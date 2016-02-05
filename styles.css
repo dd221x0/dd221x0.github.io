@@ -5,6 +5,9 @@
 
 body {
 	background-color: #555555;
+	font-family: CenturyGothic;
+	font-weight: bolder;
+	text-stroke: thin #555555;
 }
 
 a {
@@ -12,6 +15,7 @@ a {
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 0.2s 0.02s ease;
+    text-stroke: thin #555555;
 }
 
 a:hover {
@@ -30,7 +34,6 @@ a:hover {
 	right: 2%;
 	bottom: 1%;
 	text-align: right;
-	font-weight: bolder;
 }
 
 #left_links a{
