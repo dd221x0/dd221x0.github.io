@@ -14,7 +14,9 @@
             }
 
 
-.tetrahedron {
+#tetrahedron {
+    position: fixed;
+    top: 0;
     width: 300px;
     height: 300px;
     margin-top: 10%;
@@ -28,37 +30,28 @@
     animation-duration: 16s;
 }
 
-.bottom {
+#tetrahedron div {
+    position: fixed;
+    top: 0;
     width: 0;
     height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
     border-bottom: 260px solid rgba(90,0,157,0.5);
+}
+
+#bottom {
     transform: rotateX(90deg) translateZ(-130px) translateY(-130px);
 }
 
-.front{
-    width: 0;
-    height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 260px solid rgba(90,0,157,0.5);
-    transform: translateY(-267px) rotateX(19.47deg) translateZ(-46px);
+#front{
+    transform: translateY(-7px) rotateX(19.47deg) translateZ(-46px);
 }
 
-.right {
-    width: 0;
-    height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 260px solid rgba(90,0,157,0.5);
-    transform: translateY(-512px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
+#right {
+    transform: translateY(8px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
 }
-.left {
-    width: 0;
-    height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-bottom: 260px solid rgba(90,0,157,0.5);
-    transform: translateY(-772px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
+
+#left {
+    transform: translateY(8px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
 }

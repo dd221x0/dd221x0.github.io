@@ -5,25 +5,26 @@
 
 body {
 	background-color: #555555;
-	/*margin: 0;*/
 }
 
-body a {
+a {
     color: black;
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 0.2s 0.02s ease;
 }
 
-body a:hover {
+a:hover {
     color: #5A009D;
 }
 
-#wrapper {
+#strip {
+	height: 300px;
+    margin-top: 10%;
 	background-color: black;
 }
 
-#links {
+#left_links {
 	font-size: 20px;
 	position: absolute;
 	right: 2%;
@@ -32,11 +33,11 @@ body a:hover {
 	font-weight: bolder;
 }
 
-#links a{
+#left_links a{
 	right: 0;
 }
 
-#github {
+#right_links {
 	position: absolute;
 	left: 2%;
 	bottom: 1%;
@@ -44,5 +45,9 @@ body a:hover {
 
 #github img {
 	max-height: 32px;
+}
+
+#linkedin img {
+	max-height: 28px;
 }
 
