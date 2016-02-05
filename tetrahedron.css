@@ -1,0 +1,64 @@
+﻿@-webkit-keyframes animation {
+                from, to {
+                    -webkit-transform: rotateX(0) rotateY(0deg) rotateZ(0);
+                }
+                25% {
+                    -webkit-transform: rotateX(180deg) rotateY(0deg) rotateZ(180deg);
+                }
+                50% {
+                    -webkit-transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+                }
+                75% {
+                    -webkit-transform: rotateX(0deg) rotateY(180deg) rotateZ(180deg);
+                }
+            }
+
+
+.tetrahedron {
+    width: 300px;
+    height: 300px;
+    margin-top: 10%;
+    margin-left: 30%;
+    background: transparent;
+
+    -webkit-animation-name: animation;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-transform-style: preserve-3d;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 10s;
+}
+
+.bottom {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 260px solid rgba(90,0,157,0.5);
+    -webkit-transform: rotateX(90deg) translateZ(-130px) translateY(-130px);
+}
+
+.front{
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 260px solid rgba(90,0,157,0.5);
+    -webkit-transform: translateY(-267px) rotateX(19.47deg) translateZ(-46px);
+}
+
+.right {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 260px solid rgba(90,0,157,0.5);
+    -webkit-transform: translateY(-512px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
+}
+.left {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 260px solid rgba(90,0,157,0.5);
+    -webkit-transform: translateY(-772px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
+}
