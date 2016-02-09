@@ -10,11 +10,11 @@ html {
 
 body {
 	background-color: #555555;
-	background-image: url("background.jpg");
+/*	background-image: url("background.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position-x: 50%;
-	background-position-y: 50%;
+	background-position-y: 50%;*/
 	margin: 0;
 	font-family: CenturyGothic;
 	font-weight: bolder;
