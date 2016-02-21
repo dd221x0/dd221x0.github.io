@@ -10,6 +10,11 @@ html {
 
 body {
 	background-color: #555555;
+	background-image: url("background_2_l.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position-x: 50%;
+	background-position-y: 50%;
 	margin: 0;
 	font-family: CenturyGothic;
 	font-weight: bolder;
@@ -30,7 +35,12 @@ a:hover {
 	height: 300px;
     margin-top: 10%;
 	background-color: #000000;
-	opacity: 0.9;
+	opacity: 0.5;
+	transition: margin 0.2s 0.02s ease; /*experimental*/
+}
+
+#strip:active {   /*experimental*/
+	margin: 10% 1%;
 }
 
 #social {
@@ -38,6 +48,14 @@ a:hover {
 	left: 50%;
 	margin-left: -120px;
 	bottom: 1%;
+	font-size: 20px;
+}
+
+#email {
+	position: absolute;
+	bottom: 1%;
+	left: 1%;
+	margin: -50;
 	font-size: 20px;
 }
 
