@@ -33,14 +33,14 @@ a:hover {
 
 #strip {
 	height: 300px;
-    margin-top: 10%;
+    margin-top: 16vh;
 	background-color: #000000;
 	opacity: 0.5;
 	transition: margin 0.2s 0.02s ease; /*experimental*/
 }
 
 #strip:active {   /*experimental*/
-	margin: 10% 1%;
+	margin: 16vh 1vw;
 }
 
 #social {
