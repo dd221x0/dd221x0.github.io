@@ -33,7 +33,7 @@ a:hover {
 
 #strip {
 	height: 300px;
-    margin-top: 16vh;
+    margin-top: 20vh;
 	background-color: #000000;
 	opacity: 0.5;
 	transition: margin 0.2s 0.02s ease; /*experimental*/
