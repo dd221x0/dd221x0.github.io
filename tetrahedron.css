@@ -36,12 +36,12 @@
     height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-    border-bottom: 260px solid rgba(90,0,157,0.5);
+    border-bottom: 260px solid rgba(0,0,0,0.75);
     transition: border-bottom-color 0.2s 0.02s ease;     /*experimental*/
 }
 
 #tetrahedron div:hover{                         /*experimental*/
-    border-bottom-color: rgba(0,0,0,0.75);
+    border-bottom-color: rgba(90,0,157,0.5);
 }
 
 #bottom {

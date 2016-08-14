@@ -1,0 +1,31 @@
+#pentagram {
+	border: 4px solid black;
+	border-radius: 100px;
+}
+
+#pentagram div{
+	position: absolute;
+	background-color: black;
+	width: 3px;
+	height: 97px;
+}
+
+#pentagram #first{
+	transform: rotateZ(-18deg) translateX(30px) translateY(16px);
+}
+
+#pentagram #second{
+	transform: rotateZ(18deg) translateX(63px) translateY(-13px);
+}
+
+#pentagram #third{
+	transform: rotateZ(54deg) translateX(15px) translateY(-38px);
+}
+
+#pentagram #fourth{
+	transform: rotateZ(90deg) translateX(19px) translateY(-49px);
+}
+
+#pentagram #fifth{
+	transform: rotateZ(-54deg) translateX(43px) translateY(40px);
+}
