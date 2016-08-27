@@ -9,7 +9,7 @@ html {
 }
 
 body {
-	background-color: #555555;
+	background-color: #000000;
 /*	background-image: url("background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -21,14 +21,14 @@ body {
 }
 
 a {
-    color: #000000;
+    color: #AAAAAA;
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 0.2s 0.02s ease;
 }
 
 a:hover {
-    color: #5A009D;
+    color: #333333;
 }
 
 #social {

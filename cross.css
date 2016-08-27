@@ -39,17 +39,17 @@
 }
 
 #cross:hover .cross-path {
-	background-color: #5A009D;
+	background-color: #7d0088;
 }
 
 #cross:hover #horisontal-left {
-	border-right: 4px solid #5A009D;
-	background-color: #5A009D;
+	border-right: 4px solid #7d0088;
+	background-color: #7d0088;
 }
 
 #cross:hover #horisontal-right {
-	border-left: 4px solid #5A009D;
-	background-color: #5A009D;
+	border-left: 4px solid #7d0088;
+	background-color: #7d0088;
 }
 
 #pentagram {
