@@ -39,10 +39,10 @@
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
     border-bottom: 260px solid rgb(0,0,0);
-    transition: border-bottom-color 4s 0.02s ease;     /*experimental*/
+    transition: border-bottom-color 4s 0.02s ease;
 }
 
-#tetrahedron:hover div{                         /*experimental*/
+#tetrahedron:hover div{
     border-bottom-color: #AAAAAA;
 }
 
