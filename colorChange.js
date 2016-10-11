@@ -1,4 +1,5 @@
 window.onload = () => {
+
 	function getRandomColor() {
     	var letters = '0123456789ABCDEF';
     	var color = '#';
@@ -9,8 +10,6 @@ window.onload = () => {
 	}
 
 	let parts = document.querySelectorAll("#tetrahedron div");
-	let socials = document.querySelectorAll("#social a");
-	let email = document.querySelectorAll("#email a");
 
 	let color = '#AAAAAA';
 
@@ -36,34 +35,6 @@ window.onload = () => {
 				el.style.borderBottomColor = color;
 			});
 			e.stopPropagation();
-			// 	el.style.color = color;
-
-
-			// color = getRandomColor();
-			// socials.forEach((el) =>{
-			// 	el.style.color = color;
-			// 	el.onmouseover = () => {
-			// 		el.style.color = '#333333'
-			// 	};
-			// 	el.onmouseout = () => {
-			// 		el.style.color = color;
-			// 	};
-			// });
-			// email.forEach((el) =>{
-			// 	el.style.color = color;
-			// 	el.onmouseover = () => {
-			// 		el.style.color = '#333333'
-			// 	};
-			// 	el.onmouseout = () => {
-			// 		el.style.color = color;
-			// 	};
-			// });
 		})
 	})
-
-	document.getElementsByTagName('body')[0].addEventListener('click', () => {
-		parts.forEach((el) =>{
-				el.style.borderBottomColor = '#000';
-			}
-			)});
 }
