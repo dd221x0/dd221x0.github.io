@@ -40,9 +40,9 @@ window.onload = () => {
 
 	function setTetrahedronEvent(elements){
 		elements.forEach((el) => {
-			hoverColor = color = getRandomColor();
 			el.addEventListener('click', (e) => {
 				if(clicked){
+					color = getRandomColor();
 					elements.forEach((el) => {
 						el.style.borderBottomColor = color;
 					});
