@@ -71,8 +71,8 @@ window.onload = () => {
 	let socials = document.querySelectorAll("#social a");
 	let email = document.querySelectorAll("#email a");
 
-	let color = '#AAAAAA';
 	let hoverColor = '#333333';
+	let color = 'FFFFFF';
 	let background = '#000000'
 
 	let clicked = false;
