@@ -15,18 +15,19 @@ window.onload = () => {
 				el.style.color = hoverColor;
 			};
 			el.onmouseout = () => {
-				el.style.color = '#AAAAAA';
+				el.style.color = elementsColor;
 			};
-		}
-	)
+		})
 	}
 
 	function setTetrahedronHover(elements){
 		elements.forEach((el) => {
 			el.onmouseover = () => {
-				elements.forEach((e) => {
-					e.style.borderBottomColor = color;
-				})
+				if(!clicked){
+					elements.forEach((e) => {
+						e.style.borderBottomColor = color;
+					})
+				}
 			};
 			el.onmouseout = () => {
 				if(!clicked){
@@ -72,7 +73,8 @@ window.onload = () => {
 	let email = document.querySelectorAll("#email a");
 
 	let hoverColor = '#333333';
-	let color = 'FFFFFF';
+	let color = '#FFFFFF';
+	let elementsColor = '#FFFFFF'
 	let background = '#000000'
 
 	let clicked = false;
