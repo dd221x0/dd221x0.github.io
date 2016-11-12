@@ -23,31 +23,43 @@ window.onload = () => {
 
 	function setTetrahedronHover(elements){
 		elements.forEach((el) => {
-				el.onmouseover = () => {
-					elements.forEach((e) => {
-						e.style.borderBottomColor = color;
-					}
-					)
-				};
-				el.onmouseout = () => {
+			el.onmouseover = () => {
+				elements.forEach((e) => {
+					e.style.borderBottomColor = color;
+				})
+			};
+			el.onmouseout = () => {
+				if(!clicked){
 					elements.forEach((e) =>{
-						e.style.borderBottomColor = '#000';
-					}
-					) ;
-				};
-			});
+						e.style.borderBottomColor = background;
+					});
+				}
+			};
+		});
 	}
 
 	function setTetrahedronEvent(elements){
 		elements.forEach((el) => {
-		el.addEventListener('click', (e)=>{
 			hoverColor = color = getRandomColor();
-			elements.forEach((el) =>{
-				el.style.borderBottomColor = color;
+			el.addEventListener('click', (e) => {
+				if(clicked){
+					elements.forEach((el) => {
+						el.style.borderBottomColor = color;
+					});
+				}
+				else{
+					clicked = true;
+				}
+				e.stopPropagation();
 			});
-			e.stopPropagation();
+
 		})
-	})
+		document.addEventListener('click', (el)=>{
+			clicked = false;
+			elements.forEach((e) =>{
+				e.style.borderBottomColor = background;
+			});
+		})
 	}
 
 	function tetrahedronInit(elements){
@@ -61,6 +73,9 @@ window.onload = () => {
 
 	let color = '#AAAAAA';
 	let hoverColor = '#333333';
+	let background = '#000000'
+
+	let clicked = false;
 	
 	tetrahedronInit(parts);
 	setHover(socials);
