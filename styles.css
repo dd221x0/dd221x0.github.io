@@ -24,11 +24,12 @@ a {
     color: #FFFFFF;
     font-family: CenturyGothic;
     text-decoration: none;
-    transition: color 0.2s 0.02s ease;
+    transition: color 1s 0.02s ease;
 }
 
 a:hover {
     color: #333333;
+    transition: color 0.2s 0.02s ease;
 }
 
 #social {

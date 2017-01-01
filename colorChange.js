@@ -3,83 +3,85 @@ window.onload = () => {
 	function getRandomColor() {
     	let letters = '0123456789ABCDEF';
     	let color = '#';
-    	for (var i = 0; i < 6; i++ ) {
-    	    color += letters[Math.floor(Math.random() * 16)];
+    	let negative = '#';
+    	for (var i = 0; i < 3; i++ ) {
+    		let component = letters[Math.floor(Math.random() * 16)];
+    		component += letters[Math.floor(Math.random() * 16)];
+    	    color += component;
+    	    negativeComponent = (0xFF - parseInt(component, 16)).toString(16)
+    	    if (negativeComponent.length == 1){
+    	    	negativeComponent = '0' + negativeComponent;
+    	    }
+    	    negative += negativeComponent;
     	}
-    	return color;
+    	console.log([color, negative])
+    	return [color, negative];
 	}
 
-	function setHover(elements) {
+	function setHoverColor(elements) {
 		elements.forEach((el) => {
 			el.onmouseover = () => {
 				el.style.color = hoverColor;
 			};
 			el.onmouseout = () => {
-				el.style.color = elementsColor;
+				el.style.color = color;
 			};
 		})
 	}
 
-	function setTetrahedronHover(elements){
-		elements.forEach((el) => {
-			el.onmouseover = () => {
-				if(!clicked){
-					elements.forEach((e) => {
-						e.style.borderBottomColor = color;
-					})
-				}
-			};
-			el.onmouseout = () => {
-				if(!clicked){
-					elements.forEach((e) =>{
-						e.style.borderBottomColor = background;
-					});
-				}
-			};
+	function setTetrahedronHover(element, elements){
+        element.onmouseover = () => {
+            elements.forEach((e) => {
+                e.style.borderBottomColor = hoverColor;
+            })
+        };
+        element.onmouseout = () => {
+            elements.forEach((e) =>{
+                e.style.borderBottomColor = color;
+            });
+        };
+    }
+
+
+	function setElementEvent(element, elements, dependents){
+		element.addEventListener('click', (e) => {
+			newColor = getRandomColor()
+			color = newColor[0];
+			hoverColor = newColor[1];
+			elements.forEach((el) => {
+				el.style.borderBottomColor = color;
+			});
+			setColor(dependents)
+			e.stopPropagation();
+		});	
+	}
+
+	function tetrahedronInit(elements, dependents){
+		elements.forEach((element) => {
+			setElementEvent(element,elements, dependents);
+			setTetrahedronHover(element,elements);
+			setCursor(element);
 		});
 	}
 
-	function setTetrahedronEvent(elements){
-		elements.forEach((el) => {
-			el.addEventListener('click', (e) => {
-				if(clicked){
-					hoverColor = color = getRandomColor();
-					elements.forEach((el) => {
-						el.style.borderBottomColor = color;
-					});
-				}
-				else{
-					clicked = true;
-				}
-				e.stopPropagation();
-			});
-
-		})
-		document.addEventListener('click', (el)=>{
-			clicked = false;
-			elements.forEach((e) =>{
-				e.style.borderBottomColor = background;
-			});
+	function setColor(elements){
+		elements.forEach((e) => {
+			e.style.color = color;
 		})
 	}
 
-	function tetrahedronInit(elements){
-		setTetrahedronHover(elements);
-		setTetrahedronEvent(elements);
+	function setCursor(element){
+		element.style.cursor = "pointer";
 	}
 
 	let parts = document.querySelectorAll("#tetrahedron div");
 	let socials = document.querySelectorAll("#social a");
 	let email = document.querySelectorAll("#email a");
+	let controls = Array.from(socials).concat(Array.from(email));
 
-	let hoverColor = '#333333';
 	let color = '#FFFFFF';
-	let elementsColor = '#FFFFFF'
-	let background = '#000000'
-
-	let clicked = false;
+	let hoverColor = '#000000'
 	
-	tetrahedronInit(parts);
-	setHover(socials);
-	setHover(email);
+	tetrahedronInit(parts, controls);
+	setHoverColor(controls);
 }
