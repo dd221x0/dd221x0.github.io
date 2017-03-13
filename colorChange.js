@@ -14,7 +14,6 @@ window.onload = () => {
     	    }
     	    negative += negativeComponent;
     	}
-    	console.log([color, negative])
     	return [color, negative];
 	}
 
