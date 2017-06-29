@@ -3,13 +3,13 @@
     src: url("../CenturyGothic.ttf");
 }
 
-/*::selection {
-	background: rgba(136, 136, 136, 1);
+::selection {
+	background: #FFFFFF;
 }
 
 ::-moz-selection {
-	background: #ffb7ff;
-}*/
+	background: #FFFFFF;
+}
 
 ::-webkit-input-placeholder {
   color: #888888;
