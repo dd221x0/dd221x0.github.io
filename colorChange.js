@@ -28,19 +28,11 @@ window.onload = () => {
 		})
 	}
 
-	function setTetrahedronHover(element, elements){
-        element.onmouseover = () => {
-            elements.forEach((e) => {
-                e.style.borderBottomColor = hoverColor;
-            })
-        };
-        element.onmouseout = () => {
-            elements.forEach((e) =>{
-                e.style.borderBottomColor = color;
-            });
-        };
-    }
-
+	function setColor(elements){
+		elements.forEach((e) => {
+			e.style.color = color;
+		})
+	}
 
 	function setElementEvent(element, elements, dependents){
 		element.addEventListener('click', (e) => {
@@ -55,6 +47,23 @@ window.onload = () => {
 		});	
 	}
 
+	function setTetrahedronHover(element, elements){
+        element.onmouseover = () => {
+            elements.forEach((e) => {
+                e.style.borderBottomColor = hoverColor;
+            })
+        };
+        element.onmouseout = () => {
+            elements.forEach((e) =>{
+                e.style.borderBottomColor = color;
+            });
+        };
+    }
+
+	function setCursor(element){
+		element.style.cursor = "pointer";
+	}
+	
 	function tetrahedronInit(elements, dependents){
 		elements.forEach((element) => {
 			setElementEvent(element,elements, dependents);
@@ -63,24 +72,20 @@ window.onload = () => {
 		});
 	}
 
-	function setColor(elements){
-		elements.forEach((e) => {
-			e.style.color = color;
-		})
-	}
-
-	function setCursor(element){
-		element.style.cursor = "pointer";
-	}
-
 	let parts = document.querySelectorAll("#tetrahedron div");
 	let socials = document.querySelectorAll("#social a");
 	let email = document.querySelectorAll("#email a");
-	let controls = Array.from(socials).concat(Array.from(email));
+	let utilsLinks = document.querySelectorAll("#utils a");
+	let utilsHeader = document.querySelectorAll("#utils h3");
+	let controls = Array.from(socials)
+					.concat(Array.from(email))
+					.concat(Array.from(utilsLinks));
+	let allElements = controls
+					.concat(Array.from(utilsHeader));
 
 	let color = '#FFFFFF';
 	let hoverColor = '#000000'
 	
-	tetrahedronInit(parts, controls);
+	tetrahedronInit(parts, allElements);
 	setHoverColor(controls);
 }

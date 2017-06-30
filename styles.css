@@ -3,6 +3,14 @@
     src: url(CenturyGothic.ttf);
 }
 
+::selection {
+	background: #FFFFFF;
+}
+
+::-moz-selection {
+	background: #FFFFFF;
+}
+
 html {
 	max-height: 100%;
 	height: 100%;
@@ -20,7 +28,7 @@ body {
 	font-weight: bolder;
 }
 
-a {
+a, h3 {
     color: #FFFFFF;
     font-family: CenturyGothic;
     text-decoration: none;
@@ -44,6 +52,14 @@ a:hover {
 	position: fixed;
 	bottom: 1%;
 	left: 1%;
+	margin: -50;
+	font-size: 20px;
+}
+
+#utils {
+	position: fixed;
+	top: 1%;
+	right: 1%;
 	margin: -50;
 	font-size: 20px;
 }
