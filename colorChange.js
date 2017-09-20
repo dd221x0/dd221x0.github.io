@@ -47,19 +47,6 @@ window.onload = () => {
 		});	
 	}
 
-	function setTetrahedronHover(element, elements){
-        element.onmouseover = () => {
-            elements.forEach((e) => {
-                e.style.borderBottomColor = hoverColor;
-            })
-        };
-        element.onmouseout = () => {
-            elements.forEach((e) =>{
-                e.style.borderBottomColor = color;
-            });
-        };
-    }
-
 	function setCursor(element){
 		element.style.cursor = "pointer";
 	}
@@ -67,7 +54,6 @@ window.onload = () => {
 	function tetrahedronInit(elements, dependents){
 		elements.forEach((element) => {
 			setElementEvent(element,elements, dependents);
-			setTetrahedronHover(element,elements);
 			setCursor(element);
 		});
 	}
