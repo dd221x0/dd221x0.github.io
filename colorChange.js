@@ -69,8 +69,8 @@ window.onload = () => {
 	let allElements = controls
 					.concat(Array.from(utilsHeader));
 
-	let color = '#FFFFFF';
-	let hoverColor = '#000000'
+	let color = '#BBBBBB';
+	let hoverColor = '#444444'
 	
 	tetrahedronInit(parts, allElements);
 	setHoverColor(controls);

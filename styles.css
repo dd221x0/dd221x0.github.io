@@ -29,14 +29,14 @@ body {
 }
 
 a, h3 {
-    color: #FFFFFF;
+    color: #BBBBBB;
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 1s 0.02s ease;
 }
 
 a:hover {
-    color: #333333;
+    color: #444444;
     transition: color 0.2s 0.02s ease;
 }
 
@@ -62,5 +62,12 @@ a:hover {
 	right: 1%;
 	margin: -50;
 	font-size: 20px;
+	width: 64px;
+	max-width: 64px;
 }
 
+#utilLink {
+	max-width: 100%;
+	width: 100%;
+	padding-bottom: 4px;
+}

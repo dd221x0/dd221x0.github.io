@@ -41,17 +41,6 @@ body {
 	color: #AA00AA;
 }
 
-#form {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    margin-top: -150px;
-    margin-left: -150px;
-    padding: 0;
-}
-
 input, button {
 	background-color: #000000;
 	font-family: CenturyGothic;
@@ -69,42 +58,7 @@ input {
 }
 
 button {
-
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
-
-.row { /*workaround*/
-	max-width: 301px;
-	width: 301px;
-}
-
-
-#string {
-	max-width: 288px;
-	width: 288px;
-}
-
-#partsCount, #part {
-	margin-left: 0;
-	margin-right: 0;
-	max-width: 132px;
-	width: 132px;
-}
-
-#part {
-	margin-right: 8px;
-}
-
-#submit {
-	max-width: 300px;
-	width: 300px;
-}
-
-#result {
-	display: block;
-	font-weight: bolder;
-	max-width: 100%;
-	width: 100%;
-	text-align: center;
-}
-
-

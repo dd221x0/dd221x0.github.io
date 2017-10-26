@@ -1,0 +1,39 @@
+.row { /*workaround*/
+	max-width: 401px;
+	width: 401px;
+}
+
+.text {
+	font-size: 18px;
+	display: block;
+	font-weight: bolder;
+	max-width: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+#form {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -200px;
+    padding: 0;
+}
+
+#submit {
+	max-width: 400px;
+	width: 400px;
+}
+
+#upper_case {
+	color: #888888;
+	cursor: pointer;
+	padding-bottom: 5px;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
