@@ -1,7 +1,6 @@
 var stringElem = document.getElementById("string");
 var partsCountElem = document.getElementById("partsCount");
 var partElem = document.getElementById("part");
-var submitElem = document.getElementById("submit");
 var resultElem = document.getElementById("result");
 
 function get_hash_part(string, partsCount, part){
@@ -14,13 +13,13 @@ function get_hash_part(string, partsCount, part){
 	var password_hash = md5(string);
 	var part_len = Math.floor(password_hash.length / partsCount);
 	return password_hash.substring((part - 1) * part_len, part * part_len);
-}
+};
 
-var saveOldValue = function(event){
+function saveOldValue(event){
 	event.target.oldValue = event.target.value;
-}
+};
 
-var numberFilter = function(event, additionalCheck){
+function numberFilter(event, additionalCheck){
 	var elem = event.target;
 	var regex = /^\d*$/;
 	if(!regex.test(elem.value) 
@@ -33,11 +32,11 @@ var numberFilter = function(event, additionalCheck){
 	else{
 		saveOldValue(event);
 	}
-}
+};
 
-submit.onclick = function(){
+function calculate(){
 	resultElem.innerHTML = get_hash_part(stringElem.value, partsCountElem.value, partElem.value);
-}
+};
 
 partsCountElem.onfocus = saveOldValue;
 
@@ -55,10 +54,14 @@ partsCountElem.oninput = function(event){
 	else if(+elem.value < +partElem.value){
 		partElem.value = elem.value;
 	}
-}
+	calculate();
+};
 
 partElem.oninput = function(event){
 	numberFilter(event, function(event){
 			return +event.target.value <= +partsCountElem.value;
 		});
-}
+	calculate();
+};
+
+stringElem.oninput = calculate;

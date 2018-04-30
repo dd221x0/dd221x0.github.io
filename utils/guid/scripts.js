@@ -7,9 +7,11 @@ let isUpperCase = false;
 const GRAY = "#888888";
 const PURPLE = "#AA00AA";
 
-submit.onclick = function(){
+function calculate(){
 	resultElem.innerHTML = isUpperCase ? guid().toUpperCase() : guid();
 }
+
+submit.onclick = calculate;
 
 upperCaseElem.onclick = function(){
 	isUpperCase = !isUpperCase;
@@ -17,3 +19,5 @@ upperCaseElem.onclick = function(){
 	let guid = resultElem.innerHTML;
 	resultElem.innerHTML = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
 }
+
+window.onload = calculate;
