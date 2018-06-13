@@ -1,0 +1,12 @@
+@font-face {
+    font-family: CenturyGothic;
+    src: url(CenturyGothic.ttf);
+}
+
+::selection {
+	background: #FFFFFF;
+}
+
+::-moz-selection {
+	background: #FFFFFF;
+}
