@@ -20,5 +20,19 @@ body {
 	background-color: #000000;
 	margin: 0;
 	font-family: CenturyGothic;
+	font-weight: bold;
+	font-size: 72px;
 	color: #AA00AA;
+}
+
+#time {
+	position: absolute;
+	width: 420px;
+	max-width: 420px;
+	height: : 88px;
+	max-height:: 88px;
+	top: 50%;
+    left: 50%;
+    margin-top: -44px;
+    margin-left: -210px;
 }

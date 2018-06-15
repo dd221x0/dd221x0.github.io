@@ -1,8 +1,4 @@
 let endTime = new Date(2019, 5, 13);
-let currentTime;
-
-let timer;
-
 
 function setCurrentTime(callback)
 {
@@ -29,7 +25,7 @@ function setCurrentTime(callback)
 		}
 		else
 		{
-			setTimeout(setCurrentTime, 1000);
+			setTimeout(() => setCurrentTime(callback), 1000);
 		}
 	};
 
@@ -40,7 +36,7 @@ function setTimer(time)
 {
 	let difference = (endTime - time)/1000;
 
-	timer = setInterval(() => 
+	setInterval(() => 
 		{
 			document.getElementById("time").innerHTML = `${~~(difference/(24*60*60))} ${~~(difference/(60*60))%24}:${~~(difference/60)%60}:${~~difference%60}`;
 			difference--;
@@ -48,4 +44,4 @@ function setTimer(time)
 		, 1000);
 }
 
-setCurrentTime(setTimer);
+window.onload = () => setCurrentTime(setTimer);
