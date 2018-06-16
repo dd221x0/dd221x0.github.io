@@ -38,7 +38,8 @@ function setTimer(time)
 
 	setInterval(() => 
 		{
-			document.getElementById("time").innerHTML = `${~~(difference/(24*60*60))} ${~~(difference/(60*60))%24}:${~~(difference/60)%60}:${~~difference%60}`;
+			document.getElementById("time").innerHTML = 
+				`${Math.floor(difference/(24*60*60))} ${Math.floor(difference/(60*60))%24}:${Math.floor(difference/60)%60}:${Math.floor(difference%60)}`;
 			difference--;
 		}
 		, 1000);
