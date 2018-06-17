@@ -1,5 +1,6 @@
 let endTime = new Date(2019, 5, 13);
 let timeElement = document.getElementById("time");
+let testlog = document.getElementById("testlog");
 
 function setCurrentTime(callback)
 {
@@ -13,6 +14,7 @@ function setCurrentTime(callback)
 
 	xhr.onreadystatechange = (e) =>
 	{
+		testlog.innerHTML += "<br/>" + e;
 		if(resultRecieved || (e.target.status === 200 && !e.target.response))
 		{
 			return;
@@ -22,6 +24,7 @@ function setCurrentTime(callback)
 
 		if(e.target.status === 200)
 		{
+			testlog.innerHTML += "<br/>" + new Date(JSON.parse(e.target.response).formatted);
 			callback(new Date(JSON.parse(e.target.response).formatted));
 		}
 		else
