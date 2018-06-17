@@ -24,6 +24,7 @@ function setCurrentTime(callback)
 
 		if(e.target.status === 200)
 		{
+			testlog.innerHTML += "<br/>" + JSON.parse(e.target.response).formatted;
 			testlog.innerHTML += "<br/>" + new Date(JSON.parse(e.target.response).formatted);
 			callback(new Date(JSON.parse(e.target.response).formatted));
 		}
