@@ -1,6 +1,6 @@
 @font-face {
     font-family: CenturyGothic;
-    src: url(../CenturyGothic.ttf);
+    src: url(../CenturyGothic.ttf) format('truetype');
 }
 
 ::selection {
@@ -27,12 +27,13 @@ body {
 
 #time {
 	position: absolute;
-	width: 420px;
-	max-width: 420px;
+	width: 440px;
+	max-width: 440px;
 	height: : 88px;
 	max-height:: 88px;
 	top: 50%;
     left: 50%;
     margin-top: -44px;
     margin-left: -210px;
+    text-align: center;
 }
