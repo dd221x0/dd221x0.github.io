@@ -1,4 +1,5 @@
 let endTime = new Date(2019, 5, 13);
+let timeElement = document.getElementById("time");
 
 function setCurrentTime(callback)
 {
@@ -34,15 +35,28 @@ function setCurrentTime(callback)
 
 function setTimer(time)
 {
-	let difference = (endTime - time)/1000;
+	let interval = 1000;
+	let expected = Date.now();
+	let secondsLeft = (endTime - time)/1000;
 
-	setInterval(() => 
-		{
-			document.getElementById("time").innerHTML = 
-				`${Math.floor(difference/(24*60*60))} ${Math.floor(difference/(60*60))%24}:${Math.floor(difference/60)%60}:${Math.floor(difference%60)}`;
-			difference--;
-		}
-		, 1000);
+	let step = () =>
+	{
+		let dt = Date.now() - expected;
+
+		let days = ~~(secondsLeft/(24*60*60));
+		let hours = ("0" + ~~(secondsLeft/(60*60))%24).slice(-2);
+		let minutes = ("0" + ~~(secondsLeft/60)%60).slice(-2);
+		let seconds = ("0" + ~~(secondsLeft%60)).slice(-2);
+	
+		timeElement.innerHTML = `${days} ${hours}:${minutes}:${seconds}`;
+
+		secondsLeft--;
+		expected += interval;
+
+		setTimeout(step, interval - dt);
+	};
+
+	step();
 }
 
 window.onload = () => setCurrentTime(setTimer);

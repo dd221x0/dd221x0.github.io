@@ -1,6 +1,6 @@
 @font-face {
     font-family: CenturyGothic;
-    src: url(../CenturyGothic.ttf) format('truetype');
+    src: url(../CenturyGothic.ttf);
 }
 
 ::selection {
