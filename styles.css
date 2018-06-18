@@ -1,6 +1,6 @@
 @font-face {
-    font-family: CenturyGothic;
-    src: url(CenturyGothic.ttf);
+	font-family: CenturyGothic;
+	src: url(CenturyGothic.ttf);
 }
 
 ::selection {
@@ -24,15 +24,15 @@ body {
 }
 
 a, h3 {
-    color: #BBBBBB;
-    font-family: CenturyGothic;
-    text-decoration: none;
-    transition: color 1s 0.02s ease;
+	color: #BBBBBB;
+	font-family: CenturyGothic;
+	text-decoration: none;
+	transition: color 1s 0.02s ease;
 }
 
 a:hover {
-    color: #444444;
-    transition: color 0.2s 0.02s ease;
+	color: #444444;
+	transition: color 0.2s 0.02s ease;
 }
 
 #social {

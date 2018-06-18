@@ -1,20 +1,20 @@
 window.onload = () => {
 
 	function getRandomColor() {
-    	let letters = '0123456789ABCDEF';
-    	let color = '#';
-    	let negative = '#';
-    	for (var i = 0; i < 3; i++ ) {
-    		let component = letters[Math.floor(Math.random() * 16)];
-    		component += letters[Math.floor(Math.random() * 16)];
-    	    color += component;
-    	    negativeComponent = (0xFF - parseInt(component, 16)).toString(16)
-    	    if (negativeComponent.length == 1){
-    	    	negativeComponent = '0' + negativeComponent;
-    	    }
-    	    negative += negativeComponent;
-    	}
-    	return [color, negative];
+		let letters = '0123456789ABCDEF';
+		let color = '#';
+		let negative = '#';
+		for (var i = 0; i < 3; i++ ) {
+			let component = letters[Math.floor(Math.random() * 16)];
+			component += letters[Math.floor(Math.random() * 16)];
+			color += component;
+			negativeComponent = (0xFF - parseInt(component, 16)).toString(16)
+			if (negativeComponent.length == 1){
+				negativeComponent = '0' + negativeComponent;
+			}
+			negative += negativeComponent;
+		}
+		return [color, negative];
 	}
 
 	function setHoverColor(elements) {
