@@ -36,6 +36,12 @@ function setCurrentTime(callback)
 
 function setTimer(time)
 {
+	if(time >= endTime)
+	{
+		finished();
+		return;
+	} 
+
 	let interval = 1000;
 	let expected = Date.now();
 	let secondsLeft = (endTime - time)/1000;
@@ -51,13 +57,23 @@ function setTimer(time)
 	
 		timeElement.innerHTML = `${days} ${hours}:${minutes}:${seconds}`;
 
-		secondsLeft--;
+		if(secondsLeft-- <= 0)
+		{
+			finished();
+			return;
+		} 
+
 		expected += interval;
 
 		setTimeout(step, interval - dt);
 	};
 
 	step();
+}
+
+function finished()
+{
+	timeElement.innerHTML = "nothing";
 }
 
 window.onload = () => setCurrentTime(setTimer);

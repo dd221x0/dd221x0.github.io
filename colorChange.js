@@ -63,9 +63,11 @@ window.onload = () => {
 	let email = document.querySelectorAll("#email a");
 	let utilsLinks = document.querySelectorAll("#utils a");
 	let utilsHeader = document.querySelectorAll("#utils h3");
+	let howmuchisleft = document.querySelectorAll("#howmuchisleft a");
 	let controls = Array.from(socials)
 					.concat(Array.from(email))
-					.concat(Array.from(utilsLinks));
+					.concat(Array.from(utilsLinks))
+					.concat(Array.from(howmuchisleft));
 	let allElements = controls
 					.concat(Array.from(utilsHeader));
 

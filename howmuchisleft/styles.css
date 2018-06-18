@@ -27,13 +27,13 @@ body {
 
 #time {
 	position: absolute;
-	width: 440px;
-	max-width: 440px;
+	width: 600px;
+	max-width: 600px;
 	height: : 88px;
 	max-height:: 88px;
 	top: 50%;
     left: 50%;
     margin-top: -44px;
-    margin-left: -210px;
+    margin-left: -300px;
     text-align: center;
 }

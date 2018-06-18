@@ -51,6 +51,14 @@ a:hover {
 	font-size: 20px;
 }
 
+#howmuchisleft {
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+	margin: -50;
+	font-size: 20px;
+}
+
 #utils {
 	position: fixed;
 	top: 1%;
