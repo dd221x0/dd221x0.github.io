@@ -65,8 +65,9 @@ a:hover {
 	right: 1%;
 	margin: -50;
 	font-size: 20px;
-	width: 64px;
-	max-width: 64px;
+	width: 160px;
+	max-width: 160px;
+	text-align: right;
 }
 
 #utilLink {
