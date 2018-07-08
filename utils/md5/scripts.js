@@ -3,16 +3,16 @@ var partsCountElem = document.getElementById("partsCount");
 var partElem = document.getElementById("part");
 var resultElem = document.getElementById("result");
 
-function get_hash_part(string, partsCount, part){
+function getHashPart(string, partsCount, part){
 	if (!partsCount) {
 		partsCount = 1;
 	}
 	if (!part) {
 		part = 1;
 	}
-	var password_hash = md5(string);
-	var part_len = Math.floor(password_hash.length / partsCount);
-	return password_hash.substring((part - 1) * part_len, part * part_len);
+	var passwordHash = md5(string);
+	var partLen = Math.floor(passwordHash.length / partsCount);
+	return passwordHash.substring((part - 1) * partLen, part * partLen);
 };
 
 function saveOldValue(event){
@@ -35,7 +35,7 @@ function numberFilter(event, additionalCheck){
 };
 
 function calculate(){
-	resultElem.innerHTML = get_hash_part(stringElem.value, partsCountElem.value, partElem.value);
+	resultElem.innerHTML = getHashPart(stringElem.value, partsCountElem.value, partElem.value);
 };
 
 partsCountElem.onfocus = saveOldValue;

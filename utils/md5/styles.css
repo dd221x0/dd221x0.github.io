@@ -30,11 +30,6 @@
 	margin-right: 8px;
 }
 
-#submit {
-	max-width: 300px;
-	width: 300px;
-}
-
 #result {
 	display: block;
 	font-weight: bolder;

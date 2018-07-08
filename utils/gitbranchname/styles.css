@@ -1,0 +1,28 @@
+.row { /*workaround*/
+	max-width: 801px;
+	width: 801px;
+}
+
+#form {
+	position: absolute;
+	width: 800px;
+	height: 150px;
+	top: 50%;
+	left: 50%;
+	margin-top: -75px;
+	margin-left: -400px;
+	padding: 0;
+}
+
+#string {
+	max-width: 788px;
+	width: 788px;
+}
+
+#result {
+	display: block;
+	font-weight: bolder;
+	max-width: 100%;
+	width: 100%;
+	text-align: center;
+}
