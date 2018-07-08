@@ -7,7 +7,7 @@ function stingToGitBranchName(string){
 		.replace(/\.{2,}/g, ".")
 		.replace(/\/\.+/g, "/")
 		.replace(/( |(\.lock)|\/)+$/g, "")
-		.replace(/ +/g, "-");
+		.replace(/[ \t]+/g, "-");
 
 	return result;
 };

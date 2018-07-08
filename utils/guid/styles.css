@@ -1,31 +1,22 @@
 .row { /*workaround*/
-	max-width: 401px;
-	width: 401px;
-}
-
-.text {
-	font-size: 18px;
-	display: block;
-	font-weight: bolder;
-	max-width: 100%;
-	width: 100%;
-	text-align: center;
+	max-width: 451px;
+	width: 451px;
 }
 
 #form {
 	position: absolute;
-	width: 400px;
+	width: 450px;
 	height: 200px;
 	top: 50%;
 	left: 50%;
 	margin-top: -100px;
-	margin-left: -200px;
+	margin-left: -225px;
 	padding: 0;
 }
 
 #submit {
-	max-width: 400px;
-	width: 400px;
+	max-width: 450px;
+	width: 450px;
 }
 
 #upper_case {
@@ -35,5 +26,10 @@
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+}
+
+#result {
+	max-width: 442px;
+	width: 442px;
 }
 

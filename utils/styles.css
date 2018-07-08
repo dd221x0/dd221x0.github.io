@@ -29,6 +29,18 @@
   opacity: 1;
 }
 
+::-webkit-scrollbar-thumb {
+    background: #AA00AA;
+}
+
+::-webkit-scrollbar-track {
+    border: 0.5px solid #AA00AA;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
 html {
 	max-height: 100%;
 	height: 100%;
@@ -41,16 +53,37 @@ body {
 	color: #AA00AA;
 }
 
-input, button {
-	background-color: #000000;
+input, button, textarea, span {
+	font-weight: bolder;
+	font-size: 20px;
 	font-family: CenturyGothic;
-	border: 2px solid #AA00AA;
+	margin-bottom: 8px;
+}
+
+input, button, textarea {
+	background-color: #000000;
 	color: #AA00AA;
 	padding: 4px;
-	font-size: 20px;
-	font-weight: bolder;
 	outline: none;
-	margin-bottom: 8px;
+}
+
+input, button {
+	border: 2px solid #AA00AA;
+}
+
+textarea, span {
+	max-width: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+textarea {
+	border: none;
+	resize: none;
+}
+
+span {
+	display: block;
 }
 
 button {
