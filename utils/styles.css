@@ -53,24 +53,37 @@ body {
 	color: #AA00AA;
 }
 
+input, button, textarea, span {
+	font-weight: bolder;
+	font-size: 20px;
+	font-family: CenturyGothic;
+	margin-bottom: 8px;
+}
+
 input, button, textarea {
 	background-color: #000000;
-	font-family: CenturyGothic;
 	color: #AA00AA;
 	padding: 4px;
-	font-size: 20px;
-	font-weight: bolder;
 	outline: none;
-	margin-bottom: 8px;
 }
 
 input, button {
 	border: 2px solid #AA00AA;
 }
 
+textarea, span {
+	max-width: 100%;
+	width: 100%;
+	text-align: center;
+}
+
 textarea {
 	border: none;
 	resize: none;
+}
+
+span {
+	display: block;
 }
 
 button {

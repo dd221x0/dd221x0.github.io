@@ -3,15 +3,6 @@
 	width: 801px;
 }
 
-.text {
-	font-size: 18px;
-	display: block;
-	font-weight: bolder;
-	max-width: 100%;
-	width: 100%;
-	text-align: center;
-}
-
 #form {
 	position: absolute;
 	width: 800px;
@@ -29,9 +20,6 @@
 }
 
 #result {
-	display: block;
-	font-weight: bolder;
-	max-width: 788px;
-	width: 788px;
-	text-align: center;
+	max-width: 792px;
+	width: 792px;
 }
