@@ -6,7 +6,6 @@
 	border-right: 30px solid transparent;
 	border-bottom: 52px solid #AA00AA;
 	transition: border-bottom-color 1s 0.02s ease;
-	transform: rotate(45deg);
 }
 
 #triangle:hover {
@@ -19,6 +18,12 @@
 	top: 1%;
 	left: 1%;
 	width: 60px;
-	height: 60px;
+	height: 69px;
 	background: transparent;
+	transform: rotate(45deg);
+	transition: all 1s 0.02s ease;
+}
+
+#home:hover {
+	transform: rotate(-135deg);
 }
