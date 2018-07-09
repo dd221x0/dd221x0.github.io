@@ -1,0 +1,23 @@
+#triangle {
+	top: 0;
+	width: 0;
+	height: 0;
+	border-left: 30px solid transparent;
+	border-right: 30px solid transparent;
+	border-bottom: 52px solid #AA00AA;
+	transition: border-bottom-color 0.5s 0.02s ease;
+	transform: rotate(45deg);
+}
+
+#triangle:hover {
+	border-bottom-color: #BBBBBB;
+}
+
+#home {
+	position: fixed;
+	top: 1%;
+	left: 1%;
+	width: 60px;
+	height: 60px;
+	background: transparent;
+}
