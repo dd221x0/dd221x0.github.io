@@ -5,12 +5,13 @@
 	border-left: 30px solid transparent;
 	border-right: 30px solid transparent;
 	border-bottom: 52px solid #AA00AA;
-	transition: border-bottom-color 0.5s 0.02s ease;
+	transition: border-bottom-color 1s 0.02s ease;
 	transform: rotate(45deg);
 }
 
 #triangle:hover {
 	border-bottom-color: #BBBBBB;
+	transition: border-bottom-color 0.2s 0.02s ease;
 }
 
 #home {
