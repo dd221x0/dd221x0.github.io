@@ -13,7 +13,7 @@ function stingToGitBranchName(string){
 };
 
 function convert(){
-	resultElem.innerHTML = stingToGitBranchName(stringElem.value);
+	resultElem.value = stingToGitBranchName(stringElem.value);
 };
 
 

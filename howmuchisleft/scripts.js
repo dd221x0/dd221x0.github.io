@@ -55,7 +55,7 @@ function setTimer(time)
 		let minutes = ("0" + ~~(secondsLeft/60)%60).slice(-2);
 		let seconds = ("0" + ~~(secondsLeft%60)).slice(-2);
 	
-		timeElement.innerHTML = `${days} ${hours}:${minutes}:${seconds}`;
+		timeElement.value = `${days} ${hours}:${minutes}:${seconds}`;
 
 		if(secondsLeft-- <= 0)
 		{
@@ -73,7 +73,7 @@ function setTimer(time)
 
 function finished()
 {
-	timeElement.innerHTML = "nothing";
+	timeElement.value = "nothing";
 }
 
 window.onload = () => setCurrentTime(setTimer);

@@ -35,7 +35,7 @@ function numberFilter(event, additionalCheck){
 };
 
 function calculate(){
-	resultElem.innerHTML = getHashPart(stringElem.value, partsCountElem.value, partElem.value);
+	resultElem.value = getHashPart(stringElem.value, partsCountElem.value, partElem.value);
 };
 
 partsCountElem.onfocus = saveOldValue;
