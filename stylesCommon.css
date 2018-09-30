@@ -1,17 +1,11 @@
-#triangle {
-	top: 0;
-	width: 0;
-	height: 0;
-	border-left: 30px solid transparent;
-	border-right: 30px solid transparent;
-	border-bottom: 52px solid #AA00AA;
-	transition: border-bottom-color 1s 0.02s ease;
-}
-
-#triangle:hover {
-	border-bottom-color: #BBBBBB;
-	transition: border-bottom-color 0.2s 0.02s ease;
-}
+@keyframes spinner {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
 
 #home {
 	position: fixed;
@@ -26,4 +20,35 @@
 
 #home:hover {
 	transform: rotate(-135deg);
+}
+
+#spinner {
+	width: 60px;
+	height: 69px;
+	background: transparent;
+	animation: spinner 2s linear infinite;
+}
+
+#triangle {
+	top: 0;
+	width: 0;
+	height: 0;
+	border-left: 30px solid transparent;
+	border-right: 30px solid transparent;
+	border-bottom: 52px solid;
+}
+
+#home #triangle {
+	border-bottom-color: #AA00AA;
+	transition: border-bottom-color 1s 0.02s ease;
+}
+
+#home #triangle:hover {
+	border-bottom-color: #BBBBBB;
+	transition: border-bottom-color 0.2s 0.02s ease;
+}
+
+#spinner #triangle {
+	border-bottom-color: #BBBBBB;
+	transition: border-bottom-color 1s 0.02s ease;
 }
