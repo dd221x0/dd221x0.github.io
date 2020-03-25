@@ -31,5 +31,14 @@
 #result {
 	max-width: 442px;
 	width: 442px;
+	max-height: 36px;
+	height: 36px;
 }
 
+#copy {
+	position: relative;
+	max-width: 128px;
+	width: 128px;
+	left: 50%;
+	margin-left: -64px;
+}

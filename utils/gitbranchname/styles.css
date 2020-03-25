@@ -23,3 +23,11 @@
 	max-width: 792px;
 	width: 792px;
 }
+
+#copy {
+	position: relative;
+	max-width: 128px;
+	width: 128px;
+	left: 50%;
+	margin-left: -64px;
+}

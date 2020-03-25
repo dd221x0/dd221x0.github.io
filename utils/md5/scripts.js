@@ -3,6 +3,7 @@ const stringElement = document.getElementById('string');
 const partsCountElement = document.getElementById('partsCount');
 const partElement = document.getElementById('part');
 const resultElement = document.getElementById('result');
+const copyElement = document.getElementById('copy');
 
 let isPassword = true;
 
@@ -91,9 +92,15 @@ const partInputHandler = (event) => {
 	setResult();
 }
 
-partsCountElement.onfocus = saveOldValue;
-partElement.onfocus = saveOldValue;
-partsCountElement.oninput = partsCoutInputHandler;
-partElement.oninput = partInputHandler;
-stringElement.oninput = setResult;
+const copyResult = () => {
+	resultElement.select();
+  	document.execCommand('copy');
+}
+
 passwordElement.onclick = switchPasswordMode;
+stringElement.oninput = setResult;
+partsCountElement.onfocus = saveOldValue;
+partsCountElement.oninput = partsCoutInputHandler;
+partElement.onfocus = saveOldValue;
+partElement.oninput = partInputHandler;
+copyElement.onclick = copyResult;

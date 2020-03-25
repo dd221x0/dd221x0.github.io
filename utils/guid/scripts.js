@@ -1,6 +1,7 @@
 const submitElement = document.getElementById('submit');
 const upperCaseElement = document.getElementById('upper_case');
 const resultElement = document.getElementById('result');
+const copyElement = document.getElementById('copy');
 
 let isUpperCase = false;
 
@@ -19,6 +20,13 @@ const changeCase = () => {
 	resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
 }
 
+const copyResult = () => {
+	resultElement.select();
+  	document.execCommand('copy');
+}
+
 submit.onclick = calculate;
 upperCaseElement.onclick = changeCase;
+copyElement.onclick = copyResult;
+
 window.onload = calculate;
