@@ -1,20 +1,16 @@
-var stringElem = document.getElementById("string");
-var resultElem = document.getElementById("result");
+const stringElement = document.getElementById('string');
+const resultElement = document.getElementById('result');
 
-function stingToGitBranchName(string){
-	let result = string
-		.replace(/[\~\^:\[\]\\]/g, "")
-		.replace(/\.{2,}/g, ".")
-		.replace(/\/\.+/g, "/")
-		.replace(/( |(\.lock)|\/)+$/g, "")
-		.replace(/[ \t]+/g, "-");
+const stingToGitBranchName = (string) => string
+		.replace(/[\~\^:\[\]\(\)\\]/g, '')
+		.replace(/\.{2,}/g, '.')
+		.replace(/\/\.+/g, '/')
+		.replace(/( |(\.lock)|\/)+$/g, '')
+		.replace(/[ \t]+/g, '-');
 
-	return result;
-};
-
-function convert(){
-	resultElem.value = stingToGitBranchName(stringElem.value);
+const convert = () => {
+	resultElement.value = stingToGitBranchName(stringElement.value);
 };
 
 
-stringElem.oninput = convert;
+stringElement.oninput = convert;

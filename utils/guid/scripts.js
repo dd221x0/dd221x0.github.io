@@ -1,23 +1,24 @@
-var submitElem = document.getElementById("submit");
-var upperCaseElem = document.getElementById("upper_case");
-var resultElem = document.getElementById("result");
+const submitElement = document.getElementById('submit');
+const upperCaseElement = document.getElementById('upper_case');
+const resultElement = document.getElementById('result');
 
 let isUpperCase = false;
 
-const GRAY = "#888888";
-const PURPLE = "#AA00AA";
+const GRAY = '#888888';
+const MAGENTA = '#AA00AA';
 
-function calculate(){
-	resultElem.value = isUpperCase ? guid().toUpperCase() : guid();
+const calculate = () => {
+	resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
+}
+
+const changeCase = () => {
+	const guid = resultElement.value;
+
+	isUpperCase = !isUpperCase;
+	upperCaseElement.style.color = isUpperCase ? MAGENTA : GRAY;
+	resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
 }
 
 submit.onclick = calculate;
-
-upperCaseElem.onclick = function(){
-	isUpperCase = !isUpperCase;
-	upperCaseElem.style.color = isUpperCase ? PURPLE : GRAY;
-	let guid = resultElem.value;
-	resultElem.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
-}
-
+upperCaseElement.onclick = changeCase;
 window.onload = calculate;

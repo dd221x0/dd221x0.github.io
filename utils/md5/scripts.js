@@ -1,67 +1,99 @@
-var stringElem = document.getElementById("string");
-var partsCountElem = document.getElementById("partsCount");
-var partElem = document.getElementById("part");
-var resultElem = document.getElementById("result");
+const passwordElement = document.getElementById('password');
+const stringElement = document.getElementById('string');
+const partsCountElement = document.getElementById('partsCount');
+const partElement = document.getElementById('part');
+const resultElement = document.getElementById('result');
 
-function getHashPart(string, partsCount, part){
+let isPassword = true;
+
+const GRAY = '#888888';
+const MAGENTA = '#AA00AA';
+
+const switchPasswordMode = () => {
+	isPassword = !isPassword;
+	passwordElement.style.color = isPassword ? MAGENTA : GRAY;
+	
+	stringElement.type = isPassword ? 'password' : 'text';
+}
+
+const getHashPart = (string, partsCount, part) => {
+	if (!string) {
+		return '';
+	}
+	
 	if (!partsCount) {
 		partsCount = 1;
 	}
+
 	if (!part) {
 		part = 1;
 	}
-	var passwordHash = md5(string);
-	var partLen = Math.floor(passwordHash.length / partsCount);
+
+	const passwordHash = md5(string);
+	const partLen = Math.floor(passwordHash.length / partsCount);
 	return passwordHash.substring((part - 1) * partLen, part * partLen);
 };
 
-function saveOldValue(event){
+const isDigit = (value) => /^\d*$/.test(value);
+
+const isExceed = (value) => +value > +partsCountElement.value;
+
+const saveOldValue = (event) => {
 	event.target.oldValue = event.target.value;
 };
 
-function numberFilter(event, additionalCheck){
-	var elem = event.target;
-	var regex = /^\d*$/;
-	if(!regex.test(elem.value) 
-		|| !(+elem.value > 0 || elem.value === "")
-		|| (additionalCheck && !additionalCheck(event))){
-		elem.value = elem.oldValue;
-		event.returnValue = false;
-		event.preventDefault();
-	}
-	else{
-		saveOldValue(event);
-	}
+const setResult = () => {
+	resultElement.value = getHashPart(stringElement.value, partsCountElement.value, partElement.value);
 };
 
-function calculate(){
-	resultElem.value = getHashPart(stringElem.value, partsCountElem.value, partElem.value);
-};
+const partsCoutInputHandler = (event) => {
+	const element = event.target;
+	const newPartsCount = element.value;
 
-partsCountElem.onfocus = saveOldValue;
-
-partElem.onfocus = saveOldValue;
-
-partsCountElem.oninput = function(event){
-	numberFilter(event)
-	var elem = event.target;
-	if(elem.value > 32){
-		elem.value = 32;
+	if (!isDigit(newPartsCount)){ 
+		element.value = element.oldValue;
+		return;
 	}
-	if(elem.value === ""){
-		partElem.value = "";
-	}
-	else if(+elem.value < +partElem.value){
-		partElem.value = elem.value;
-	}
-	calculate();
-};
 
-partElem.oninput = function(event){
-	numberFilter(event, function(event){
-			return +event.target.value <= +partsCountElem.value;
-		});
-	calculate();
-};
+	if (newPartsCount === '') {
+		partElement.value = '';
+	}
+	else if (+newPartsCount > 32) {
+		element.value = 32;
+	}
+	else if (+newPartsCount < +partElement.value) {
+		partElement.value = element.value;
+	}
 
-stringElem.oninput = calculate;
+	saveOldValue(event);
+
+	setResult();
+}
+
+const partInputHandler = (event) => {
+	const element = event.target;
+	const partCount = element.value;
+
+	if (!isDigit(partCount)) {
+		element.value = element.oldValue;
+		return;		
+	}
+
+	if (partsCountElement.value === '') {
+		element.value = '';
+	}
+	else if (isExceed(partCount)) {
+		element.value = +partsCountElement.value;
+	}
+
+	saveOldValue(event);
+
+	setResult();
+}
+
+partsCountElement.onfocus = saveOldValue;
+partElement.onfocus = saveOldValue;
+partsCountElement.oninput = partsCoutInputHandler;
+partElement.oninput = partInputHandler;
+stringElement.oninput = setResult;
+passwordElement.onclick = switchPasswordMode;
