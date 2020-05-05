@@ -1,8 +1,7 @@
 let endTime = new Date("2019-06-13T00:00:00+03:00");
 let timeElement = document.getElementById("time");
 
-function setCurrentTime(callback)
-{
+let setCurrentTime = () => {
 	let timeApiUrl = "http://api.timezonedb.com/v2/get-time-zone?key=692FL2W84HRV&by=zone&zone=Europe/Minsk&format=json"
 
 	let xhr = new XMLHttpRequest();
@@ -23,19 +22,18 @@ function setCurrentTime(callback)
 		if(e.target.status === 200)
 		{
 			let currentTimeFormatted = JSON.parse(e.target.response).formatted.replace(" ", "T") + "+03:00";
-			callback(new Date(currentTimeFormatted));
+			setTimer(new Date(currentTimeFormatted));
 		}
 		else
 		{
-			setTimeout(() => setCurrentTime(callback), 1000);
+			setTimeout(() => setCurrentTime(setTimer), 1000);
 		}
 	};
 
 	xhr.send();
 };
 
-function setTimer(time)
-{
+let setTimer = (time) => {
 	if(time >= endTime)
 	{
 		finished();
@@ -71,9 +69,8 @@ function setTimer(time)
 	step();
 }
 
-function finished()
-{
+let finished = () => {
 	timeElement.innerHTML = "nothing";
 }
 
-window.onload = () => setCurrentTime(setTimer);
+window.onload = setCurrentTime;
