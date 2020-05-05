@@ -1,0 +1,33 @@
+.row { /*workaround*/
+	max-width: 801px;
+	width: 801px;
+}
+
+#form {
+	position: absolute;
+	width: 800px;
+	height: 150px;
+	top: 50%;
+	left: 50%;
+	margin-top: -75px;
+	margin-left: -400px;
+	padding: 0;
+}
+
+#string {
+	max-width: 788px;
+	width: 788px;
+}
+
+#result {
+	max-width: 792px;
+	width: 792px;
+}
+
+#copy {
+	position: relative;
+	max-width: 128px;
+	width: 128px;
+	left: 50%;
+	margin-left: -64px;
+}
