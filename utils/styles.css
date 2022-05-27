@@ -4,11 +4,11 @@
 }
 
 ::selection {
-	background: #FFFFFF;
+	background: #BBBBBB;
 }
 
 ::-moz-selection {
-	background: #FFFFFF;
+	background: #BBBBBB;
 }
 
 ::-webkit-input-placeholder {
@@ -19,22 +19,22 @@
   color: #888888;
 }
 
-::-moz-placeholder { 
+::-moz-placeholder {
   color: #888888;
   opacity: 1;
 }
 
-:-moz-placeholder { 
+:-moz-placeholder {
   color: #888888;
   opacity: 1;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #AA00AA;
+    background: #BBBBBB;
 }
 
 ::-webkit-scrollbar-track {
-    border: 0.5px solid #AA00AA;
+    border: 0.5px solid #BBBBBB;
 }
 
 ::-webkit-scrollbar {
@@ -50,7 +50,7 @@ body {
 	background-color: #000000;
 	margin: 0;
 	font-family: CenturyGothic;
-	color: #AA00AA;
+	color: #BBBBBB;
 }
 
 input, button, textarea, span {
@@ -62,13 +62,13 @@ input, button, textarea, span {
 
 input, button, textarea {
 	background-color: #000000;
-	color: #AA00AA;
+	color: #BBBBBB;
 	padding: 4px;
 	outline: none;
 }
 
 input, button {
-	border: 2px solid #AA00AA;
+	border: 2px solid #BBBBBB;
 }
 
 textarea, span {
@@ -87,7 +87,14 @@ span {
 }
 
 button {
+	user-select: none;
 	-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+	cursor: pointer;
+	transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
+}
+
+button:hover {
+	transition: color 0.2s 0.02s ease, border-color 0.2s 0.02s ease;
 }

@@ -5,15 +5,17 @@ const utilsLinks = document.querySelectorAll('#utils a');
 const utilsHeader = document.querySelectorAll('#utils h3');
 const howmuchisleft = document.querySelectorAll('#howmuchisleft a');
 
-const controls = Array.from(socials)
-				.concat(Array.from(email))
-				.concat(Array.from(utilsLinks))
-				.concat(Array.from(howmuchisleft));
+const controls = [
+	...socials,
+	...email,
+	...utilsLinks,
+	...howmuchisleft
+];
 
-const allElements = controls.concat(Array.from(utilsHeader));
+const allElements = [...controls, ...utilsHeader];
 
-let color = '#BBBBBB';
-let hoverColor = '#444444'
+let mainColor = '#BBBBBB';
+let hoverColor = '#444444';
 
 const getRandomColor = () => {
 	let color = '#';
@@ -22,26 +24,26 @@ const getRandomColor = () => {
 	for (var i = 0; i < 3; i++ ) {
 		let component = getRandomHexSymbol() + getRandomHexSymbol();
 		color += component;
-		negative += reflectHex(component);
+		negative += inverseColor(component);
 	}
 
 	return { color, negative };
-}
+};
 
 const getRandomHexSymbol = () => {
 	const symbols = '0123456789ABCDEF';
 	return symbols[Math.floor(Math.random() * 16)];
-}
+};
 
-const reflectHex = (hex) => {
-	const reflectedValue = (0xFF - parseInt(hex, 16)).toString(16);
+const inverseColor = (hex) => {
+	const inversedColor = (0xFF - parseInt(hex, 16)).toString(16);
 	
-	if (reflectedValue.length === 1) {
-		return '0' + reflectedValue;
+	if (inversedColor.length === 1) {
+		return '0' + inversedColor;
 	}
 
-	return reflectedValue;
-}
+	return inversedColor;
+};
 
 const setHoverColor = (elements) => {
 	elements.forEach((el) => {
@@ -49,43 +51,54 @@ const setHoverColor = (elements) => {
 			el.style.color = hoverColor;
 		};
 		el.onmouseout = () => {
-			el.style.color = color;
+			el.style.color = mainColor;
 		};
 	})
 }
 
 const setColor = (elements) => {
 	elements.forEach((e) => {
-		e.style.color = color;
+		e.style.color = mainColor;
 	})
-}
+};
 
 const setElementEvent = (element, elements, dependents) => {
 	element.addEventListener('click', (e) => {
-		newColor = getRandomColor()
-		color = newColor.color;
+		newColor = getRandomColor();
+
+		saveColor(newColor);
+
+		mainColor = newColor.color;
 		hoverColor = newColor.negative;
+
 		elements.forEach((el) => {
-			el.style.borderBottomColor = color;
+			el.style.borderBottomColor = mainColor;
 		});
-		setColor(dependents)
+
+		setColor(dependents);
+
 		e.stopPropagation();
 	});	
-}
+};
+
+const saveColor = (color) => {
+	localStorage.setItem('color', JSON.stringify(color));
+};
 
 const setCursor = (element) => {
 	element.style.cursor = 'pointer';
-}
+};
 
 const tetrahedronInit = (elements, dependents) => {
 	elements.forEach((element) => {
-		setElementEvent(element,elements, dependents);
+		setElementEvent(element, elements, dependents);
 		setCursor(element);
 	});
-}
+};
 
 
 window.onload = () => {
+	saveColor({color: mainColor, negative: hoverColor});
 	tetrahedronInit(parts, allElements);
 	setHoverColor(controls);
-}
+};

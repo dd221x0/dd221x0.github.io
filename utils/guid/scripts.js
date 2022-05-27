@@ -1,32 +1,35 @@
-const submitElement = document.getElementById('submit');
-const upperCaseElement = document.getElementById('upper_case');
-const resultElement = document.getElementById('result');
-const copyElement = document.getElementById('copy');
+(function(){
+	const submitElement = document.getElementById('submit');
+	const upperCaseElement = document.getElementById('upper_case');
+	const resultElement = document.getElementById('result');
+	const copyElement = document.getElementById('copy');
 
-let isUpperCase = false;
+	let isUpperCase = false;
 
-const GRAY = '#888888';
-const MAGENTA = '#AA00AA';
+	const color = JSON.parse(localStorage.getItem('color'));
 
-const calculate = () => {
-	resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
-}
+	const GRAY = '#888888';
 
-const changeCase = () => {
-	const guid = resultElement.value;
+	const calculate = () => {
+		resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
+	}
 
-	isUpperCase = !isUpperCase;
-	upperCaseElement.style.color = isUpperCase ? MAGENTA : GRAY;
-	resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
-}
+	const changeCase = () => {
+		const guid = resultElement.value;
 
-const copyResult = () => {
-	resultElement.select();
-  	document.execCommand('copy');
-}
+		isUpperCase = !isUpperCase;
+		upperCaseElement.style.color = isUpperCase ? color.color : GRAY;
+		resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
+	}
 
-submit.onclick = calculate;
-upperCaseElement.onclick = changeCase;
-copyElement.onclick = copyResult;
+	const copyResult = () => {
+		resultElement.select();
+	  	document.execCommand('copy');
+	}
 
-window.onload = calculate;
+	submit.onclick = calculate;
+	upperCaseElement.onclick = changeCase;
+	copyElement.onclick = copyResult;
+
+	window.onload = calculate;
+})();
