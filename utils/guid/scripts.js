@@ -12,6 +12,8 @@ const setupPage = () => {
 
 	const currentColor = getCurrentColor();
 
+	upperCaseElement.style.color = placeholderColor;
+
 	const calculate = () => {
 		resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
 	}

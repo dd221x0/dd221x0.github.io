@@ -47,4 +47,8 @@ export const applyColor = () => {
             button.style.color = currentColor.color;
         };
     });
+
+    inputs.forEach((input) => {
+        input.classList.add('active');
+    });
 };

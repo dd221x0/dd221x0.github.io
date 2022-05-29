@@ -24,7 +24,7 @@ body {
 }
 
 a, h3 {
-	color: #BBBBBB;
+	color: #000000;
 	font-family: CenturyGothic;
 	text-decoration: none;
 	transition: color 1s 0.02s ease;

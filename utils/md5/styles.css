@@ -15,9 +15,10 @@
 }
 
 #password {
-	color: '#BBBBBB';
+	color: '#000000';
 	cursor: pointer;
 	padding-bottom: 5px;
+	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
