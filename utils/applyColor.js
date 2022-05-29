@@ -1,4 +1,6 @@
-(function(){
+import { getCurrentColor } from "../common.js";
+
+export const applyColor = () => {
     const inputs = document.querySelectorAll('input');
     const buttons = document.querySelectorAll('button');
     const result = document.getElementById('result');
@@ -14,35 +16,35 @@
         result,
     ];
 
-    const color = JSON.parse(localStorage.getItem('color'));
+    let currentColor = getCurrentColor();
 
     elementsWithBorder.forEach((element) => {
-        element.style.borderColor = color.color;
+        element.style.borderColor = currentColor.color;
     });
 
     allElements.forEach((element) => {
-        element.style.color = color.color;
+        element.style.color = currentColor.color;
     });
 
-    homeButton.style.borderBottomColor = color.color;
+    homeButton.style.borderBottomColor = currentColor.color;
 
     homeButton.onmouseover = () => {
-        homeButton.style.borderBottomColor = color.negative;
+        homeButton.style.borderBottomColor = currentColor.negative;
     };
     
     homeButton.onmouseout = () => {
-        homeButton.style.borderBottomColor = color.color;
+        homeButton.style.borderBottomColor = currentColor.color;
     };
 
     buttons.forEach((button) => {
         button.onmouseover = () => {
-            button.style.borderColor = color.negative;
-            button.style.color = color.negative;
+            button.style.borderColor = currentColor.negative;
+            button.style.color = currentColor.negative;
         };
 
         button.onmouseout = () => {
-            button.style.borderColor = color.color;
-            button.style.color = color.color;
+            button.style.borderColor = currentColor.color;
+            button.style.color = currentColor.color;
         };
     });
-})();
+};

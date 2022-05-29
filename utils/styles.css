@@ -58,6 +58,7 @@ input, button, textarea, span {
 	font-size: 20px;
 	font-family: CenturyGothic;
 	margin-bottom: 8px;
+	transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
 }
 
 input, button, textarea {
@@ -92,7 +93,6 @@ button {
     -moz-user-select: none;
     -ms-user-select: none;
 	cursor: pointer;
-	transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
 }
 
 button:hover {

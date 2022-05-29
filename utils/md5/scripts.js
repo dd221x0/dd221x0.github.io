@@ -1,4 +1,8 @@
-(function(){	
+import { getCurrentColor, placeholderColor } from "../../common.js";
+import { applyColor } from "../applyColor.js";
+import { md5 } from "./md5.min.js";
+
+const setupPage = () => {	
 	const passwordElement = document.getElementById('password');
 	const stringElement = document.getElementById('string');
 	const partsCountElement = document.getElementById('partsCount');
@@ -8,15 +12,13 @@
 
 	let isPassword = true;
 
-	const color = JSON.parse(localStorage.getItem('color'));
+	const currentColor = getCurrentColor();
 	
-	passwordElement.style.color = color.color;
-
-	const GRAY = '#888888';
+	passwordElement.style.color = currentColor.color;
 
 	const switchPasswordMode = () => {
 		isPassword = !isPassword;
-		passwordElement.style.color = isPassword ? color.color : GRAY;
+		passwordElement.style.color = isPassword ? currentColor.color : placeholderColor;
 
 		stringElement.type = isPassword ? 'password' : 'text';
 	}
@@ -108,4 +110,9 @@
 	partElement.onfocus = saveOldValue;
 	partElement.oninput = partInputHandler;
 	copyElement.onclick = copyResult;
-})();
+};
+
+window.onload = () => {
+	applyColor();
+	setupPage();
+};

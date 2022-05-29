@@ -1,4 +1,6 @@
-(function(){
+import { applyColor } from "../applyColor.js";
+
+const setupPage = () => {
 	const stringElement = document.getElementById('string');
 	const resultElement = document.getElementById('result');
 	const copyElement = document.getElementById('copy');
@@ -21,4 +23,9 @@
 	
 	stringElement.oninput = convert;
 	copyElement.onclick = copyResult;
-})();
+};
+
+window.onload = () => {
+	applyColor();
+	setupPage();
+};

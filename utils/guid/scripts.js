@@ -1,4 +1,8 @@
-(function(){
+import { getCurrentColor, placeholderColor } from "../../common.js";
+import { applyColor } from "../applyColor.js";
+import { guid } from "./guid.js";
+
+const setupPage = () => {
 	const submitElement = document.getElementById('submit');
 	const upperCaseElement = document.getElementById('upper_case');
 	const resultElement = document.getElementById('result');
@@ -6,9 +10,7 @@
 
 	let isUpperCase = false;
 
-	const color = JSON.parse(localStorage.getItem('color'));
-
-	const GRAY = '#888888';
+	const currentColor = getCurrentColor();
 
 	const calculate = () => {
 		resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
@@ -18,7 +20,7 @@
 		const guid = resultElement.value;
 
 		isUpperCase = !isUpperCase;
-		upperCaseElement.style.color = isUpperCase ? color.color : GRAY;
+		upperCaseElement.style.color = isUpperCase ? currentColor.color : placeholderColor;
 		resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
 	}
 
@@ -27,9 +29,14 @@
 	  	document.execCommand('copy');
 	}
 
-	submit.onclick = calculate;
+	submitElement.onclick = calculate;
 	upperCaseElement.onclick = changeCase;
 	copyElement.onclick = copyResult;
 
-	window.onload = calculate;
-})();
+	calculate();
+};
+
+window.onload = () => {
+	applyColor();
+	setupPage();
+};
