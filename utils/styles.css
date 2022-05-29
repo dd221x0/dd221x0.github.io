@@ -4,11 +4,11 @@
 }
 
 ::selection {
-	background: #BBBBBB;
+	background: #FFFFFF;
 }
 
 ::-moz-selection {
-	background: #BBBBBB;
+	background: #FFFFFF;
 }
 
 ::-webkit-input-placeholder {
