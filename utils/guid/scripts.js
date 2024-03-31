@@ -2,43 +2,43 @@ import { getCurrentColor, placeholderColor } from "../../common.js";
 import { applyColor } from "../applyColor.js";
 import { guid } from "./guid.js";
 
+const upperCaseSwitch = document.getElementById('upperCase');
+const generateButton = document.getElementById('generate');
+const resultTextArea = document.getElementById('result');
+const copyButton = document.getElementById('copy');
+
+const currentColor = getCurrentColor();
+
+let isUpperCase = false;
+
+const setGuidValue = () => {
+    resultTextArea.value = isUpperCase ? guid().toUpperCase() : guid();
+};
+
+const switchCase = () => {
+    const guid = resultTextArea.value;
+
+    isUpperCase = !isUpperCase;
+    upperCaseSwitch.style.color = isUpperCase ? currentColor.color : placeholderColor;
+    resultTextArea.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
+};
+
+const copyResult = () => {
+    resultTextArea.select();
+    navigator.clipboard.writeText(resultTextArea.value);
+};
+
 const setupPage = () => {
-	const submitElement = document.getElementById('submit');
-	const upperCaseElement = document.getElementById('upper_case');
-	const resultElement = document.getElementById('result');
-	const copyElement = document.getElementById('copy');
+    upperCaseSwitch.style.color = placeholderColor;
 
-	let isUpperCase = false;
+    generateButton.onclick = setGuidValue;
+    upperCaseSwitch.onclick = switchCase;
+    copyButton.onclick = copyResult;
 
-	const currentColor = getCurrentColor();
-
-	upperCaseElement.style.color = placeholderColor;
-
-	const calculate = () => {
-		resultElement.value = isUpperCase ? guid().toUpperCase() : guid();
-	}
-
-	const changeCase = () => {
-		const guid = resultElement.value;
-
-		isUpperCase = !isUpperCase;
-		upperCaseElement.style.color = isUpperCase ? currentColor.color : placeholderColor;
-		resultElement.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
-	}
-
-	const copyResult = () => {
-		resultElement.select();
-	  	document.execCommand('copy');
-	}
-
-	submitElement.onclick = calculate;
-	upperCaseElement.onclick = changeCase;
-	copyElement.onclick = copyResult;
-
-	calculate();
+    setGuidValue();
 };
 
 window.onload = () => {
-	applyColor();
-	setupPage();
+    applyColor();
+    setupPage();
 };

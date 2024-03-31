@@ -1,45 +1,45 @@
 .row { /*workaround*/
-	max-width: 451px;
-	width: 451px;
+    max-width: 451px;
+    width: 451px;
 }
 
 #form {
-	position: absolute;
-	width: 450px;
-	height: 200px;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -225px;
-	padding: 0;
+    position: absolute;
+    width: 450px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -225px;
+    padding: 0;
 }
 
-#submit {
-	max-width: 450px;
-	width: 450px;
+#generate {
+    max-width: 450px;
+    width: 450px;
 }
 
-#upper_case {
-	color: #000000;
-	cursor: pointer;
-	padding-bottom: 5px;
-	user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
+#upperCase {
+    color: #000000;
+    cursor: pointer;
+    padding-bottom: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 #result {
-	max-width: 442px;
-	width: 442px;
-	max-height: 36px;
-	height: 36px;
+    max-width: 442px;
+    width: 442px;
+    max-height: 36px;
+    height: 36px;
 }
 
 #copy {
-	position: relative;
-	max-width: 128px;
-	width: 128px;
-	left: 50%;
-	margin-left: -64px;
+    position: relative;
+    max-width: 128px;
+    width: 128px;
+    left: 50%;
+    margin-left: -64px;
 }
