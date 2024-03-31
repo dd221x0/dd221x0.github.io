@@ -1,31 +1,31 @@
 import { applyColor } from "../applyColor.js";
 
+const stringInput = document.getElementById('string');
+const resultTextArea = document.getElementById('result');
+const copyButton = document.getElementById('copy');
+
+const stingToGitBranchName = (string) => string
+    .replace(/[\~\^:\[\]\(\)\\]/g, '')
+    .replace(/\.{2,}/g, '.')
+    .replace(/\/\.+/g, '/')
+    .replace(/( |(\.lock)|\/)+$/g, '')
+    .replace(/[ \t]+/g, '-');
+
+const convertToGitBranchName = () => {
+    resultTextArea.value = stingToGitBranchName(stringInput.value);
+};
+
+const copyResult = () => {
+    resultTextArea.select();
+    navigator.clipboard.writeText(resultTextArea.value);
+};
+
 const setupPage = () => {
-	const stringElement = document.getElementById('string');
-	const resultElement = document.getElementById('result');
-	const copyElement = document.getElementById('copy');
-	
-	const stingToGitBranchName = (string) => string
-			.replace(/[\~\^:\[\]\(\)\\]/g, '')
-			.replace(/\.{2,}/g, '.')
-			.replace(/\/\.+/g, '/')
-			.replace(/( |(\.lock)|\/)+$/g, '')
-			.replace(/[ \t]+/g, '-');
-	
-	const convert = () => {
-		resultElement.value = stingToGitBranchName(stringElement.value);
-	};
-	
-	const copyResult = () => {
-		resultElement.select();
-	  	document.execCommand('copy');
-	}
-	
-	stringElement.oninput = convert;
-	copyElement.onclick = copyResult;
+    stringInput.oninput = convertToGitBranchName;
+    copyButton.onclick = copyResult;
 };
 
 window.onload = () => {
-	applyColor();
-	setupPage();
+    applyColor();
+    setupPage();
 };
