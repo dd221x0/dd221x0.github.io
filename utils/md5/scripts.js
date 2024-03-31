@@ -2,117 +2,133 @@ import { getCurrentColor, placeholderColor } from "../../common.js";
 import { applyColor } from "../applyColor.js";
 import { md5 } from "./md5.min.js";
 
-const setupPage = () => {	
-	const passwordElement = document.getElementById('password');
-	const stringElement = document.getElementById('string');
-	const partsCountElement = document.getElementById('partsCount');
-	const partElement = document.getElementById('part');
-	const resultElement = document.getElementById('result');
-	const copyElement = document.getElementById('copy');
+const passwordSwitch = document.getElementById('password');
+const stringInput = document.getElementById('string');
+const partsCountInput = document.getElementById('partsCount');
+const partInput = document.getElementById('part');
+const resultTextArea = document.getElementById('result');
+const copyButton = document.getElementById('copy');
 
-	let isPassword = true;
+const currentColor = getCurrentColor();
 
-	const currentColor = getCurrentColor();
-	
-	passwordElement.style.color = currentColor.color;
+let isPassword = true;
 
-	const switchPasswordMode = () => {
-		isPassword = !isPassword;
-		passwordElement.style.color = isPassword ? currentColor.color : placeholderColor;
+const switchPasswordMode = () => {
+    isPassword = !isPassword;
+    passwordSwitch.style.color = isPassword ? currentColor.color : placeholderColor;
 
-		stringElement.type = isPassword ? 'password' : 'text';
-	}
+    stringInput.type = isPassword ? 'password' : 'text';
+};
 
-	const getHashPart = (string, partsCount, part) => {
-		if (!string) {
-			return '';
-		}
+const getHashPart = (string, partsCount, part) => {
+    if (!string) {
+        return '';
+    }
 
-		if (!partsCount) {
-			partsCount = 1;
-		}
+    if (!partsCount) {
+        partsCount = 1;
+    }
 
-		if (!part) {
-			part = 1;
-		}
+    if (!part) {
+        part = 1;
+    }
 
-		const passwordHash = md5(string);
-		const partLen = Math.floor(passwordHash.length / partsCount);
-		return passwordHash.substring((part - 1) * partLen, part * partLen);
-	};
+    const passwordHash = md5(string);
+    const partLength = Math.floor(passwordHash.length / partsCount);
+    return passwordHash.substring((part - 1) * partLength, part * partLength);
+};
 
-	const isDigit = (value) => /^\d*$/.test(value);
+const isDigit = (value) => /^\d*$/.test(value);
 
-	const isExceed = (value) => +value > +partsCountElement.value;
+const saveOldValue = (event) => {
+    event.target.oldValue = event.target.value;
+};
 
-	const saveOldValue = (event) => {
-		event.target.oldValue = event.target.value;
-	};
+const updateCountRelatedInputs = (newPartsCount) => {
+    if (newPartsCount === '') {
+        partInput.value = '';
+        return;
+    }
 
-	const setResult = () => {
-		resultElement.value = getHashPart(stringElement.value, partsCountElement.value, partElement.value);
-	};
+    if (+newPartsCount > 32) {
+        partsCountInput.value = 32;
+        return;
+    }
 
-	const partsCoutInputHandler = (event) => {
-		const element = event.target;
-		const newPartsCount = element.value;
+    if (+newPartsCount < +partInput.value) {
+        partInput.value = partsCountInput.value;
+        return;
+    }
+};
 
-		if (!isDigit(newPartsCount)){ 
-			element.value = element.oldValue;
-			return;
-		}
+const handlePartsCountInput = (event) => {
+    const element = event.target;
+    const newPartsCount = element.value;
 
-		if (newPartsCount === '') {
-			partElement.value = '';
-		}
-		else if (+newPartsCount > 32) {
-			element.value = 32;
-		}
-		else if (+newPartsCount < +partElement.value) {
-			partElement.value = element.value;
-		}
+    if (!isDigit(newPartsCount)){ 
+        element.value = element.oldValue;
+        return;
+    }
 
-		saveOldValue(event);
+    updateCountRelatedInputs(newPartsCount);
 
-		setResult();
-	}
+    saveOldValue(event);
+    setResult();
+};
 
-	const partInputHandler = (event) => {
-		const element = event.target;
-		const partCount = element.value;
+const updatePartRelatedInputs = (partNumber) => {
+    if (partsCountInput.value === '') {
+        partInput.value = '';
+        return;
+    }
 
-		if (!isDigit(partCount)) {
-			element.value = element.oldValue;
-			return;		
-		}
+    if (+partNumber > +partsCountInput.value) {
+        partInput.value = +partsCountInput.value;
+        return;
+    }
+};
 
-		if (partsCountElement.value === '') {
-			element.value = '';
-		}
-		else if (isExceed(partCount)) {
-			element.value = +partsCountElement.value;
-		}
+const handlePartInput = (event) => {
+    const element = event.target;
+    const partNumber = element.value;
 
-		saveOldValue(event);
+    if (!isDigit(partNumber)) {
+        element.value = element.oldValue;
+        return;
+    }
 
-		setResult();
-	}
+    updatePartRelatedInputs(partNumber);
 
-	const copyResult = () => {
-		resultElement.select();
-	  	document.execCommand('copy');
-	}
+    saveOldValue(event);
+    setResult();
+};
 
-	passwordElement.onclick = switchPasswordMode;
-	stringElement.oninput = setResult;
-	partsCountElement.onfocus = saveOldValue;
-	partsCountElement.oninput = partsCoutInputHandler;
-	partElement.onfocus = saveOldValue;
-	partElement.oninput = partInputHandler;
-	copyElement.onclick = copyResult;
+const setResult = () => {
+    resultTextArea.value = getHashPart(stringInput.value, partsCountInput.value, partInput.value);
+};
+
+const copyResult = () => {
+    resultTextArea.select();
+    navigator.clipboard.writeText(resultTextArea.value);
+};
+
+const applyPageSpecificColor = () => {
+    passwordSwitch.style.color = currentColor.color;
+};
+
+const setupPage = () => {    
+    applyPageSpecificColor();
+
+    passwordSwitch.onclick = switchPasswordMode;
+    stringInput.oninput = setResult;
+    partsCountInput.onfocus = saveOldValue;
+    partsCountInput.oninput = handlePartsCountInput;
+    partInput.onfocus = saveOldValue;
+    partInput.oninput = handlePartInput;
+    copyButton.onclick = copyResult;
 };
 
 window.onload = () => {
-	applyColor();
-	setupPage();
+    applyColor();
+    setupPage();
 };
