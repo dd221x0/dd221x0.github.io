@@ -1,59 +1,59 @@
 ﻿@keyframes animation {
-				from, to {
-					transform: rotateX(0) rotateY(0deg) rotateZ(0);
-				}
-				25% {
-					transform: rotateX(180deg) rotateY(0deg) rotateZ(180deg);
-				}
-				50% {
-					transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
-				}
-				75% {
-					transform: rotateX(0deg) rotateY(180deg) rotateZ(180deg);
-				}
-			}
+                from, to {
+                    transform: rotateX(0) rotateY(0deg) rotateZ(0);
+                }
+                25% {
+                    transform: rotateX(180deg) rotateY(0deg) rotateZ(180deg);
+                }
+                50% {
+                    transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+                }
+                75% {
+                    transform: rotateX(0deg) rotateY(180deg) rotateZ(180deg);
+                }
+            }
 
 
 #tetrahedron {
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	top: 50%;
-	left: 50%;
-	margin-top: -150px;
-	margin-left: -150px;
-	background: transparent;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    background: transparent;
 
-	animation-name: animation;
-	animation-timing-function: ease-in-out;
-	transform-style: preserve-3d;
-	animation-iteration-count: infinite;
-	animation-duration: 16s;
+    animation-name: animation;
+    animation-timing-function: ease-in-out;
+    transform-style: preserve-3d;
+    animation-iteration-count: infinite;
+    animation-duration: 16s;
 }
 
 #tetrahedron div {
-	position: fixed;
-	top: 0;
-	width: 0;
-	height: 0;
-	border-left: 150px solid transparent;
-	border-right: 150px solid transparent;
-	border-bottom: 260px solid #000000;
-	transition: border-bottom-color 1s 0.02s ease;
+    position: fixed;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 260px solid #000000;
+    transition: border-bottom-color 1s 0.02s ease;
 }
 
 #bottom {
-	transform: rotateX(90deg) translateZ(-130px) translateY(-130px);
+    transform: rotateX(90deg) translateZ(-130px) translateY(-130px);
 }
 
 #front{
-	transform: translateY(-7px) rotateX(19.47deg) translateZ(-46px);
+    transform: translateY(-7px) rotateX(19.47deg) translateZ(-46px);
 }
 
 #right {
-	transform: translateY(8px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
+    transform: translateY(8px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
 }
 
 #left {
-	transform: translateY(8px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
+    transform: translateY(8px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
 }

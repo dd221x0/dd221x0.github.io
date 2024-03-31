@@ -1,10 +1,12 @@
 import { getCurrentColor } from "../common.js";
 
+const inputs = document.querySelectorAll('input');
+const buttons = document.querySelectorAll('button');
+const result = document.getElementById('result');
+const homeButton = document.getElementById('triangle');
+
 export const applyColor = () => {
-    const inputs = document.querySelectorAll('input');
-    const buttons = document.querySelectorAll('button');
-    const result = document.getElementById('result');
-    const homeButton = document.getElementById('triangle');
+
 
     const elementsWithBorder = [
         ...inputs,
@@ -16,7 +18,7 @@ export const applyColor = () => {
         result,
     ];
 
-    let currentColor = getCurrentColor();
+    const currentColor = getCurrentColor();
 
     elementsWithBorder.forEach((element) => {
         element.style.borderColor = currentColor.color;

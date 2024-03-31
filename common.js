@@ -1,6 +1,12 @@
-export const defaultColor = {color: '#BBBBBB', negative: '#444444'};
-export const placeholderColor = '#888888'; 
+const defaultColor = {color: '#BBBBBB', negative: '#444444'};
+const placeholderColor = '#888888'; 
 
-export const getCurrentColor = () => {
+const getCurrentColor = () => {
     return JSON.parse(localStorage.getItem('color')) || defaultColor;
 };
+
+export {
+    defaultColor,
+    placeholderColor,
+    getCurrentColor,
+}
