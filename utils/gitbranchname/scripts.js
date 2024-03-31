@@ -4,15 +4,19 @@ const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
 
-const stingToGitBranchName = (string) => string
-    .replace(/[\~\^:\[\]\(\)\\]/g, '')
-    .replace(/\.{2,}/g, '.')
+const stringToGitBranchName = (string) => string
+    .replace(/[\^\[\]\(\)\>\<\"\{\}\'\|\,\?\*\!\#\$\%]/g, '')
+	.replace(/\&/g, 'and')
     .replace(/\/\.+/g, '/')
-    .replace(/( |(\.lock)|\/)+$/g, '')
-    .replace(/[ \t]+/g, '-');
+	.replace(/\/+/g, '/')
+	.replace(/\.{2,}/g, '.')
+    .replace(/( |(\.lock)|\/|\.)+$/g, '')
+	.replace(/^(\/|\.)+/g, '')
+    .replace(/[ \t\:\;\~\\\@]+/g, '-')
+	.replace(/\-+/g, '-');
 
 const convertToGitBranchName = () => {
-    resultTextArea.value = stingToGitBranchName(stringInput.value);
+    resultTextArea.value = stringToGitBranchName(stringInput.value);
 };
 
 const copyResult = () => {
