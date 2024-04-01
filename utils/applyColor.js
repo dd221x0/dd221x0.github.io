@@ -1,4 +1,5 @@
 import { getCurrentColor } from "../common.js";
+import { setIcon } from "../icon.js";
 
 const inputs = document.querySelectorAll('input');
 const buttons = document.querySelectorAll('button');
@@ -67,6 +68,7 @@ const applyColor = () => {
     applyColorForHomeButton();
     applyColorForButtons();
     applyColorForInputs();
+    setIcon();
 };
 
 export {

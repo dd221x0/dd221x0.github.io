@@ -1,9 +1,15 @@
 import {
     defaultColor,
     getCurrentColor,
-} from "./common.js";
+} from './common.js';
+import { setIcon } from './icon.js';
 
 let currentColor = getCurrentColor();
+
+let triggerElements = [];
+let targetElements = [];
+let targetBorderElements = [];
+let targetHoverElements = [];
 
 const getRandomColor = () => {
     const color = {
@@ -35,7 +41,7 @@ const convertColorToString = (color) => {
         .toUpperCase();
 
     return `#${colorString}`;
-}
+};
 
 const saveColor = (color) => {
     localStorage.setItem('color', JSON.stringify(color));
@@ -51,7 +57,18 @@ const setBorderColor = (elements) => {
     elements.forEach((el) => {
         el.style.borderBottomColor = currentColor.color;
     });
-}
+};
+
+const changeColor = (color) => {
+    currentColor = color;
+
+    setColor(targetElements);
+    setBorderColor(targetBorderElements);
+
+    saveColor(currentColor);
+
+    setIcon();
+};
 
 const setHoverColorChange = (elements) => {
     elements.forEach((el) => {
@@ -62,46 +79,61 @@ const setHoverColorChange = (elements) => {
             el.style.color = currentColor.color;
         };
     })
-}
+};
 
-const setClickColorChange = (
-    triggerElement,
-    targetElements,
-    targetBorderElements,
-) => {
-    triggerElement.addEventListener('click', (e) => {
-        currentColor = getRandomColor();
-
-        setColor(targetElements);
-        setBorderColor(targetBorderElements);
-
-        saveColor(currentColor);
-
+const setClickColorChange = (element) => {
+    element.addEventListener('click', (e) => {
+        changeColor(getRandomColor());
         e.stopPropagation();
     });
 };
 
-const setDoubleClickColorChange = (
-    triggerElement,
-    targetElements,
-    targetBorderElements,
-) => {
-    triggerElement.addEventListener('dbclick', (e) => {
-        currentColor = defaultColor;
-
-        setColor(targetElements);
-        setBorderColor(targetBorderElements);
-
-        saveColor(currentColor);
-
+const setDoubleClickColorChange = (element) => {
+    element.addEventListener('dbclick', (e) => {
+        changeColor(defaultColor);
         e.stopPropagation();
     });
+};
+
+const initializeTriggers = () => {
+    triggerElements.forEach((triggerElement) => {
+        setClickColorChange(triggerElement);
+        setDoubleClickColorChange(triggerElement);
+    });
+};
+
+const initializeTargets = () => {
+    setColor(targetElements);
+    setBorderColor(targetBorderElements);
+    setHoverColorChange(targetHoverElements);
+};
+
+const registerTriggerElements = (elements) => {
+    triggerElements = [...elements];
+};
+
+const registerTargetElements = (elements) => {
+    targetElements = [...elements];
+};
+
+const registerTargetBorderElements = (elements) => {
+    targetBorderElements = [...elements];
+};
+
+const registerTargetHoverElements = (elements) => {
+    targetHoverElements = [...elements];
+};
+
+const initializeColorChange = () => {
+    initializeTriggers();
+    initializeTargets();
+    setIcon();
 };
 
 export {
-    setColor,
-    setBorderColor,
-    setHoverColorChange,
-    setClickColorChange,
-    setDoubleClickColorChange,
+    registerTriggerElements,
+    registerTargetElements,
+    registerTargetBorderElements,
+    registerTargetHoverElements,
+    initializeColorChange,
 };

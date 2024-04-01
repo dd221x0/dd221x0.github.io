@@ -1,9 +1,9 @@
 import {
-    setColor,
-    setBorderColor,
-    setHoverColorChange,
-    setClickColorChange,
-    setDoubleClickColorChange,
+    registerTriggerElements,
+	registerTargetElements,
+	registerTargetBorderElements,
+	registerTargetHoverElements,
+	initializeColorChange,
 } from './colorChange.js';
 
 const tetrahedronParts = document.querySelectorAll('#tetrahedron div');
@@ -29,17 +29,17 @@ const setCursor = (element) => {
 
 const initializeTetrahedron = () => {
     tetrahedronParts.forEach((element) => {
-        setClickColorChange(element, allElements, tetrahedronParts);
-        setDoubleClickColorChange(element, allElements, tetrahedronParts);
         setCursor(element);
     });
 };
 
 const initialize = () => {
     initializeTetrahedron();
-    setColor(allElements);
-    setBorderColor(tetrahedronParts);
-    setHoverColorChange(controls);
+	registerTriggerElements(tetrahedronParts);
+    registerTargetElements(allElements);
+    registerTargetBorderElements(tetrahedronParts);
+    registerTargetHoverElements(controls);
+	initializeColorChange();
 }
 
 window.onload = () => {
