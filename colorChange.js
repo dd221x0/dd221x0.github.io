@@ -128,20 +128,22 @@ const setClickColorChange = (element) => {
     element.addEventListener('click', (e) => {
         changeColor(getRandomColor());
         e.stopPropagation();
+        e.preventDefault();
     });
 };
 
-const setDoubleClickColorChange = (element) => {
-    element.addEventListener('dbclick', (e) => {
+const setClickColorReset = (element) => {
+    element.addEventListener('contextmenu', (e) => {
         changeColor(defaultColor);
         e.stopPropagation();
+        e.preventDefault();
     });
 };
 
 const initializeTriggers = () => {
     triggerElements.forEach((triggerElement) => {
         setClickColorChange(triggerElement);
-        setDoubleClickColorChange(triggerElement);
+        setClickColorReset(triggerElement);
     });
 };
 
