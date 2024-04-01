@@ -9,12 +9,11 @@ const partInput = document.getElementById('part');
 const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
 
-let isPassword = true;
-
 const switchPasswordMode = () => {
-    isPassword = !isPassword;
-    passwordSwitch.isActive = isPassword;
-    stringInput.type = isPassword ? 'password' : 'text';
+    passwordSwitch.isActive = !passwordSwitch.isActive;
+    stringInput.type = passwordSwitch.isActive ? 'password' : 'text';
+
+    updateURLParameters();
 };
 
 const getHashPart = (string, partsCount, part) => {
@@ -102,6 +101,7 @@ const handlePartInput = (event) => {
 
 const setResult = () => {
     resultTextArea.value = getHashPart(stringInput.value, partsCountInput.value, partInput.value);
+    updateURLParameters();
 };
 
 const copyResult = () => {
@@ -109,9 +109,70 @@ const copyResult = () => {
     navigator.clipboard.writeText(resultTextArea.value);
 };
 
-const setupPage = () => {    
-    passwordSwitch.isActive = isPassword;
+const readURLParameters = () => {
+    const url = new URL(window.location);
+    const string = url.searchParams.get('string');
+    const partsCount = url.searchParams.get('partsCount');
+    const part = url.searchParams.get('part');
 
+    if (string) {
+        stringInput.value = string;
+    }
+
+    if (!partsCount) {
+        return
+    }
+
+    partsCountInput.value = partsCount;
+
+    if (part) {
+        partInput.value = part;
+    }
+};
+
+const applyValuesFromURL = () => {
+    readURLParameters();
+    setResult();
+};
+
+const updateStringParameter = (url) => {
+    if (!stringInput.value || passwordSwitch.isActive) {
+        url.searchParams.delete('string');
+        return
+    }
+
+    url.searchParams.set('string', stringInput.value);
+};
+
+const updatePartsCountParameter = (url) => {
+    if (!partsCountInput.value) {
+        url.searchParams.delete('partsCount');
+        return;
+    }
+
+    url.searchParams.set('partsCount', partsCountInput.value);
+};
+
+const updatePartParameter = (url) => {
+    if (!partInput.value) {
+        url.searchParams.delete('part');
+        return;
+    }
+
+    url.searchParams.set('part', partInput.value);
+};
+
+const updateURLParameters = () => {
+    const url = new URL(window.location);
+
+    updateStringParameter(url);
+    updatePartsCountParameter(url);
+    updatePartParameter(url);
+
+    window.history.replaceState({}, '', url);
+};
+
+const setupPage = () => {    
     passwordSwitch.onclick = switchPasswordMode;
     stringInput.oninput = setResult;
     partsCountInput.onfocus = saveOldValue;
@@ -119,6 +180,8 @@ const setupPage = () => {
     partInput.onfocus = saveOldValue;
     partInput.oninput = handlePartInput;
     copyButton.onclick = copyResult;
+
+    applyValuesFromURL();
 
     stringInput.focus();
 };
