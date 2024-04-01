@@ -1,5 +1,5 @@
 import { getCurrentColor, placeholderColor } from "../../common.js";
-import { applyColor } from "../applyColor.js";
+import { initializeLayout } from "../layout.js";
 import { guid } from "./guid.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
@@ -39,6 +39,6 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    applyColor();
+    initializeLayout();
     setupPage();
 };

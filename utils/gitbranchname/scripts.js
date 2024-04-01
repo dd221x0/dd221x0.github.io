@@ -1,4 +1,4 @@
-import { applyColor } from "../applyColor.js";
+import { initializeLayout } from "../layout.js";
 
 const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
@@ -30,6 +30,6 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    applyColor();
+    initializeLayout();
     setupPage();
 };

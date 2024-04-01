@@ -1,7 +1,7 @@
 import {
     registerTriggerElements,
 	registerTargetElements,
-	registerTargetBorderElements,
+	registerTargetTriangleElements,
 	registerTargetHoverElements,
 	initializeColorChange,
 } from './colorChange.js';
@@ -37,7 +37,7 @@ const initialize = () => {
     initializeTetrahedron();
 	registerTriggerElements(tetrahedronParts);
     registerTargetElements(allElements);
-    registerTargetBorderElements(tetrahedronParts);
+    registerTargetTriangleElements(tetrahedronParts);
     registerTargetHoverElements(controls);
 	initializeColorChange();
 }

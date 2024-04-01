@@ -1,17 +1,17 @@
 ﻿@keyframes animation {
-                from, to {
-                    transform: rotateX(0) rotateY(0deg) rotateZ(0);
-                }
-                25% {
-                    transform: rotateX(180deg) rotateY(0deg) rotateZ(180deg);
-                }
-                50% {
-                    transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
-                }
-                75% {
-                    transform: rotateX(0deg) rotateY(180deg) rotateZ(180deg);
-                }
-            }
+    from, to {
+        transform: rotateX(0) rotateY(0deg) rotateZ(0);
+    }
+    25% {
+        transform: rotateX(180deg) rotateY(0deg) rotateZ(180deg);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg) rotateZ(0deg);
+    }
+    75% {
+        transform: rotateX(0deg) rotateY(180deg) rotateZ(180deg);
+    }
+}
 
 
 #tetrahedron {

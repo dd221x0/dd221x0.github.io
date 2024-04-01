@@ -1,5 +1,5 @@
 import { getCurrentColor, placeholderColor } from "../../common.js";
-import { applyColor } from "../applyColor.js";
+import { initializeLayout } from "../layout.js";
 import { md5 } from "./md5.min.js";
 
 const passwordSwitch = document.getElementById('password');
@@ -129,6 +129,6 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    applyColor();
+    initializeLayout();
     setupPage();
 };

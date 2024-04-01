@@ -1,3 +1,6 @@
+import { initializeLayout } from "../layout.js";
+import { registerTargetElements } from "../../colorChange.js";
+
 const SECONDS_IN_A_DAY = 24 * 60 * 60;
 const SECONDS_IN_AN_HOUR = 60 * 60;
 const SECONDS_IN_A_MINUTE = 60;
@@ -76,4 +79,8 @@ const startCountdown = async () => {
     setTimer(currentTime);
 };
 
-window.onload = startCountdown;
+window.onload = () => {
+    registerTargetElements([timeElement]);
+    initializeLayout();
+    startCountdown();
+};

@@ -8,8 +8,12 @@ let currentColor = getCurrentColor();
 
 let triggerElements = [];
 let targetElements = [];
-let targetBorderElements = [];
+let targetTriangleElements = [];
+let targetPlaceholderElements = [];
 let targetHoverElements = [];
+let targetTriangleHoverElements = [];
+let targetButtonHoverElements = [];
+let targetBorderElements = [];
 
 const getRandomColor = () => {
     const color = {
@@ -48,14 +52,26 @@ const saveColor = (color) => {
 };
 
 const setColor = (elements) => {
-    elements.forEach((e) => {
-        e.style.color = currentColor.color;
+    elements.forEach((el) => {
+        el.style.color = currentColor.color;
     })
+};
+
+const setTriangleColor = (elements) => {
+    elements.forEach((el) => {
+        el.style.borderBottomColor = currentColor.color;
+    });
 };
 
 const setBorderColor = (elements) => {
     elements.forEach((el) => {
-        el.style.borderBottomColor = currentColor.color;
+        el.style.borderColor = currentColor.color;
+    });
+};
+
+const setPlaceholderColor = (elements) => {
+    elements.forEach((el) => {
+        el.classList.add('active');
     });
 };
 
@@ -63,7 +79,7 @@ const changeColor = (color) => {
     currentColor = color;
 
     setColor(targetElements);
-    setBorderColor(targetBorderElements);
+    setTriangleColor(targetTriangleElements);
 
     saveColor(currentColor);
 
@@ -75,10 +91,37 @@ const setHoverColorChange = (elements) => {
         el.onmouseover = () => {
             el.style.color = currentColor.negative;
         };
+
         el.onmouseout = () => {
             el.style.color = currentColor.color;
         };
-    })
+    });
+};
+
+const setTriangleHoverColorChange = (elements) => {
+    elements.forEach((el) => {
+        el.onmouseover = () => {
+            el.style.borderBottomColor = currentColor.negative;
+        };
+
+        el.onmouseout = () => {
+            el.style.borderBottomColor = currentColor.color;
+        };
+    });
+};
+
+const setButtonHoverColorChange = (elements) => {
+    elements.forEach((el) => {
+        el.onmouseover = () => {
+            el.style.borderColor = currentColor.negative;
+            el.style.color = currentColor.negative;
+        };
+    
+        el.onmouseout = () => {
+            el.style.borderColor = currentColor.color;
+            el.style.color = currentColor.color;
+        };
+    });
 };
 
 const setClickColorChange = (element) => {
@@ -104,36 +147,60 @@ const initializeTriggers = () => {
 
 const initializeTargets = () => {
     setColor(targetElements);
-    setBorderColor(targetBorderElements);
+    setTriangleColor(targetTriangleElements);
+    setPlaceholderColor(targetPlaceholderElements);
     setHoverColorChange(targetHoverElements);
+    setTriangleHoverColorChange(targetTriangleHoverElements);
+    setButtonHoverColorChange(targetButtonHoverElements);
+    setBorderColor(targetBorderElements);
 };
 
 const registerTriggerElements = (elements) => {
-    triggerElements = [...elements];
+    triggerElements = [ ...triggerElements, ...elements ];
 };
 
 const registerTargetElements = (elements) => {
-    targetElements = [...elements];
+    targetElements = [ ...targetElements, ...elements ];
 };
 
-const registerTargetBorderElements = (elements) => {
-    targetBorderElements = [...elements];
+const registerTargetTriangleElements = (elements) => {
+    targetTriangleElements = [ ...targetTriangleElements, ...elements ];
+};
+
+const registerTargetPlaceholderElements = (elements) => {
+    targetPlaceholderElements = [ ...targetPlaceholderElements, ...elements ];
 };
 
 const registerTargetHoverElements = (elements) => {
-    targetHoverElements = [...elements];
+    targetHoverElements = [ ...targetHoverElements, ...elements ];
+};
+
+const registerTargetTriangleHoverElements = (elements) => {
+    targetTriangleHoverElements = [ ...targetTriangleHoverElements, ...elements ];
+};
+
+const registerTargetButtonHoverElements = (elements) => {
+    targetButtonHoverElements = [ ...targetButtonHoverElements, ...elements ];
+}
+
+const registerTargetBorderElements = (elements) => {
+    targetBorderElements = [ ...targetBorderElements, ...elements ];
 };
 
 const initializeColorChange = () => {
+    setIcon();
     initializeTriggers();
     initializeTargets();
-    setIcon();
 };
 
 export {
     registerTriggerElements,
     registerTargetElements,
-    registerTargetBorderElements,
+    registerTargetTriangleElements,
+    registerTargetPlaceholderElements,
     registerTargetHoverElements,
+    registerTargetTriangleHoverElements,
+    registerTargetButtonHoverElements,
+    registerTargetBorderElements,
     initializeColorChange,
 };
