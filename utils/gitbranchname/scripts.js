@@ -17,6 +17,7 @@ const stringToGitBranchName = (string) => string
 
 const convertToGitBranchName = () => {
     resultTextArea.value = stringToGitBranchName(stringInput.value);
+    updateURLParameters();
 };
 
 const copyResult = () => {
@@ -24,9 +25,42 @@ const copyResult = () => {
     navigator.clipboard.writeText(resultTextArea.value);
 };
 
+const updateStringParameter = (url) => {
+    if (!stringInput.value) {
+        url.searchParams.delete('string');
+        return;
+    }
+
+    url.searchParams.set('string', stringInput.value);
+};
+
+const updateURLParameters = () => {
+    const url = new URL(window.location);
+    
+    updateStringParameter(url);
+
+    window.history.replaceState({}, '', url);
+};
+
+const readURLParameters = () => {
+    const url = new URL(window.location);
+    const string = url.searchParams.get('string');
+
+    if (string) {
+        stringInput.value = string;
+    }
+};
+
+const applyValuesFromURL = () => {
+    readURLParameters();
+    convertToGitBranchName();
+};
+
 const setupPage = () => {
     stringInput.oninput = convertToGitBranchName;
     copyButton.onclick = copyResult;
+
+    applyValuesFromURL();
 
     stringInput.focus();
 };
