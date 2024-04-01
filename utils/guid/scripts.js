@@ -1,6 +1,6 @@
 import { registerTargetSwitchElements } from "../../colorChange/colorChange.js";
 import { initializeLayout } from "../layout.js";
-import { guid } from "./guid.js";
+import { generateGuid } from "./guid.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
 const generateButton = document.getElementById('generate');
@@ -10,7 +10,8 @@ const copyButton = document.getElementById('copy');
 let isUpperCase = false;
 
 const setGuidValue = () => {
-    resultTextArea.value = isUpperCase ? guid().toUpperCase() : guid();
+	const guid = generateGuid();
+    resultTextArea.value = isUpperCase ? guid.toUpperCase() : guid;
 };
 
 const switchCase = () => {

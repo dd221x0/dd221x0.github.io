@@ -1,3 +1,18 @@
-const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+const generateSegment = (length) => Array(length)
+    .fill(0)
+    .map(() => Math.floor(Math.random() * 0x10).toString(0x10))
+    .join('');
 
-export const guid = () => s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+const generateVariant = () => (Math.floor(Math.random() * 0x4) + 0x8).toString(0x10);
+
+export const generateGuid = () => (
+    generateSegment(8) +
+    '-' +
+    generateSegment(4) +
+    '-' +
+    `4${generateSegment(3)}` +
+    '-' +
+    `${generateVariant()}${generateSegment(3)}` +
+    '-' +
+    generateSegment(12)
+);
