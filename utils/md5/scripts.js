@@ -1,6 +1,6 @@
-import { getCurrentColor, placeholderColor } from "../../common.js";
 import { initializeLayout } from "../layout.js";
 import { md5 } from "./md5.min.js";
+import { registerTargetSwitchElements } from "../../colorChange/colorChange.js";
 
 const passwordSwitch = document.getElementById('password');
 const stringInput = document.getElementById('string');
@@ -9,14 +9,11 @@ const partInput = document.getElementById('part');
 const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
 
-const currentColor = getCurrentColor();
-
 let isPassword = true;
 
 const switchPasswordMode = () => {
     isPassword = !isPassword;
-    passwordSwitch.style.color = isPassword ? currentColor.color : placeholderColor;
-
+    passwordSwitch.isActive = isPassword;
     stringInput.type = isPassword ? 'password' : 'text';
 };
 
@@ -112,12 +109,8 @@ const copyResult = () => {
     navigator.clipboard.writeText(resultTextArea.value);
 };
 
-const applyPageSpecificColor = () => {
-    passwordSwitch.style.color = currentColor.color;
-};
-
 const setupPage = () => {    
-    applyPageSpecificColor();
+    passwordSwitch.isActive = isPassword;
 
     passwordSwitch.onclick = switchPasswordMode;
     stringInput.oninput = setResult;
@@ -129,6 +122,7 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    initializeLayout();
     setupPage();
+    registerTargetSwitchElements([passwordSwitch]);
+    initializeLayout();
 };

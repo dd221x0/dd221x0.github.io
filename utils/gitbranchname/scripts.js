@@ -30,6 +30,6 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    initializeLayout();
     setupPage();
+    initializeLayout();
 };

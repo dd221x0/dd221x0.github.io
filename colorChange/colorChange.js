@@ -1,10 +1,12 @@
 import {
-    defaultColor,
-    getCurrentColor,
+    getCurrentColorPair,
+    placeholderColor,
+    saveColor,
 } from './common.js';
 import { setIcon } from './icon.js';
+import { startManual } from './strategies/manual.js';
 
-let currentColor = getCurrentColor();
+let currentColorPair = getCurrentColorPair();
 
 let triggerElements = [];
 let targetElements = [];
@@ -14,58 +16,23 @@ let targetHoverElements = [];
 let targetTriangleHoverElements = [];
 let targetButtonHoverElements = [];
 let targetBorderElements = [];
-
-const getRandomColor = () => {
-    const color = {
-        r: generateColorComponent(),
-        g: generateColorComponent(),
-        b: generateColorComponent(),
-    }
-
-    const negative = {
-        r: inverseColorComponent(color.r),
-        g: inverseColorComponent(color.g),
-        b: inverseColorComponent(color.b),
-    }
-
-    return { 
-        color: convertColorToString(color),
-        negative: convertColorToString(negative),
-    };
-};
-
-const generateColorComponent = () => Math.random() * 0xFF << 0;
-
-const inverseColorComponent = (colorComponent) => 0xFF - colorComponent;
-
-const convertColorToString = (color) => {
-    const colorString = [color.r, color.g, color.b]
-        .map((c) => c.toString(16).padStart(2, '0'))
-        .join('')
-        .toUpperCase();
-
-    return `#${colorString}`;
-};
-
-const saveColor = (color) => {
-    localStorage.setItem('color', JSON.stringify(color));
-};
+let targetSwitchElements = [];
 
 const setColor = (elements) => {
     elements.forEach((el) => {
-        el.style.color = currentColor.color;
+        el.style.color = currentColorPair.color;
     })
 };
 
 const setTriangleColor = (elements) => {
     elements.forEach((el) => {
-        el.style.borderBottomColor = currentColor.color;
+        el.style.borderBottomColor = currentColorPair.color;
     });
 };
 
 const setBorderColor = (elements) => {
     elements.forEach((el) => {
-        el.style.borderColor = currentColor.color;
+        el.style.borderColor = currentColorPair.color;
     });
 };
 
@@ -75,13 +42,14 @@ const setPlaceholderColor = (elements) => {
     });
 };
 
-const changeColor = (color) => {
-    currentColor = color;
+const changeColor = (colorPair) => {
+    currentColorPair = colorPair;
 
     setColor(targetElements);
     setTriangleColor(targetTriangleElements);
+    setBorderColor(targetBorderElements);
 
-    saveColor(currentColor);
+    saveColor(currentColorPair);
 
     setIcon();
 };
@@ -89,11 +57,11 @@ const changeColor = (color) => {
 const setHoverColorChange = (elements) => {
     elements.forEach((el) => {
         el.onmouseover = () => {
-            el.style.color = currentColor.negative;
+            el.style.color = currentColorPair.negative;
         };
 
         el.onmouseout = () => {
-            el.style.color = currentColor.color;
+            el.style.color = currentColorPair.color;
         };
     });
 };
@@ -101,11 +69,11 @@ const setHoverColorChange = (elements) => {
 const setTriangleHoverColorChange = (elements) => {
     elements.forEach((el) => {
         el.onmouseover = () => {
-            el.style.borderBottomColor = currentColor.negative;
+            el.style.borderBottomColor = currentColorPair.negative;
         };
 
         el.onmouseout = () => {
-            el.style.borderBottomColor = currentColor.color;
+            el.style.borderBottomColor = currentColorPair.color;
         };
     });
 };
@@ -113,39 +81,25 @@ const setTriangleHoverColorChange = (elements) => {
 const setButtonHoverColorChange = (elements) => {
     elements.forEach((el) => {
         el.onmouseover = () => {
-            el.style.borderColor = currentColor.negative;
-            el.style.color = currentColor.negative;
+            el.style.borderColor = currentColorPair.negative;
+            el.style.color = currentColorPair.negative;
         };
     
         el.onmouseout = () => {
-            el.style.borderColor = currentColor.color;
-            el.style.color = currentColor.color;
+            el.style.borderColor = currentColorPair.color;
+            el.style.color = currentColorPair.color;
         };
     });
 };
 
-const setClickColorChange = (element) => {
-    element.addEventListener('click', (e) => {
-        changeColor(getRandomColor());
-        e.stopPropagation();
-        e.preventDefault();
+const setSwitchColorChange = (elements) => {
+    elements.forEach((el) => {
+        el.style.color = el.isActive ? currentColorPair.color : placeholderColor;
+        el.addEventListener('click', () => {
+            el.style.color = el.isActive ? currentColorPair.color : placeholderColor;
+        });
     });
-};
-
-const setClickColorReset = (element) => {
-    element.addEventListener('contextmenu', (e) => {
-        changeColor(defaultColor);
-        e.stopPropagation();
-        e.preventDefault();
-    });
-};
-
-const initializeTriggers = () => {
-    triggerElements.forEach((triggerElement) => {
-        setClickColorChange(triggerElement);
-        setClickColorReset(triggerElement);
-    });
-};
+}
 
 const initializeTargets = () => {
     setColor(targetElements);
@@ -155,6 +109,7 @@ const initializeTargets = () => {
     setTriangleHoverColorChange(targetTriangleHoverElements);
     setButtonHoverColorChange(targetButtonHoverElements);
     setBorderColor(targetBorderElements);
+    setSwitchColorChange(targetSwitchElements);
 };
 
 const registerTriggerElements = (elements) => {
@@ -189,10 +144,14 @@ const registerTargetBorderElements = (elements) => {
     targetBorderElements = [ ...targetBorderElements, ...elements ];
 };
 
+const registerTargetSwitchElements = (elements) => {
+    targetSwitchElements = [ ...targetSwitchElements, ...elements ];
+};
+
 const initializeColorChange = () => {
     setIcon();
-    initializeTriggers();
     initializeTargets();
+    startManual(triggerElements, changeColor);
 };
 
 export {
@@ -204,5 +163,6 @@ export {
     registerTargetTriangleHoverElements,
     registerTargetButtonHoverElements,
     registerTargetBorderElements,
+    registerTargetSwitchElements,
     initializeColorChange,
 };

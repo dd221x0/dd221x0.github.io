@@ -4,7 +4,7 @@ import {
 	registerTargetTriangleElements,
 	registerTargetHoverElements,
 	initializeColorChange,
-} from './colorChange.js';
+} from './colorChange/colorChange.js';
 
 const tetrahedronParts = document.querySelectorAll('#tetrahedron div');
 const socialLinks = document.querySelectorAll('#social a');
@@ -23,18 +23,7 @@ const allElements = [
     utilsHeader,
 ];
 
-const setCursor = (element) => {
-    element.style.cursor = 'pointer';
-};
-
-const initializeTetrahedron = () => {
-    tetrahedronParts.forEach((element) => {
-        setCursor(element);
-    });
-};
-
 const initialize = () => {
-    initializeTetrahedron();
 	registerTriggerElements(tetrahedronParts);
     registerTargetElements(allElements);
     registerTargetTriangleElements(tetrahedronParts);

@@ -1,4 +1,4 @@
-import { getCurrentColor } from './common.js';
+import { getCurrentColorPair } from './common.js';
 
 const ICON_SIZE = 64;
 
@@ -22,7 +22,7 @@ const drawTriangle = (canvas) => {
     const x3 = 0.7091757122668199;
     const y3 = 17.27359459882815;
 
-    canvasContext.fillStyle = getCurrentColor().color;
+    canvasContext.fillStyle = getCurrentColorPair().color;
     canvasContext.beginPath();
     canvasContext.moveTo(x1, y1);
     canvasContext.lineTo(x2, y2);

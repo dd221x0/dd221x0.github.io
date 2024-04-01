@@ -1,4 +1,4 @@
-import { getCurrentColor, placeholderColor } from "../../common.js";
+import { registerTargetSwitchElements } from "../../colorChange/colorChange.js";
 import { initializeLayout } from "../layout.js";
 import { guid } from "./guid.js";
 
@@ -6,8 +6,6 @@ const upperCaseSwitch = document.getElementById('upperCase');
 const generateButton = document.getElementById('generate');
 const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
-
-const currentColor = getCurrentColor();
 
 let isUpperCase = false;
 
@@ -19,7 +17,7 @@ const switchCase = () => {
     const guid = resultTextArea.value;
 
     isUpperCase = !isUpperCase;
-    upperCaseSwitch.style.color = isUpperCase ? currentColor.color : placeholderColor;
+    upperCaseSwitch.isActive = isUpperCase;
     resultTextArea.value = isUpperCase ? guid.toUpperCase() : guid.toLowerCase();
 };
 
@@ -29,7 +27,7 @@ const copyResult = () => {
 };
 
 const setupPage = () => {
-    upperCaseSwitch.style.color = placeholderColor;
+    upperCaseSwitch.isActive = isUpperCase;
 
     generateButton.onclick = setGuidValue;
     upperCaseSwitch.onclick = switchCase;
@@ -39,6 +37,7 @@ const setupPage = () => {
 };
 
 window.onload = () => {
-    initializeLayout();
     setupPage();
+	registerTargetSwitchElements([upperCaseSwitch]);
+    initializeLayout();
 };

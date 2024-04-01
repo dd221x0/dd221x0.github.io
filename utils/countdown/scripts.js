@@ -1,5 +1,5 @@
 import { initializeLayout } from "../layout.js";
-import { registerTargetElements } from "../../colorChange.js";
+import { registerTargetElements } from "../../colorChange/colorChange.js";
 
 const SECONDS_IN_A_DAY = 24 * 60 * 60;
 const SECONDS_IN_AN_HOUR = 60 * 60;

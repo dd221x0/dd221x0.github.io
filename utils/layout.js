@@ -6,7 +6,7 @@ import {
     registerTargetButtonHoverElements,
     registerTargetBorderElements,
     registerTargetPlaceholderElements,
-} from '../colorChange.js';
+} from '../colorChange/colorChange.js';
 
 const inputs = document.querySelectorAll('input');
 const buttons = document.querySelectorAll('button');
