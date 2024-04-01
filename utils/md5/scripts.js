@@ -1,6 +1,6 @@
-import { initializeLayout } from "../layout.js";
-import { md5 } from "./md5.min.js";
-import { registerTargetSwitchElements } from "../../colorChange/colorChange.js";
+import { initializeLayout } from '../layout.js';
+import { md5 } from './md5.min.js';
+import { registerTargetSwitchElements } from '../../colorChange/colorChange.js';
 
 const passwordSwitch = document.getElementById('password');
 const stringInput = document.getElementById('string');
@@ -119,6 +119,8 @@ const setupPage = () => {
     partInput.onfocus = saveOldValue;
     partInput.oninput = handlePartInput;
     copyButton.onclick = copyResult;
+
+    stringInput.focus();
 };
 
 window.onload = () => {
