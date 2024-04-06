@@ -1,0 +1,14 @@
+@media screen and (
+    ((orientation: portrait) and (max-width: 600px))
+    or ((orientation: landscape) and (max-height: 600px))
+) {
+    #email {
+        left: 1%;
+        top: 1%;
+        font-size: 16px;
+    }
+
+    #tetrahedron {
+        scale: 0.618;
+    }
+}

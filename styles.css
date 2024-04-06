@@ -1,3 +1,8 @@
+@import "./tetrahedron.css";
+@import "./desktop.css";
+@import "./tablet.css";
+@import "./mobile.css";
+
 @font-face {
     font-family: CenturyGothic;
     src: url(CenturyGothic.ttf);
@@ -46,17 +51,12 @@ a:hover {
 
 #email {
     position: fixed;
-    bottom: 1%;
-    left: 1%;
-    margin: -50;
-    font-size: 20px;
 }
 
 #utils {
     position: fixed;
     top: 1%;
     right: 1%;
-    margin: -50;
     font-size: 16px;
     width: 160px;
     max-width: 160px;

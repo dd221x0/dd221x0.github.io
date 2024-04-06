@@ -29,6 +29,12 @@
     transform-style: preserve-3d;
     animation-iteration-count: infinite;
     animation-duration: 16s;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
 }
 
 #tetrahedron div {
@@ -40,6 +46,12 @@
     border-right: 150px solid transparent;
     border-bottom: 260px solid #000000;
     transition: border-bottom-color 1s 0.02s ease;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
 }
 
 #bottom {
