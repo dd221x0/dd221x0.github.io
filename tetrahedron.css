@@ -1,4 +1,4 @@
-﻿@keyframes animation {
+﻿@keyframes rotation {
     from, to {
         transform: rotateX(0) rotateY(0deg) rotateZ(0);
     }
@@ -13,7 +13,6 @@
     }
 }
 
-
 #tetrahedron {
     position: absolute;
     width: 300px;
@@ -24,7 +23,7 @@
     margin-left: -150px;
     background: transparent;
 
-    animation-name: animation;
+    animation-name: rotation;
     animation-timing-function: ease-in-out;
     transform-style: preserve-3d;
     animation-iteration-count: infinite;
@@ -44,28 +43,85 @@
     height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-    border-bottom: 260px solid #000000;
-    transition: border-bottom-color 1s 0.02s ease;
+    border-bottom: 259.8076211353315px solid #000000;
+
+    transition: border-bottom-color 1s 0.02s ease, transform 1s 0.02s ease;
+    -webkit-transition: border-bottom-color 1s 0.02s ease, transform 1s 0.02s ease;
+    -moz-transition: border-bottom-color 1s 0.02s ease, transform 1s 0.02s ease;
+
+    /* transition: transform 1s 0.02s ease;
+    -webkit-transition: transform 1s 0.02s ease;
+    -moz-transition: transform 1s 0.02s ease; */
 
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -webkit-tap-highlight-color: transparent;
     -moz-tap-highlight-color: transparent;
+
+    /* transform-style:preserve-3d;
+    perspective: 9000px; */
+
+    /* box-shadow:0 0 20vw #333 inset ; */
+
+    --PI: 3.141592653589793rad;
+    --halfPI: 1.5707963267948966rad;
+    --edges-angle: 0.3398369094541218rad;
+    --right-corner-angle: 2.0943951023931957rad;
+    --left-corner-angle: -2.0943951023931957rad;
+    --disassemble-range: 75px;
 }
 
 #bottom {
-    transform: rotateX(90deg) translateZ(-130px) translateY(-130px);
+    transform-origin: 50% 100%;
+    transform: rotateX(var(--halfPI))
+        rotateY(var(--PI));
 }
 
-#front{
-    transform: translateY(-7px) rotateX(19.47deg) translateZ(-46px);
+#bottom.disassemble {
+    transform-origin: 50% 100%;
+    transform: rotateX(var(--halfPI))
+        rotateY(var(--PI))
+        translateZ(var(--disassemble-range));
+}
+
+#front {
+    transform-origin: 50% 100%;
+    transform: rotateX(var(--edges-angle));
+}
+
+#front.disassemble {
+    transform-origin: 50% 100%;
+    transform: rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));;
 }
 
 #right {
-    transform: translateY(8px) rotateY(-60deg) translateX(-75px) translateZ(-86px) rotateX(-19.47deg);
+    transform-origin: 0% 100%;
+    transform: translateX(100%)
+        rotateY(var(--right-corner-angle))
+        rotateX(var(--edges-angle));
+}
+
+#right.disassemble {
+    transform-origin: 0% 100%;
+    transform: translateX(100%)
+        rotateY(var(--right-corner-angle))
+        rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));
 }
 
 #left {
-    transform: translateY(8px) rotateY(60deg) translateX(75px) translateZ(-86px) rotateX(-19.47deg);
+    transform-origin: 100% 100%;
+    transform: translateX(-100%)
+        rotateY(var(--left-corner-angle))
+        rotateX(var(--edges-angle));
+}
+
+#left.disassemble {
+    transform-origin: 100% 100%;
+    transform: translateX(-100%)
+        rotateY(var(--left-corner-angle))
+        rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));
 }
