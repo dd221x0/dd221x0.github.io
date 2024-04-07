@@ -20,9 +20,9 @@ const convertToGitBranchName = () => {
     updateURLParameters();
 };
 
-const copyResult = () => {
-    resultTextArea.select();
-    navigator.clipboard.writeText(resultTextArea.value);
+const copyResult = async () => {
+    resultTextArea.setSelectionRange(0, resultTextArea.value.length);
+    await navigator.clipboard.writeText(resultTextArea.value);
 };
 
 const updateStringParameter = (url) => {
