@@ -1,3 +1,7 @@
+@import "./desktop.css";
+@import "./tablet.css";
+@import "./mobile.css";
+
 @font-face {
     font-family: CenturyGothic;
     src: url("../CenturyGothic.ttf");
@@ -12,43 +16,34 @@
 }
 
 ::-webkit-input-placeholder {
-  color: #000000;
-}
-
-:-ms-input-placeholder {
-  color: #000000;
+    color: #000000;
 }
 
 ::-moz-placeholder {
-  color: #000000;
-  opacity: 1;
+    color: #000000;
+    opacity: 1;
 }
 
 :-moz-placeholder {
-  color: #000000;
-  opacity: 1;
+    color: #000000;
+    opacity: 1;
 }
 
 .active::-webkit-input-placeholder {
-  color: #888888;
-  transition: color 1s 0.02s ease;
-}
-
-.active:-ms-input-placeholder {
-  color: #888888;
-  transition: color 1s 0.02s ease;
+    color: #888888;
+    transition: color 1s 0.02s ease;
 }
 
 .active::-moz-placeholder {
-  color: #888888;
-  opacity: 1;
-  transition: color 1s 0.02s ease;
+    color: #888888;
+    opacity: 1;
+    transition: color 1s 0.02s ease;
 }
 
 .active:-moz-placeholder {
-  color: #888888;
-  opacity: 1;
-  transition: color 1s 0.02s ease;
+    color: #888888;
+    opacity: 1;
+    transition: color 1s 0.02s ease;
 }
 
 ::-webkit-scrollbar-thumb:not(input, button) {
@@ -113,10 +108,53 @@ button {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
     cursor: pointer;
 }
 
 button:hover {
     transition: color 0.2s 0.02s ease, border-color 0.2s 0.02s ease;
+}
+
+#home {
+    position: fixed;
+    width: 60px;
+    height: 69px;
+    background: transparent;
+    transform: rotate(45deg);
+    transition: all 1s 0.02s ease;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
+}
+
+#home:hover {
+    transform: rotate(-135deg);
+}
+
+#triangle {
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 52px solid;
+    
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
+}
+
+#home #triangle {
+    border-bottom-color: #000000;
+    transition: border-bottom-color 1s 0.02s ease;
+}
+
+#home #triangle:hover {
+    border-bottom-color: #000000;
+    transition: border-bottom-color 0.2s 0.02s ease;
 }

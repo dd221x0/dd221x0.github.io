@@ -1,37 +1,41 @@
+@import '../layoutStyles.css';
+
 .row { /*workaround*/
-    max-width: 451px;
-    width: 451px;
+    max-width: 461px;
+    width: 461px;
 }
 
 #form {
     position: absolute;
-    width: 450px;
+    width: 460px;
     height: 200px;
     top: 50%;
     left: 50%;
     margin-top: -100px;
-    margin-left: -225px;
+    margin-left: -230px;
     padding: 0;
 }
 
 #generate {
-    max-width: 450px;
-    width: 450px;
+    max-width: 460px;
+    width: 460px;
 }
 
 #upperCase {
     color: #000000;
     cursor: pointer;
     padding-bottom: 5px;
+
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
 }
 
 #result {
-    max-width: 442px;
-    width: 442px;
+    max-width: 452px;
+    width: 452px;
     max-height: 36px;
     height: 36px;
 }

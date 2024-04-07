@@ -1,0 +1,17 @@
+@media screen and (
+    ((orientation: portrait) and (max-width: 900px) and (min-width: 600px))
+) {
+    #home {
+        left: 1%;
+        bottom: 1%;
+    }
+}
+
+@media screen and (
+    ((orientation: landscape) and (max-height: 900px) and (min-height: 600px))
+) {
+    #home {
+        left: 1%;
+        top: 1%;
+    }
+}

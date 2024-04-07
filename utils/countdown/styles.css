@@ -1,3 +1,14 @@
+@import '../layoutStyles.css';
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 #time {
     position: absolute;
     width: 600px;
@@ -14,6 +25,24 @@
     font-size: 72px;
 }
 
+#spinner {
+    width: 60px;
+    height: 69px;
+    background: transparent;
+    animation: spinner 2s linear infinite;
+}
+
 #time #spinner {
     margin: 0 auto;
+}
+
+#spinner #triangle {
+    border-bottom-color: #000000;
+    transition: border-bottom-color 1s 0.02s ease;
+}
+
+@media screen and (max-width: 600px) {
+    #time {
+        scale: 0.5;
+    }
 }
