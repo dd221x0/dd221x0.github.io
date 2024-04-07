@@ -1,2 +1,1 @@
-# shaeredal.github.io
-my page
+My personal website and at the same time a sandbox for playing with Pure JS.
