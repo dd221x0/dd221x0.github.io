@@ -1,11 +1,18 @@
 import {
     registerTriggerElements,
-	registerTargetElements,
-	registerTargetTriangleElements,
-	registerTargetHoverElements,
-	initializeColorChange,
+    registerTargetElements,
+    registerTargetTriangleElements,
+    registerTargetHoverElements,
+    initializeColorChange,
 } from './colorChange/colorChange.js';
+import {
+    registerTetrahedron,
+    registerTetrahedronParts,
+    registerTriggerHoverElements,
+    initializeTetrahedron,
+} from './tetrahedron.js';
 
+const tetrahedron = document.querySelector('#tetrahedron');
 const tetrahedronParts = document.querySelectorAll('#tetrahedron div');
 const socialLinks = document.querySelectorAll('#social a');
 const email = document.querySelector('#email a');
@@ -24,13 +31,22 @@ const allElements = [
 ];
 
 const initialize = () => {
-	registerTriggerElements(tetrahedronParts);
+    registerTriggerElements(tetrahedronParts);
     registerTargetElements(allElements);
     registerTargetTriangleElements(tetrahedronParts);
     registerTargetHoverElements(controls);
-	initializeColorChange();
+    initializeColorChange();
+
+    registerTetrahedron(tetrahedron);
+    registerTetrahedronParts(tetrahedronParts);
+    registerTriggerHoverElements(controls);
+    initializeTetrahedron();
 }
 
 window.onload = () => {
     initialize();
+};
+
+window.onbeforeunload = () => {
+    tetrahedron.classList.add('disassembled');
 };

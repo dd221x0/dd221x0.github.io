@@ -3,7 +3,7 @@
 ) {
     #home {
         left: 1%;
-        bottom: 1%;
+        bottom: 3%;
     }
 }
 
@@ -12,6 +12,5 @@
 ) {
     #home {
         left: 1%;
-        top: 1%;
     }
 }
