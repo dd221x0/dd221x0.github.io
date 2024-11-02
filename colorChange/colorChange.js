@@ -1,10 +1,14 @@
 import {
+    backgroundColor,
     getCurrentColorPair,
     placeholderColor,
     saveColor,
 } from './common.js';
 import { setIcon } from './icon.js';
-import { startManual } from './strategies/manual.js';
+import { 
+    startManual,
+    stopManual,
+} from './strategies/manual.js';
 
 let currentColorPair = getCurrentColorPair();
 
@@ -18,107 +22,158 @@ let targetButtonHoverElements = [];
 let targetBorderElements = [];
 let targetSwitchElements = [];
 
-const setColor = (color = currentColorPair.color) => {
+const setColor = (color) => {
     targetElements.forEach((el) => {
         el.style.color = color;
     })
 };
 
-const setTriangleColor = (color = currentColorPair.color) => {
+const setTriangleColor = (color) => {
     targetTriangleElements.forEach((el) => {
         el.style.backgroundColor = color;
     });
 };
 
-const setBorderColor = (color = currentColorPair.color) => {
+const setBorderColor = (color) => {
     targetBorderElements.forEach((el) => {
         el.style.borderColor = color;
     });
 };
 
-const setPlaceholderColor = () => {
+const setPlaceholderColor = (isActive = true) => {
     targetPlaceholderElements.forEach((el) => {
-        el.classList.add('active');
+        if (isActive) {
+            el.classList.add('active');
+            return;
+        }
+
+        el.classList.remove('active');
     });
+};
+
+const updateColor = (color = currentColorPair.color) => {
+    setColor(color);
+    setTriangleColor(color);
+    setBorderColor(color);
 };
 
 const changeColor = (colorPair) => {
     currentColorPair = colorPair;
 
-    setColor();
-    setTriangleColor();
-    setBorderColor();
+    updateColor();
 
     saveColor(currentColorPair);
 
     setIcon();
 };
 
-const setHoverColorChange = () => {
+const handleMouseOver = (event) => {
+    event.currentTarget.style.color = currentColorPair.negative;
+    setTriangleColor(currentColorPair.negative);
+};
+
+const handleMouseOut = (event) => {
+    event.currentTarget.style.color = currentColorPair.color;
+    setTriangleColor(currentColorPair.color);
+};
+
+const configureHoverColorChange = () => {
     targetHoverElements.forEach((el) => {
-        el.addEventListener('mouseover', (event) => {
-            el.style.color = currentColorPair.negative;
-            setTriangleColor(currentColorPair.negative);
-            return event;
-        });
-
-        addEventListener('mouseout', (event) => {
-            el.style.color = currentColorPair.color;
-            setTriangleColor(currentColorPair.color);
-            return event;
-        });
+        el.addEventListener('mouseover', handleMouseOver);
+        el.addEventListener('mouseout', handleMouseOut);
     });
 };
 
-const setTriangleHoverColorChange = () => {
+const removeHoverColorChange = () => {
+    targetHoverElements.forEach((el) => {
+        el.removeEventListener('mouseover', handleMouseOver);
+        el.removeEventListener('mouseout', handleMouseOut);
+    });
+};
+
+const handleTriangleMouseOver = (event) => {
+    event.currentTarget.style.backgroundColor = currentColorPair.negative;
+};
+
+const handleTriangleMouseOut = (event) => {
+    event.currentTarget.style.backgroundColor = currentColorPair.color;
+};
+
+const configureTriangleHoverColorChange = () => {
     targetTriangleHoverElements.forEach((el) => {
-        el.addEventListener('mouseover', (event) => {
-            el.style.backgroundColor = currentColorPair.negative;
-            return event;
-        });
-
-        addEventListener('mouseout', (event) => {
-            el.style.backgroundColor = currentColorPair.color;
-            return event;
-        });
+        el.addEventListener('mouseover', handleTriangleMouseOver);
+        el.addEventListener('mouseout', handleTriangleMouseOut);
     });
 };
 
-const setButtonHoverColorChange = () => {
+const removeTriangleHoverColorChange = () => {
+    targetTriangleHoverElements.forEach((el) => {
+        el.removeEventListener('mouseover', handleTriangleMouseOver);
+        el.removeEventListener('mouseout', handleTriangleMouseOut);
+    });
+};
+
+const handleButtonMouseOver = (event) => {
+    event.currentTarget.style.borderColor = currentColorPair.negative;
+    event.currentTarget.style.color = currentColorPair.negative;
+};
+
+const handleButtonMouseOut = (event) => {
+    event.currentTarget.style.borderColor = currentColorPair.color;
+    event.currentTarget.style.color = currentColorPair.color;
+};
+
+const configureButtonHoverColorChange = () => {
     targetButtonHoverElements.forEach((el) => {
-        el.addEventListener('mouseover', (event) => {
-            el.style.borderColor = currentColorPair.negative;
-            el.style.color = currentColorPair.negative;
-            return event;
-        });
-    
-        addEventListener('mouseout', (event) => {
-            el.style.borderColor = currentColorPair.color;
-            el.style.color = currentColorPair.color;
-            return event;
-        });
+        el.addEventListener('mouseover', handleButtonMouseOver);
+        el.addEventListener('mouseout', handleButtonMouseOut);
     });
 };
 
-const setSwitchColorChange = () => {
+const removeButtonHoverColorChange = () => {
+    targetButtonHoverElements.forEach((el) => {
+        el.removeEventListener('mouseover', handleButtonMouseOver);
+        el.removeEventListener('mouseout', handleButtonMouseOut);
+    });
+};
+
+const handleSwitchClick = (event) => {
+    const el = event.currentTarget;
+    el.style.color = el.isActive ? currentColorPair.color : placeholderColor;
+};
+
+const configureSwitchColorChange = () => {
     targetSwitchElements.forEach((el) => {
         el.style.color = el.isActive ? currentColorPair.color : placeholderColor;
-        el.addEventListener('click', () => {
-            el.style.color = el.isActive ? currentColorPair.color : placeholderColor;
-        });
+        el.addEventListener('click', handleSwitchClick);
     });
-}
+};
+
+const removeSwitchColorChange = () => {
+    targetSwitchElements.forEach((el) => {
+        el.removeEventListener('click', handleSwitchClick);
+    });
+};
 
 const initializeTargets = () => {
-    setColor();
-    setTriangleColor();
+    updateColor();
     setPlaceholderColor();
-    setHoverColorChange();
-    setTriangleHoverColorChange();
-    setButtonHoverColorChange();
-    setBorderColor();
-    setSwitchColorChange();
+
+    configureHoverColorChange();
+    configureTriangleHoverColorChange();
+    configureButtonHoverColorChange();
+    configureSwitchColorChange();
 };
+
+const deinitializeTargets = () => {
+    updateColor(backgroundColor);
+    setPlaceholderColor(false);
+
+    removeHoverColorChange();
+    removeTriangleHoverColorChange();
+    removeButtonHoverColorChange();
+    removeSwitchColorChange();
+}
 
 const registerTriggerElements = (elements) => {
     triggerElements = [ ...triggerElements, ...elements ];
@@ -162,6 +217,11 @@ const initializeColorChange = () => {
     startManual(triggerElements, changeColor);
 };
 
+const deinitializeColorChange = () => {
+    deinitializeTargets();
+    stopManual();
+};
+
 export {
     registerTriggerElements,
     registerTargetElements,
@@ -173,4 +233,5 @@ export {
     registerTargetBorderElements,
     registerTargetSwitchElements,
     initializeColorChange,
+    deinitializeColorChange,
 };

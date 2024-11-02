@@ -1,5 +1,6 @@
 const defaultColorPair = {color: '#BBBBBB', negative: '#444444'};
-const placeholderColor = '#888888'; 
+const placeholderColor = '#888888';
+const backgroundColor = '#000000';
 
 const getCurrentColorPair = () => {
     return JSON.parse(localStorage.getItem('color')) || defaultColorPair;
@@ -29,6 +30,7 @@ const inverseColor = (color) => ({
 export {
     defaultColorPair,
     placeholderColor,
+    backgroundColor,
     getCurrentColorPair,
     saveColor,
     convertColorToString,
