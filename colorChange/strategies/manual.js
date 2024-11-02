@@ -10,7 +10,6 @@ const clickColorChangeListener = (event) => {
     event.preventDefault();
 };
 
-
 const clickColorResetListener = (event) => {
     changeColor(defaultColorPair);
     event.stopPropagation();

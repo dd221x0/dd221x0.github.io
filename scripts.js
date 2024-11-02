@@ -4,12 +4,14 @@ import {
     registerTargetTriangleElements,
     registerTargetHoverElements,
     initializeColorChange,
+    deinitializeColorChange,
 } from './colorChange/colorChange.js';
 import {
     registerTetrahedron,
     registerTetrahedronParts,
     registerTriggerHoverElements,
     initializeTetrahedron,
+    deinitializeTetrahedron,
 } from './tetrahedron.js';
 
 const tetrahedron = document.querySelector('#tetrahedron');
@@ -43,10 +45,15 @@ const initialize = () => {
     initializeTetrahedron();
 }
 
+const deinitialize = () => {
+    deinitializeColorChange();
+    deinitializeTetrahedron();
+};
+
 window.onload = () => {
     initialize();
 };
 
 window.onbeforeunload = () => {
-    tetrahedron.classList.add('disassembled');
+    deinitialize();
 };

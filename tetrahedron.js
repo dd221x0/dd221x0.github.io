@@ -35,9 +35,14 @@ const initializeTetrahedron = () => {
     assemble();
 };
 
+const deinitializeTetrahedron = () => {
+    disassemble();
+} ;
+
 export {
     registerTetrahedron,
     registerTetrahedronParts,
     registerTriggerHoverElements,
     initializeTetrahedron,
+    deinitializeTetrahedron,
 };
