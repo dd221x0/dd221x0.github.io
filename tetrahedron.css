@@ -29,12 +29,6 @@
     transform-style: preserve-3d;
     animation-iteration-count: infinite;
     animation-duration: 16s;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -moz-tap-highlight-color: transparent;
 }
 
 #tetrahedron div {
@@ -61,12 +55,6 @@
         transform 1s 0.02s ease,
         opacity 1s 0.02s ease,
         box-shadow 1s 0.02s ease;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -moz-tap-highlight-color: transparent;
 
     --PI: 3.141592653589793rad;
     --halfPI: 1.5707963267948966rad;

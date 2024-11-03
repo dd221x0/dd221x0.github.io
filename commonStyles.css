@@ -24,3 +24,12 @@ body {
     font-weight: bolder;
     opacity: 0.8;
 }
+
+.unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
+}
+
