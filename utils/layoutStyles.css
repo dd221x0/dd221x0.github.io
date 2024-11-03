@@ -81,9 +81,6 @@ span {
 }
 
 button {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
     cursor: pointer;
 }
 
@@ -100,12 +97,6 @@ button:hover {
     transform-origin: 50% 71.13248654051871%;
     transform: rotate(45deg);
     transition: all 1s 0.02s ease;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -moz-tap-highlight-color: transparent;
 }
 
 #home:hover {
@@ -120,12 +111,6 @@ button:hover {
 
     clip-path: polygon(50% 13.397459621556166%, 100% 100%, 0% 100%);
     background: transparent;
-    
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -moz-tap-highlight-color: transparent;
 }
 
 #home #triangle {
