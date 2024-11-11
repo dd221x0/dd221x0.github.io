@@ -18,6 +18,8 @@ import {
     registerNavigationHandler,
 } from './navigationEffects/navigationEffects.js';
 
+onclick="ignore=true"
+
 const tetrahedron = document.querySelector('#tetrahedron');
 const tetrahedronTriangles = document.querySelectorAll('#tetrahedron .triangle');
 const socialLinks = document.querySelectorAll('#social a');
@@ -62,5 +64,10 @@ window.onload = () => {
 };
 
 window.onbeforeunload = () => {
+    if (window.ignoreOnBeforeUnload) {
+        window.ignoreOnBeforeUnload = false;
+        return;
+    }
+
     deinitialize();
 };
