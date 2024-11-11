@@ -38,12 +38,23 @@ const configureClicks = () => {
     });
 };
 
+const removeClicks = () => {
+    navigationElements.forEach((el) => {
+        el.removeEventListener('click', handleClick);
+    });
+};
+
 const initializeNavigationEffects = () => {
     configureClicks();
+};
+
+const deinitializeNavigationEffects = () => {
+    removeClicks();
 };
 
 export {
     registerNavigationHandler,
     registerNavigationElements,
     initializeNavigationEffects,
+    deinitializeNavigationEffects,
 };

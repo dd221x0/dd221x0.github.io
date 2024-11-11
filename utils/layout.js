@@ -9,10 +9,13 @@ import {
     deinitializeColorChange,
 } from '../colorChange/colorChange.js';
 import {
-    initializeNavigationEffects,
     registerNavigationElements,
     registerNavigationHandler,
+    initializeNavigationEffects,
+    deinitializeNavigationEffects,
 } from '../navigationEffects/navigationEffects.js';
+
+let isInitialized = false;
 
 const inputs = document.querySelectorAll('input');
 const buttons = document.querySelectorAll('button');
@@ -29,22 +32,36 @@ const allElements = [
     ...(result ? [ result ] : []),
 ];
 
-const initializeLayout = () => {
+const registerLayoutElements = () => {
     registerTargetElements(allElements);
     registerTargetTriangleElements([homeButton]);
     registerTargetTriangleHoverElements([homeButton]);
     registerTargetButtonHoverElements(buttons);
     registerTargetBorderElements(elementsWithBorder);
     registerTargetPlaceholderElements(inputs);
-    initializeColorChange();
 
     registerNavigationElements([homeButton.parentElement]);
     registerNavigationHandler(deinitializeLayout);
+};
+
+const initializeLayout = () => {
+    initializeColorChange();
     initializeNavigationEffects();
+
+    isInitialized = true;
 };
 
 const deinitializeLayout = () => {
     deinitializeColorChange();
+    deinitializeNavigationEffects();
+
+    isInitialized = false;
+};
+
+window.onpageshow = () => {
+    if (!isInitialized) {
+        initializeLayout();
+    }
 };
 
 window.onbeforeunload = () => {
@@ -52,5 +69,5 @@ window.onbeforeunload = () => {
 };
 
 export {
-    initializeLayout,
+    registerLayoutElements,
 }

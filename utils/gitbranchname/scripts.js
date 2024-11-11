@@ -1,4 +1,4 @@
-import { initializeLayout } from '../layout.js';
+import { registerLayoutElements } from '../layout.js';
 
 const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
@@ -67,5 +67,5 @@ const setupPage = () => {
 
 window.onload = () => {
     setupPage();
-    initializeLayout();
+    registerLayoutElements();
 };

@@ -1,5 +1,5 @@
 import { registerTargetSwitchElements } from "../../colorChange/colorChange.js";
-import { initializeLayout } from "../layout.js";
+import { registerLayoutElements } from "../layout.js";
 import { generateGuid } from "./guid.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
@@ -40,5 +40,5 @@ const setupPage = () => {
 window.onload = () => {
     setupPage();
 	registerTargetSwitchElements([upperCaseSwitch]);
-    initializeLayout();
+    registerLayoutElements();
 };

@@ -1,4 +1,4 @@
-import { initializeLayout } from '../layout.js';
+import { registerLayoutElements } from '../layout.js';
 import { md5 } from './md5.min.js';
 import { registerTargetSwitchElements } from '../../colorChange/colorChange.js';
 
@@ -189,5 +189,5 @@ const setupPage = () => {
 window.onload = () => {
     setupPage();
     registerTargetSwitchElements([passwordSwitch]);
-    initializeLayout();
+    registerLayoutElements();
 };

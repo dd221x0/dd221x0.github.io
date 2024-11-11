@@ -21,6 +21,10 @@ const transformToOctahedron = () => {
     tetrahedron.classList.add('octahedron');
 };
 
+const transformFromOctahedron = () => {
+    tetrahedron.classList.remove('octahedron');
+};
+
 const handleTriggerMouseOver = (event) => {
     disassemble();
     return event;
@@ -47,6 +51,7 @@ const removeTriggersHover = () => {
 
 const initializeTetrahedron = () => {
     configureTriggersHover();
+    transformFromOctahedron();
     assemble();
 };
 
