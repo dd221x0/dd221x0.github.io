@@ -2,6 +2,8 @@ let navigationElements = [];
 
 let navigationHandler = () => {};
 
+let currentEvent = null;
+
 const registerNavigationHandler = (handler) => {
     navigationHandler = handler;
 };
@@ -11,8 +13,8 @@ const registerNavigationElements = (elements) => {
 };
 
 const handleClick = (event) => {
-    if (event.delayedCall) {
-        return event;
+    if (event === currentEvent) {
+        return;
     }
 
     event.preventDefault();
@@ -20,8 +22,10 @@ const handleClick = (event) => {
 
     navigationHandler();
 
-    const newEvent = new MouseEvent('click', {...event, delayedCall: true});
-    const target = event.currentTarget
+    const target = event.currentTarget;
+
+    const newEvent = new MouseEvent('click', {...event});
+    currentEvent = newEvent;
 
     setTimeout(() => {
         target.dispatchEvent(newEvent);
