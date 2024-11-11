@@ -12,23 +12,20 @@ const timeElement = document.getElementById("time");
 const timeApiUrl = "https://api.timezonedb.com/v2/get-time-zone?key=692FL2W84HRV&by=zone&zone=Europe/Warsaw&format=json";
 
 const getCurrentTime = async () => {
-    try {
-        const response = await fetch(timeApiUrl);
+    const response = await fetch(timeApiUrl);
 
-        if (!response.ok) {
-            throw new Error(`Time service request failed with status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const currentTimeFormatted = data.formatted.replace(" ", "T") + "+01:00";
-
-        return new Date(currentTimeFormatted);
-    } catch (error) {
-        console.error(error);
+    if (!response.ok) {
+        console.error(`Time service request failed with status: ${response.status}`);
+        console.log("Retrying in 1 second...");
         return await new Promise((resolve) => {
             setTimeout(() => resolve(getCurrentTime()), 1000);
         });
     }
+
+    const data = await response.json();
+    const currentTimeFormatted = data.formatted.replace(" ", "T") + "+01:00";
+
+    return new Date(currentTimeFormatted);
 };
 
 const setCountdownValue = (secondsLeft) => {
