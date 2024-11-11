@@ -1,12 +1,12 @@
 let tetrahedron = null;
-let tetrahedronParts = [];
-
-const registerTetrahedronParts = (elements) => {
-    tetrahedronParts = elements;
-};
+let triggerHoverElements = [];
 
 const registerTetrahedron = (element) => {
     tetrahedron = element;
+};
+
+const registerTriggerHoverElements = (elements) => {
+    triggerHoverElements = elements;
 };
 
 const disassemble = () => {
@@ -17,31 +17,53 @@ const assemble = () => {
     tetrahedron.classList.remove('disassembled');
 };
 
-const registerTriggerHoverElements = (elements) => {
-    elements.forEach((el) => {
-        el.addEventListener('mouseover', (event) => {
-            disassemble();
-            return event;
-        });
+const transformToOctahedron = () => {
+    tetrahedron.classList.add('octahedron');
+};
 
-        el.addEventListener('mouseout', (event) => {
-            assemble();
-            return event;
-        });
+const handleTriggerMouseOver = (event) => {
+    disassemble();
+    return event;
+};
+
+const handleTriggerMouseOut = (event) => {
+    assemble();
+    return event;
+};
+
+const configureTriggersHover = () => {
+    triggerHoverElements.forEach((el) => {
+        el.addEventListener('mouseover', handleTriggerMouseOver);
+        el.addEventListener('mouseout', handleTriggerMouseOut);
+    });
+};
+
+const removeTriggersHover = () => {
+    triggerHoverElements.forEach((el) => {
+        el.removeEventListener('mouseover', handleTriggerMouseOver);
+        el.removeEventListener('mouseout', handleTriggerMouseOut);
     });
 };
 
 const initializeTetrahedron = () => {
+    configureTriggersHover();
     assemble();
 };
 
-const deinitializeTetrahedron = () => {
+const deinitializeTetrahedron = (transform = false) => {
+    removeTriggersHover();
+
+    if (transform) {
+        transformToOctahedron();
+        return;
+    }
+
     disassemble();
-} ;
+    return;
+};
 
 export {
     registerTetrahedron,
-    registerTetrahedronParts,
     registerTriggerHoverElements,
     initializeTetrahedron,
     deinitializeTetrahedron,

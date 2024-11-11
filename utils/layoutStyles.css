@@ -5,16 +5,20 @@
 
 ::-webkit-input-placeholder {
     color: #000000;
+    opacity: 1;
+    transition: color 1s 0.02s ease;
 }
 
 ::-moz-placeholder {
     color: #000000;
     opacity: 1;
+    transition: color 1s 0.02s ease;
 }
 
 :-moz-placeholder {
     color: #000000;
     opacity: 1;
+    transition: color 1s 0.02s ease;
 }
 
 .active::-webkit-input-placeholder {
@@ -99,9 +103,17 @@ button:hover {
     transition: all 1s 0.02s ease;
 }
 
-#home:hover {
+#home:has(#triangle:hover) {
     transform-origin: 50% 71.13248654051871%;
     transform: rotate(-135deg);
+}
+
+#home a {
+    cursor: default;
+}
+
+#home a:has(#triangle:hover) {
+    cursor: pointer;
 }
 
 #triangle {
@@ -120,5 +132,7 @@ button:hover {
 
 #home #triangle:hover {
     background-color: #000000;
+    cursor: pointer;
+
     transition: background-color 0.2s 0.02s ease;
 }

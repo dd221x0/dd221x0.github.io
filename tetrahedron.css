@@ -14,9 +14,13 @@
 }
 
 #tetrahedron {
+    --box-size: 300px;
+    --negative-box-size: -300px;
+    --half-box-size: 150px;
+
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: var(--box-size);
+    height: var(--box-size);
     top: 50%;
     left: 50%;
     margin-top: -238.76275643042055px;
@@ -31,42 +35,38 @@
     animation-duration: 16s;
 }
 
-#tetrahedron div {
+#tetrahedron .side {
     position: fixed;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 0;
+    height: 0;
 
-    clip-path: polygon(50% 13.397459621556166%, 100% 100%, 0% 100%);
-    background:#000000;
+    transform-style: preserve-3d;
 
     transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
+        transform 1s 0.02s ease;
     -webkit-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
+        transform 1s 0.02s ease;
     -moz-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
+        transform 1s 0.02s ease;
 
     --PI: 3.141592653589793rad;
-    --halfPI: 1.5707963267948966rad;
+    --half-PI: 1.5707963267948966rad;
     --edges-angle: 0.3398369094541218rad;
     --right-corner-angle: 2.0943951023931957rad;
     --left-corner-angle: -2.0943951023931957rad;
-    --disassemble-range: 64px;
+
+    --disassemble-range: 61.23724356957945px;
+    --triangle-center-distance: 213.39745962155615px;
 }
 
-.disassembled#tetrahedron div {
-    opacity: 0.8;
-    box-shadow:0 0 256px #000000 inset;
+#tetrahedron .triangle {
+    clip-path: polygon(50% 13.397459621556166%, 100% 100%, 0% 100%);
+    background:#000000;
+    width: var(--box-size);
+    height: var(--box-size);
+
+    transform-origin: var(--half-box-size) var(--triangle-center-distance);
 
     transition:
         background-color 1s 0.02s ease,
@@ -85,56 +85,74 @@
         box-shadow 1s 0.02s ease;
 }
 
+#tetrahedron.disassembled .triangle {
+    opacity: 0.92;
+
+    transform-origin: var(--half-box-size) var(--triangle-center-distance);
+    transform: translateZ(var(--disassemble-range));
+
+    transition:
+        background-color 1s 0.02s ease,
+        transform 1s 0.02s ease,
+        opacity 1s 0.02s ease,
+        box-shadow 1s 0.02s ease;
+    -webkit-transition:
+        background-color 1s 0.02s ease,
+        transform 1s 0.02s ease,
+        opacity 1s 0.02s ease,
+        box-shadow 1s 0.02s ease;
+    -moz-transition:
+        background-color 1s 0.02s ease,
+        transform 1s 0.02s ease,
+        opacity 1s 0.02s ease,
+        box-shadow 1s 0.02s ease;
+}
+
+#tetrahedron.octahedron .triangle {
+    opacity: 0.92;
+
+    transform-origin: var(--half-box-size) var(--triangle-center-distance);
+    transform: translateZ(var(--disassemble-range))
+        rotateZ(var(--PI));
+
+    transition:
+        background-color 1s 0.02s ease,
+        transform 0.2s 0.02s ease,
+        opacity 0.2s 0.02s ease,
+        box-shadow 0.2s 0.02s ease;
+    -webkit-transition:
+        background-color 1s 0.02s ease,
+        transform 0.2s 0.02s ease,
+        opacity 0.2s 0.02s ease,
+        box-shadow 0.2s 0.02s ease;
+    -moz-transition:
+        background-color 1s 0.02s ease,
+        transform 0.2s 0.02s ease,
+        opacity 0.2s 0.02s ease,
+        box-shadow 0.2s 0.02s ease;
+}
+
 #bottom {
-    transform-origin: 50% 100%;
-    transform: rotateX(var(--halfPI))
+    transform-origin: var(--half-box-size) var(--box-size);
+    transform: rotateX(var(--half-PI))
         rotateY(var(--PI));
 }
 
-.disassembled #bottom {
-    transform-origin: 50% 100%;
-    transform: rotateX(var(--halfPI))
-        rotateY(var(--PI))
-        translateZ(var(--disassemble-range));
-}
-
 #front {
-    transform-origin: 50% 100%;
+    transform-origin: var(--half-box-size) var(--box-size);
     transform: rotateX(var(--edges-angle));
 }
 
-.disassembled #front {
-    transform-origin: 50% 100%;
-    transform: rotateX(var(--edges-angle))
-        translateZ(var(--disassemble-range));;
-}
-
 #right {
-    transform-origin: 0% 100%;
-    transform: translateX(100%)
-        rotateY(var(--right-corner-angle))
+    transform-origin: var(--box-size) var(--box-size);
+    transform: rotateY(var(--right-corner-angle))
+        translateX(var(--box-size))
         rotateX(var(--edges-angle));
-}
-
-.disassembled #right {
-    transform-origin: 0% 100%;
-    transform: translateX(100%)
-        rotateY(var(--right-corner-angle))
-        rotateX(var(--edges-angle))
-        translateZ(var(--disassemble-range));
 }
 
 #left {
-    transform-origin: 100% 100%;
-    transform: translateX(-100%)
-        rotateY(var(--left-corner-angle))
+    transform-origin: 0px var(--box-size);
+    transform: rotateY(var(--left-corner-angle))
+        translateX(var(--negative-box-size))
         rotateX(var(--edges-angle));
-}
-
-.disassembled #left {
-    transform-origin: 100% 100%;
-    transform: translateX(-100%)
-        rotateY(var(--left-corner-angle))
-        rotateX(var(--edges-angle))
-        translateZ(var(--disassemble-range));
 }

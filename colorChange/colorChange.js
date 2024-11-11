@@ -51,6 +51,12 @@ const setPlaceholderColor = (isActive = true) => {
     });
 };
 
+const setSwitchColor = (color) => {
+    targetSwitchElements.forEach((el) => {
+        el.style.color = color;
+    });
+};
+
 const updateColor = (color = currentColorPair.color) => {
     setColor(color);
     setTriangleColor(color);
@@ -168,6 +174,7 @@ const initializeTargets = () => {
 const deinitializeTargets = () => {
     updateColor(backgroundColor);
     setPlaceholderColor(false);
+    setSwitchColor(backgroundColor);
 
     removeHoverColorChange();
     removeTriangleHoverColorChange();

@@ -8,14 +8,18 @@ import {
 } from './colorChange/colorChange.js';
 import {
     registerTetrahedron,
-    registerTetrahedronParts,
     registerTriggerHoverElements,
     initializeTetrahedron,
     deinitializeTetrahedron,
 } from './tetrahedron.js';
+import {
+    initializeNavigationEffects,
+    registerNavigationElements,
+    registerNavigationHandler,
+} from './navigationEffects/navigationEffects.js';
 
 const tetrahedron = document.querySelector('#tetrahedron');
-const tetrahedronParts = document.querySelectorAll('#tetrahedron div');
+const tetrahedronTriangles = document.querySelectorAll('#tetrahedron .triangle');
 const socialLinks = document.querySelectorAll('#social a');
 const email = document.querySelector('#email a');
 const utilsHeader = document.querySelector('#utils h3');
@@ -33,21 +37,24 @@ const allElements = [
 ];
 
 const initialize = () => {
-    registerTriggerElements(tetrahedronParts);
+    registerTriggerElements(tetrahedronTriangles);
     registerTargetElements(allElements);
-    registerTargetTriangleElements(tetrahedronParts);
+    registerTargetTriangleElements(tetrahedronTriangles);
     registerTargetHoverElements(controls);
     initializeColorChange();
 
     registerTetrahedron(tetrahedron);
-    registerTetrahedronParts(tetrahedronParts);
     registerTriggerHoverElements(controls);
     initializeTetrahedron();
+
+    registerNavigationElements(utilsLinks);
+    registerNavigationHandler(() => deinitialize(true));
+    initializeNavigationEffects();
 }
 
-const deinitialize = () => {
+const deinitialize = (isNavigation = false) => {
     deinitializeColorChange();
-    deinitializeTetrahedron();
+    deinitializeTetrahedron(isNavigation);
 };
 
 window.onload = () => {

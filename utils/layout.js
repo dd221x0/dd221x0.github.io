@@ -6,7 +6,13 @@ import {
     registerTargetButtonHoverElements,
     registerTargetBorderElements,
     registerTargetPlaceholderElements,
+    deinitializeColorChange,
 } from '../colorChange/colorChange.js';
+import {
+    initializeNavigationEffects,
+    registerNavigationElements,
+    registerNavigationHandler,
+} from '../navigationEffects/navigationEffects.js';
 
 const inputs = document.querySelectorAll('input');
 const buttons = document.querySelectorAll('button');
@@ -31,6 +37,18 @@ const initializeLayout = () => {
     registerTargetBorderElements(elementsWithBorder);
     registerTargetPlaceholderElements(inputs);
     initializeColorChange();
+
+    registerNavigationElements([homeButton.parentElement]);
+    registerNavigationHandler(deinitializeLayout);
+    initializeNavigationEffects();
+};
+
+const deinitializeLayout = () => {
+    deinitializeColorChange();
+};
+
+window.onbeforeunload = () => {
+    deinitializeLayout();
 };
 
 export {
