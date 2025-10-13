@@ -1,0 +1,70 @@
+/* Cookie Banner Styles */
+.cookie-banner {
+    position: fixed;
+    bottom: 1%;
+    right: 1%;
+    background-color: #BBBBBB;
+    color: #000000;
+    padding: 10px 16px;
+    font-size: 16px;
+    max-width: 300px;
+    z-index: 1000;
+    transition: opacity 1s 0.02s ease;
+}
+
+.cookie-banner.hidden {
+    display: none;
+}
+
+.cookie-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cookie-text {
+    margin: 0;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.cookie-buttons button {
+    background: none;
+    border: 1px solid #000000;
+    color: #000000;
+    font-size: 16px;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: background-color 1s 0.02s ease, color 1s 0.02s ease;
+}
+
+.cookie-buttons button:hover {
+    background-color: #000000;
+    color: #BBBBBB;
+}
+
+@media screen and (
+    ((orientation: portrait) and (max-width: 600px))
+    or ((orientation: landscape) and (max-height: 600px))
+) {
+    .cookie-banner {
+        left: 2%;
+        right: 2%;
+        bottom: 2%;
+        max-width: none;
+        font-size: 20px;
+    }
+    
+    .cookie-buttons {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
+    .cookie-buttons button {
+        font-size: 16px;
+        padding: px 10px;
+    }
+}

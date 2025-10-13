@@ -18,6 +18,7 @@ import {
     initializeNavigationEffects,
     deinitializeNavigationEffects,
 } from './navigationEffects/navigationEffects.js';
+import { initializeCookieBanner } from './cookieBanner.js';
 
 let isInitialized = false;
 
@@ -70,6 +71,7 @@ const deinitialize = (isNavigation = false) => {
 
 window.onload = () => {
     registerElements();
+    initializeCookieBanner();
 };
 
 window.onpageshow = () => {

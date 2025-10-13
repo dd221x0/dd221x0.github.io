@@ -1,10 +1,11 @@
-@import 'commonStyles.css';
+@import './commonStyles.css';
 @import './tetrahedron.css';
 @import './desktop.css';
 @import './tablet.css';
 @import './mobile.css';
+@import './cookieBanner.css';
 
-a, h3 {
+a, h3, button {
     color: #000000;
     font-family: CenturyGothic;
     text-decoration: none;
