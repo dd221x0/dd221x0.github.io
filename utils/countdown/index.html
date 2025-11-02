@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNQGK06S1X"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
-            gtag('config', 'G-MNQGK06S1X');
-        </script>
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNQGK06S1X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-        <link type="image/x-icon" rel="shortcut icon" href="../../icon.png">
-        <title>countdown</title>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
-    <body>
-        <div id="home" class="unselectable">
-            <a href="/">
-                <div id="triangle"></div>
-            </a>
+        gtag('config', 'G-MNQGK06S1X');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <link type="image/x-icon" rel="shortcut icon" href="../../icon.png">
+    <title>countdown</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://kit.fontawesome.com/5e4a1a8ab9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="home" class="unselectable">
+        <a href="/" class="navigator">
+            <div id="triangle" class="home"></div>
+        </a>
+    </div>
+    <div id="time" class="unselectable target">
+    </div>
+    <div id="setEndTime" class="unselectable">
+        <div class="row top unselectable">
+            <button id="yearSwitch" class="switch active"></button>
+            <button id="monthSwitch" class="switch active"></button>
+            <button id="daySwitch" class="switch active"></button>
         </div>
-        <div id="time" class="unselectable">
-            <div id="spinner">
-                <div id="triangle"></div>
-            </div>
+        <div class="row unselectable">
+            <input id="year" placeholder="year" type="text" name="year">
+            <input id="month" placeholder="month" type="text" name="month">
+            <input id="day" placeholder="day" type="text" name="day">
         </div>
-        <script type="module" src="scripts.js"></script>
-    </body>
+        <div class="row unselectable">
+            <input id="hour" placeholder="hour" type="text" name="hour">
+            <input id="minute" placeholder="minute" type="text" name="minute">
+            <input id="second" placeholder="second" type="text" name="second">
+        </div>
+        <div class="row bottom unselectable">
+            <button id="hourSwitch" class="switch active"></button>
+            <button id="minuteSwitch" class="switch active"></button>
+            <button id="secondSwitch" class="switch active"></button>
+        </div>
+    </div>
+    <script type="module" src="scripts.js"></script>
+</body>
+
 </html>

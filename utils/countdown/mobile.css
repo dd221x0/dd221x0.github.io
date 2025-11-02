@@ -1,0 +1,9 @@
+@media screen and (
+    ((orientation: portrait) and (max-width: 600px))
+    or ((orientation: landscape) and (max-height: 600px))
+) {
+    #time {
+        margin-top: -4vw;
+        font-size: 8vw;
+    }
+}

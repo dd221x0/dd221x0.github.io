@@ -1,83 +1,157 @@
-import { registerLayoutElements } from "../layout.js";
-import { registerTargetElements } from "../../colorChange/colorChange.js";
+import '../layout.js';
+import {
+    isDigit,
+    saveOldValue,
+    getValueInsideRange,
+    roundToTwoDigits,
+    updateUrl,
+} from '../common.js';
+import {
+    createInputConfigs,
+   getRemainingTime
+} from './timeCalculations.js';
+import { startTimer } from './timerState.js';
 
-const SECONDS_IN_A_DAY = 24 * 60 * 60;
-const SECONDS_IN_AN_HOUR = 60 * 60;
-const SECONDS_IN_A_MINUTE = 60;
-const INTERVAL = 1000;
+const url = new URL(window.location);
 
-const endTime = new Date("2024-06-13T00:00:00+01:00");
-const timeElement = document.getElementById("time");
+const timeElement = document.getElementById('time');
 
-const timeApiUrl = "https://api.timezonedb.com/v2/get-time-zone?key=692FL2W84HRV&by=zone&zone=Europe/Warsaw&format=json";
+const endTime = new Date(1970, 0, 1, 0, 0, 0);
 
-const getCurrentTime = async () => {
-    const response = await fetch(timeApiUrl);
+let maxUnit = 'year';
 
-    if (!response.ok) {
-        console.error(`Time service request failed with status: ${response.status}`);
-        console.log("Retrying in 1 second...");
-        return await new Promise((resolve) => {
-            setTimeout(() => resolve(getCurrentTime()), 1000);
-        });
-    }
+const inputs = createInputConfigs(endTime);
 
-    const data = await response.json();
-    const currentTimeFormatted = data.formatted.replace(" ", "T") + "+01:00";
-
-    return new Date(currentTimeFormatted);
-};
-
-const setCountdownValue = (secondsLeft) => {
-    const days = Math.floor(secondsLeft / SECONDS_IN_A_DAY);
-    const hours = ("0" + Math.floor((secondsLeft / SECONDS_IN_AN_HOUR) % 24)).slice(-2);
-    const minutes = ("0" + Math.floor((secondsLeft / SECONDS_IN_A_MINUTE) % 60)).slice(-2);
-    const seconds = ("0" + Math.floor(secondsLeft % 60)).slice(-2);
-
-    timeElement.innerText = `${days}d ${hours}:${minutes}:${seconds}`;
-};
-
-const updateCountdownTimer = (secondsLeft, updateTime) =>
-{
-    const timeDifference = Date.now() - updateTime;
-
-    setCountdownValue(secondsLeft);
-
-    if(secondsLeft <= 0)
-    {
-        setFinished();
-        return;
-    }
-
-    setTimeout(
-        () => updateCountdownTimer(secondsLeft -1, updateTime + INTERVAL),
-        INTERVAL - timeDifference,
-    );
-};
-
-const setTimer = (currentTime) => {
-    if(currentTime >= endTime)
-    {
-        setFinished();
-        return;
-    } 
-    
-    const secondsLeft = (endTime - currentTime)/1000;
-
-    updateCountdownTimer(secondsLeft, Date.now());
+const setCountdownValue = () => {
+    timeElement.innerText = getRemainingTime(endTime, inputs, maxUnit);
 };
 
 const setFinished = () => {
-    timeElement.innerText = "nothing";
+    const iconElement = document.createElement('i');
+
+    iconElement.className = 'fa-solid fa-hourglass-end';
+    timeElement.innerHTML = '';
+    timeElement.appendChild(iconElement);
 };
 
-const startCountdown = async () => {
-    const currentTime = await getCurrentTime();
-    setTimer(currentTime);
+const correctLastDayOfMonth = () => {
+    const year = endTime.getFullYear();
+    const month = endTime.getMonth();
+    const day = endTime.getDate();
+    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
+
+    if (day < lastDayOfMonth) {
+        return;
+    }
+
+    const dayInput = inputs.find(input => input.key === 'day');
+
+    dayInput.element.value = lastDayOfMonth;
+    dayInput.element.oldValue = lastDayOfMonth;
+
+    endTime.setDate(lastDayOfMonth);
+    url.searchParams.set('day', lastDayOfMonth);
 };
 
-window.onload = () => {
-    registerTargetElements([timeElement]);
-    registerLayoutElements();
-    startCountdown();
+const handleDigitInput = (event) => {
+    if (isDigit(event.target.value)) {
+        saveOldValue(event);
+        return;
+    }
+
+    event.target.value = event.target.oldValue;
 };
+
+const setInputValue = (input, value) => {
+    if (!value && value !== 0) {
+        input.onChange(input.minValue);
+        url.searchParams.delete(input.key);
+
+        return;
+    }
+
+    const newValue = getValueInsideRange(
+        value,
+        input.minValue,
+        input.getMaxValue(endTime),
+    );
+
+    const valueString = input.key === 'year' 
+        ? newValue
+        : roundToTwoDigits(newValue);
+
+    input.element.value = valueString;
+    input.element.oldValue = valueString;
+    input.onChange(+newValue);
+
+    url.searchParams.set(input.key, newValue);
+
+    if (input.needsDateCorrection) {
+        correctLastDayOfMonth();
+    }
+};
+
+const createFocusOutHandler = (input) => (event) => {
+    setInputValue(input, event.target.value);
+    updateUrl(url);
+    startTimer(endTime, setCountdownValue, setFinished);
+};
+
+const updateSwitches = () => {
+    let unitReached = false;
+
+    inputs.forEach(input => {
+        if (input.key === maxUnit) {
+            unitReached = true;
+        }
+
+        if (input.switch) {
+            input.switch.classList.toggle('active', unitReached);
+        }
+    });
+};
+
+const setMaxUnit = (key) => {
+    maxUnit = key;
+    url.searchParams.set('maxUnit', maxUnit);
+    updateUrl(url);
+
+    updateSwitches();
+};
+
+const setupSwitch = (input) => {
+    input.switch = document.getElementById(`${input.key}Switch`);
+
+    if (input.switch) {
+        input.switch.onclick = () => setMaxUnit(input.key);
+    }
+};
+
+const initializeInput = (input) => {
+    input.element = document.getElementById(input.key);
+    input.element.onfocus = saveOldValue;
+    input.element.oninput = handleDigitInput;
+    input.element.addEventListener('focusout', createFocusOutHandler(input));
+
+    setupSwitch(input);
+    setInputValue(input, url.searchParams.get(input.key));
+};
+
+const initializeInputs = () => inputs.forEach(initializeInput);
+
+const initializeMaxUnit = () => {
+    const urlMaxUnit = url.searchParams.get('maxUnit');
+
+    if (urlMaxUnit) {
+        maxUnit = urlMaxUnit;
+        updateSwitches();
+    }
+};
+
+const setupPage = () => {
+    initializeInputs();
+    initializeMaxUnit();
+    startTimer(endTime, setCountdownValue, setFinished);
+};
+
+window.onload = setupPage;

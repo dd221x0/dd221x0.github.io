@@ -1,4 +1,5 @@
 import '../layout.js';
+import { updateUrl } from '../common.js';
 
 const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
@@ -39,7 +40,7 @@ const updateURLParameters = () => {
     
     updateStringParameter(url);
 
-    window.history.replaceState({}, '', url);
+    updateUrl(url);
 };
 
 const readURLParameters = () => {
