@@ -1,47 +1,48 @@
 @import '../layoutStyles.css';
+@import './desktop.css';
+@import './mobile.css';
 
-@keyframes spinner {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.row { /*workaround*/
+    max-width: 286px;
+    width: 286px;
+}
+
+.row input {
+    width: 80px;
+    text-align: center;
+}
+
+.switch {
+    width: 92px;
+    height: 4px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.row.top .switch {
+    vertical-align: bottom;
+}
+
+.row.bottom .switch {
+    vertical-align: top;
 }
 
 #time {
     position: absolute;
-    width: 600px;
-    max-width: 600px;
-    height: 88px;
-    max-height: 88px;
+    width: 100vw;
+    max-width: 100vw;
     top: 50%;
-    left: 50%;
-    margin-top: -44px;
-    margin-left: -300px;
     text-align: center;
     font-weight: bold;
-    font-size: 72px;
+    transition: color 1s 0.02s ease;
 }
 
-#spinner {
-    width: 60px;
-    height: 69px;
-    background: transparent;
-    animation: spinner 2s linear infinite;
-}
-
-#time #spinner {
-    margin: 0 auto;
-}
-
-#spinner #triangle {
-    border-bottom-color: #000000;
-    transition: border-bottom-color 1s 0.02s ease;
-}
-
-@media screen and (max-width: 600px) {
-    #time {
-        scale: 0.5;
-    }
+#setEndTime {
+    position: absolute;
+    width: 285px;
+    height: auto;
+    top: 61.8%;
+    left: 50%;
+    margin-left: -142.5px;
+    text-align: center;
 }

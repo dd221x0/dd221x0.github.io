@@ -33,19 +33,15 @@ button:hover {
     border-color: var(--negative-color);
 }
 
-.switch {
+.switch, .switch:hover {
     color: var(--placeholder-color);
     border-color: var(--placeholder-color);
+    transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
 }
 
-.switch.active {
+.switch.active, .switch.active:hover {
     color: var(--main-color);
     border-color: var(--main-color);
-}
-
-.switch:hover {
-    color: var(--negative-color);
-    border-color: var(--negative-color);
 }
 
 ::placeholder {

@@ -1,4 +1,9 @@
 import '../layout.js';
+import {
+    isDigit,
+    saveOldValue,
+    updateUrl,
+} from '../common.js';
 import { md5 } from './md5.min.js';
 
 const passwordSwitch = document.getElementById('password');
@@ -31,12 +36,6 @@ const getHashPart = (string, partsCount, part) => {
     const passwordHash = md5(string);
     const partLength = Math.floor(passwordHash.length / partsCount);
     return passwordHash.substring((part - 1) * partLength, part * partLength);
-};
-
-const isDigit = (value) => /^\d*$/.test(value);
-
-const saveOldValue = (event) => {
-    event.target.oldValue = event.target.value;
 };
 
 const updateCountRelatedInputs = (newPartsCount) => {
@@ -168,7 +167,7 @@ const updateURLParameters = () => {
     updatePartsCountParameter(url);
     updatePartParameter(url);
 
-    window.history.replaceState({}, '', url);
+    updateUrl(url);
 };
 
 const setupPage = () => {    
