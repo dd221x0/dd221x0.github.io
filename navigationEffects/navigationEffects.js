@@ -1,4 +1,4 @@
-let navigationElements = [];
+const navigationElements = [...document.getElementsByClassName('navigator')];
 
 let navigationHandler = () => {};
 
@@ -6,10 +6,6 @@ let currentEvent = null;
 
 const registerNavigationHandler = (handler) => {
     navigationHandler = handler;
-};
-
-const registerNavigationElements = (elements) => {
-    navigationElements = [ ...navigationElements, ...elements ];
 };
 
 const handleClick = (event) => {
@@ -32,29 +28,28 @@ const handleClick = (event) => {
     }, 1000);
 };
 
-const configureClicks = () => {
+const configureClickHandlers = () => {
     navigationElements.forEach((el) => {
         el.addEventListener('click', handleClick);
     });
 };
 
-const removeClicks = () => {
+const removeClickHandlers = () => {
     navigationElements.forEach((el) => {
         el.removeEventListener('click', handleClick);
     });
 };
 
 const initializeNavigationEffects = () => {
-    configureClicks();
+    configureClickHandlers();
 };
 
-const deinitializeNavigationEffects = () => {
-    removeClicks();
+const uninitializeNavigationEffects = () => {
+    removeClickHandlers();
 };
 
 export {
     registerNavigationHandler,
-    registerNavigationElements,
     initializeNavigationEffects,
-    deinitializeNavigationEffects,
+    uninitializeNavigationEffects,
 };

@@ -1,0 +1,53 @@
+:root {
+    --main-color: #000000;
+    --negative-color: #000000;
+    --placeholder-color: #000000;
+}
+
+a, input, button, textarea, h3, .target {
+    color: var(--main-color);
+}
+
+a:hover {
+    color: var(--negative-color);
+}
+
+.hoverTarget, .home {
+    background-color: var(--main-color);
+}
+
+.hoverTarget.negative {
+    background-color: var(--negative-color);
+}
+
+.home:hover {
+    background-color: var(--negative-color);
+}
+
+input, button {
+    border-color: var(--main-color);
+}
+
+button:hover {
+    color: var(--negative-color);
+    border-color: var(--negative-color);
+}
+
+.switch {
+    color: var(--placeholder-color);
+    border-color: var(--placeholder-color);
+}
+
+.switch.active {
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.switch:hover {
+    color: var(--negative-color);
+    border-color: var(--negative-color);
+}
+
+::placeholder {
+    color: var(--placeholder-color);
+}

@@ -1,13 +1,5 @@
-let tetrahedron = null;
-let triggerHoverElements = [];
-
-const registerTetrahedron = (element) => {
-    tetrahedron = element;
-};
-
-const registerTriggerHoverElements = (elements) => {
-    triggerHoverElements = elements;
-};
+const tetrahedron = document.querySelector('#tetrahedron');
+const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
 
 const disassemble = () => {
     tetrahedron.classList.add('disassembled');
@@ -36,14 +28,14 @@ const handleTriggerMouseOut = (event) => {
 };
 
 const configureTriggersHover = () => {
-    triggerHoverElements.forEach((el) => {
+    hoverTriggerElements.forEach((el) => {
         el.addEventListener('mouseover', handleTriggerMouseOver);
         el.addEventListener('mouseout', handleTriggerMouseOut);
     });
 };
 
 const removeTriggersHover = () => {
-    triggerHoverElements.forEach((el) => {
+    hoverTriggerElements.forEach((el) => {
         el.removeEventListener('mouseover', handleTriggerMouseOver);
         el.removeEventListener('mouseout', handleTriggerMouseOut);
     });
@@ -55,7 +47,7 @@ const initializeTetrahedron = () => {
     assemble();
 };
 
-const deinitializeTetrahedron = (transform = false) => {
+const uninitializeTetrahedron = (transform = false) => {
     removeTriggersHover();
 
     if (transform) {
@@ -68,8 +60,6 @@ const deinitializeTetrahedron = (transform = false) => {
 };
 
 export {
-    registerTetrahedron,
-    registerTriggerHoverElements,
     initializeTetrahedron,
-    deinitializeTetrahedron,
+    uninitializeTetrahedron,
 };
