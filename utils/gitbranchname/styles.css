@@ -1,5 +1,3 @@
-@import "./tablet.css";
-@import "./mobile.css";
 @import '../layoutStyles.css';
 
 .row { /*workaround*/

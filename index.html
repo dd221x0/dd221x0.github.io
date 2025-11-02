@@ -22,57 +22,62 @@
 <body>
     <div id="tetrahedron" class="disassembled unselectable">
         <div id="bottom" class="side">
-            <div class="triangle"></div>
+            <div class="triangle trigger hoverTarget"></div>
         </div>
         <div id="front" class="side">
-            <div class="triangle"></div>
+            <div class="triangle trigger hoverTarget"></div>
         </div>
         <div id="right" class="side">
-            <div class="triangle"></div>
+            <div class="triangle trigger hoverTarget"></div>
         </div>
         <div id="left" class="side">
-            <div class="triangle"></div>
+            <div class="triangle trigger hoverTarget"></div>
         </div>
     </div>
 
     <div id="utils" class="unselectable">
         <h3>utils</h3>
-        <div class="utilLink">
-            <a href="utils/md5">md5</a>
+        <div>
+            <a href="utils/md5" class="hoverTrigger navigator">md5</a>
         </div>
-        <div class="utilLink">
-            <a href="utils/guid" class="utilLink">guid</a>
+        <div>
+            <a href="utils/guid" class="hoverTrigger navigator">guid</a>
         </div>
-        <div class="utilLink">
-            <a href="utils/gitbranchname" class="utilLink">gitbranchname</a>
+        <div>
+            <a href="utils/gitbranchname" class="hoverTrigger navigator">gitbranchname</a>
+        </div>
+        <div>
+            <a href="utils/countdown" class="hoverTrigger navigator">countdown</a>
         </div>
     </div>
 
     <div id="social" class="unselectable">
-        <a href="https://www.instagram.com/dd221x0/" target="_blank">
+        <a href="https://www.instagram.com/dd221x0/" class="hoverTrigger" target="_blank">
             <i class="fab fa-instagram fa-2x"></i>
         </a>
-        <a href="https://www.youtube.com/@dd221x0" target="_blank">
+        <a href="https://www.youtube.com/@dd221x0" class="hoverTrigger" target="_blank">
             <i class="fab fa-youtube fa-2x"></i>
         </a>
-        <a href="https://open.spotify.com/artist/20UhqCc3xMkepIWRut4dQD?si=BpYeaTl_TPiGg_KeX91IKA" target="_blank">
+        <a href="https://open.spotify.com/artist/20UhqCc3xMkepIWRut4dQD?si=BpYeaTl_TPiGg_KeX91IKA" class="hoverTrigger"
+            target="_blank">
             <i class="fab fa-spotify fa-2x"></i>
         </a>
-        <a href="https://soundcloud.com/dd221x0" target="_blank">
+        <a href="https://soundcloud.com/dd221x0" class="hoverTrigger" target="_blank">
             <i class="fab fa-soundcloud fa-2x"></i>
         </a>
-        <a href="https://www.last.fm/user/dd221x0" target="_blank">
+        <a href="https://www.last.fm/user/dd221x0" class="hoverTrigger" target="_blank">
             <i class="fab fa-lastfm fa-2x"></i>
         </a>
-        <a href="https://github.com/DzmitryDanilovich" target="_blank">
+        <a href="https://github.com/DzmitryDanilovich" class="hoverTrigger" target="_blank">
             <i class="fab fa-github fa-2x"></i>
         </a>
-        <a href="https://www.linkedin.com/in/dd221x0" target="_blank">
+        <a href="https://www.linkedin.com/in/dd221x0" class="hoverTrigger" target="_blank">
             <i class="fab fa-linkedin fa-2x"></i>
         </a>
     </div>
     <div id="email">
-        <a href="mailto:dd221x0@gmail.com" onclick="ignoreOnBeforeUnload=true">dd221x0@gmail.com</a>
+        <a href="mailto:dd221x0@gmail.com" class="hoverTrigger"
+            onclick="ignoreOnBeforeUnload=true">dd221x0@gmail.com</a>
     </div>
     <script type="module" src="scripts.js"></script>
 </body>

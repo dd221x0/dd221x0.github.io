@@ -2,38 +2,9 @@
 @import './desktop.css';
 @import './tablet.css';
 @import './mobile.css';
+@import '../colorChange/colorChange.css';
 
-::-webkit-input-placeholder {
-    color: #000000;
-    opacity: 1;
-    transition: color 1s 0.02s ease;
-}
-
-::-moz-placeholder {
-    color: #000000;
-    opacity: 1;
-    transition: color 1s 0.02s ease;
-}
-
-:-moz-placeholder {
-    color: #000000;
-    opacity: 1;
-    transition: color 1s 0.02s ease;
-}
-
-.active::-webkit-input-placeholder {
-    color: #888888;
-    transition: color 1s 0.02s ease;
-}
-
-.active::-moz-placeholder {
-    color: #888888;
-    opacity: 1;
-    transition: color 1s 0.02s ease;
-}
-
-.active:-moz-placeholder {
-    color: #888888;
+::placeholder {
     opacity: 1;
     transition: color 1s 0.02s ease;
 }
@@ -60,13 +31,12 @@ input, button, textarea, span {
 
 input, button, textarea {
     background-color: #000000;
-    color: #000000;
     padding: 4px;
     outline: none;
 }
 
 input, button {
-    border: 2px solid #000000;
+    border: 2px solid;
 }
 
 textarea, span {
@@ -103,7 +73,7 @@ button:hover {
     transition: all 1s 0.02s ease;
 }
 
-#home:has(#triangle:hover) {
+#home:has(.home:hover) {
     transform-origin: 50% 71.13248654051871%;
     transform: rotate(-135deg);
 }
@@ -112,26 +82,23 @@ button:hover {
     cursor: default;
 }
 
-#home a:has(#triangle:hover) {
+#home a:has(.home:hover) {
     cursor: pointer;
 }
 
-#triangle {
+.home {
     top: 0;
     width: 100%;
     height: 100%;
 
     clip-path: polygon(50% 13.397459621556166%, 100% 100%, 0% 100%);
-    background: transparent;
 }
 
-#home #triangle {
-    background-color: #000000;
+#home .home {
     transition: background-color 1s 0.02s ease;
 }
 
-#home #triangle:hover {
-    background-color: #000000;
+#home .home:hover {
     cursor: pointer;
 
     transition: background-color 0.2s 0.02s ease;

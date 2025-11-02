@@ -1,6 +1,5 @@
-import { registerLayoutElements } from '../layout.js';
+import '../layout.js';
 import { md5 } from './md5.min.js';
-import { registerTargetSwitchElements } from '../../colorChange/colorChange.js';
 
 const passwordSwitch = document.getElementById('password');
 const stringInput = document.getElementById('string');
@@ -10,8 +9,8 @@ const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
 
 const switchPasswordMode = () => {
-    passwordSwitch.isActive = !passwordSwitch.isActive;
-    stringInput.type = passwordSwitch.isActive ? 'password' : 'text';
+    passwordSwitch.classList.toggle('active');
+    stringInput.type = passwordSwitch.classList.contains('active') ? 'password' : 'text';
 
     updateURLParameters();
 };
@@ -188,6 +187,4 @@ const setupPage = () => {
 
 window.onload = () => {
     setupPage();
-    registerTargetSwitchElements([passwordSwitch]);
-    registerLayoutElements();
 };

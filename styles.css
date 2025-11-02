@@ -3,16 +3,15 @@
 @import './desktop.css';
 @import './tablet.css';
 @import './mobile.css';
+@import './colorChange/colorChange.css';
 
 a, h3 {
-    color: #000000;
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 1s 0.02s ease;
 }
 
 a:hover {
-    color: #444444;
     transition: color 0.2s 0.02s ease;
 }
 

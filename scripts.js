@@ -1,75 +1,34 @@
 import {
-    registerTriggerElements,
-    registerTargetElements,
-    registerTargetTriangleElements,
-    registerTargetHoverElements,
     initializeColorChange,
-    deinitializeColorChange,
+    uninitializeColorChange,
 } from './colorChange/colorChange.js';
 import {
-    registerTetrahedron,
-    registerTriggerHoverElements,
     initializeTetrahedron,
-    deinitializeTetrahedron,
+    uninitializeTetrahedron,
 } from './tetrahedron.js';
 import {
-    registerNavigationElements,
     registerNavigationHandler,
     initializeNavigationEffects,
-    deinitializeNavigationEffects,
+    uninitializeNavigationEffects,
 } from './navigationEffects/navigationEffects.js';
 
 let isInitialized = false;
 
-const tetrahedron = document.querySelector('#tetrahedron');
-const tetrahedronTriangles = document.querySelectorAll('#tetrahedron .triangle');
-const socialLinks = document.querySelectorAll('#social a');
-const email = document.querySelector('#email a');
-const utilsHeader = document.querySelector('#utils h3');
-const utilsLinks = document.querySelectorAll('#utils a');
-
-const controls = [
-    ...socialLinks,
-    ...utilsLinks,
-    email,
-];
-
-const allElements = [
-    ...controls,
-    utilsHeader,
-];
-
-const registerElements = () => {
-    registerTriggerElements(tetrahedronTriangles);
-    registerTargetElements(allElements);
-    registerTargetTriangleElements(tetrahedronTriangles);
-    registerTargetHoverElements(controls);
-
-    registerTetrahedron(tetrahedron);
-    registerTriggerHoverElements(controls);
-
-    registerNavigationElements(utilsLinks);
-    registerNavigationHandler(() => deinitialize(true));
-};
-
 const initialize = () => {
     initializeColorChange();
     initializeTetrahedron();
+    registerNavigationHandler(() => uninitialize(true));
     initializeNavigationEffects();
 
     isInitialized = true;
 }
 
-const deinitialize = (isNavigation = false) => {
-    deinitializeColorChange();
-    deinitializeTetrahedron(isNavigation);
-    deinitializeNavigationEffects();
+const uninitialize = (isNavigation = false) => {
+    uninitializeColorChange();
+    uninitializeTetrahedron(isNavigation);
+    uninitializeNavigationEffects();
 
     isInitialized = false;
-};
-
-window.onload = () => {
-    registerElements();
 };
 
 window.onpageshow = () => {
@@ -84,5 +43,5 @@ window.onbeforeunload = () => {
         return;
     }
 
-    deinitialize();
+    uninitialize();
 };
