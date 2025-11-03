@@ -12,11 +12,10 @@
     text-align: center;
 }
 
-.switch {
+button.switch {
     width: 92px;
     height: 4px;
     padding: 0;
-    cursor: pointer;
 }
 
 .row.top .switch {
@@ -37,7 +36,7 @@
     transition: color 1s 0.02s ease;
 }
 
-#setEndTime {
+#setTargetTime {
     position: absolute;
     width: 285px;
     height: auto;

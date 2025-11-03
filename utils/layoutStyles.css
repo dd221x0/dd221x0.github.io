@@ -62,6 +62,10 @@ button:hover {
     transition: color 0.2s 0.02s ease, border-color 0.2s 0.02s ease;
 }
 
+.switch {
+    cursor: pointer;
+}
+
 #home {
     position: fixed;
     width: 60px;

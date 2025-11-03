@@ -1,9 +1,9 @@
 import { roundToTwoDigits } from '../common.js';
 
-export const createInputConfigs = (endTime) => [
+export const createInputConfigs = () => [
     {
         key: 'year',
-        onChange: (value) => { endTime.setFullYear(+value); },
+        onChange: (value, targetTime) => { targetTime.setFullYear(+value); },
         needsDateCorrection: true,
         getMaxValue: () => 9999,
         minValue: 1970,
@@ -30,7 +30,7 @@ export const createInputConfigs = (endTime) => [
     },
     {
         key: 'month',
-        onChange: (value) => { endTime.setMonth(+value - 1); },
+        onChange: (value, targetTime) => { targetTime.setMonth(+value - 1); },
         needsDateCorrection: true,
         getMaxValue: () => 12,
         minValue: 1,
@@ -59,7 +59,7 @@ export const createInputConfigs = (endTime) => [
     },
     {
         key: 'day',
-        onChange: (value) => { endTime.setDate(+value); },
+        onChange: (value, targetTime) => { targetTime.setDate(+value); },
         getMaxValue: (time) => {
             const year = time.getFullYear();
             const month = time.getMonth();
@@ -71,7 +71,7 @@ export const createInputConfigs = (endTime) => [
     },
     {
         key: 'hour',
-        onChange: (value) => { endTime.setHours(+value); },
+        onChange: (value, targetTime) => { targetTime.setHours(+value); },
         getMaxValue: () => 23,
         minValue: 0,
         getDifference: (now, end) => end.getHours() - now.getHours(),
@@ -79,7 +79,7 @@ export const createInputConfigs = (endTime) => [
     },
     {
         key: 'minute',
-        onChange: (value) => { endTime.setMinutes(+value); },
+        onChange: (value, targetTime) => { targetTime.setMinutes(+value); },
         getMaxValue: () => 59,
         minValue: 0,
         getDifference: (now, end) => end.getMinutes() - now.getMinutes(),
@@ -87,7 +87,7 @@ export const createInputConfigs = (endTime) => [
     },
     {
         key: 'second',
-        onChange: (value) => { endTime.setSeconds(+value); },
+        onChange: (value, targetTime) => { targetTime.setSeconds(+value); },
         getMaxValue: () => 59,
         minValue: 0,
         getDifference: (now, end) => end.getSeconds() - now.getSeconds(),
@@ -95,23 +95,21 @@ export const createInputConfigs = (endTime) => [
     }
 ];
 
-const calculateCountdown = (endTime, inputs, maxUnit) => {
-    const now = new Date();
-
+const calculateTimeDifference = (startTime, endTime, inputs, maxUnit) => {
     const result = [0, 0, 0, 0, 0, 0];
 
     for (let i = inputs.length - 1; i >= 0; i--) {
         const input = inputs[i];
 
         if (maxUnit === input.key) {
-            result[i] = input.convertToUnit(now, endTime);
+            result[i] = input.convertToUnit(startTime, endTime);
             break;
         }
 
-        result[i] += input.getDifference(now, endTime);
+        result[i] += input.getDifference(startTime, endTime);
 
         if (result[i] < 0) {
-            result[i] += input.getMaxValue(now) + 1 - input.minValue;
+            result[i] += input.getMaxValue(startTime) + 1 - input.minValue;
             result[i - 1]--;
         }
     }
@@ -154,6 +152,11 @@ const assembleResultString = (
 };
 
 export const getRemainingTime = (endTime, inputs, maxUnit) => {
-    const remaining = calculateCountdown(endTime, inputs, maxUnit);
+    const remaining = calculateTimeDifference(new Date(), endTime, inputs, maxUnit);
     return assembleResultString(...remaining, maxUnit);
+};
+
+export const getPassedTime = (startTime, inputs, maxUnit) => {
+    const passed = calculateTimeDifference(startTime, new Date(), inputs, maxUnit);
+    return assembleResultString(...passed, maxUnit);
 };
