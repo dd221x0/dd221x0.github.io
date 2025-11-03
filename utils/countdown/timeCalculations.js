@@ -6,7 +6,7 @@ export const createInputConfigs = () => [
         onChange: (value, targetTime) => { targetTime.setFullYear(+value); },
         needsDateCorrection: true,
         getMaxValue: () => 9999,
-        minValue: 1970,
+        minValue: 0,
         getDifference: (now, end) => end.getFullYear() - now.getFullYear(),
         convertToUnit: (now, end) => {
             const monthDifference = new Date(

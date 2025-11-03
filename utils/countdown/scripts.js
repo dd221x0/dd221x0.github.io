@@ -18,7 +18,7 @@ const url = new URL(window.location);
 const timeElement = document.getElementById('time');
 const modeSwitch = document.getElementById('modeSwitch');
 
-const targetTime = new Date(1970, 0, 1, 0, 0, 0);
+const targetTime = new Date(0, 0, 1, 0, 0, 0);
 
 let maxUnit = 'year';
 
