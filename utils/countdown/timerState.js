@@ -1,15 +1,45 @@
 const INTERVAL = 1000;
+const MAX_TIMEOUT_DELAY = 2 ** 32 - 1;
 
 let isRunning = false;
 
-const updateCountdownTimer = (updateTime, endTime, onUpdate, onFinished) => {
+let startTime = null;
+let endTime = null;
+
+let pendingTimerId = null;
+
+const startLater = (onUpdate, onInactive) => {
+    const delay = startTime - Date.now();
+
+    if (delay > MAX_TIMEOUT_DELAY) {
+        return;
+    }
+
+    pendingTimerId = setTimeout(
+        () => {
+            pendingTimerId = null;
+            isRunning = true;
+            update(startTime, onUpdate, onInactive);
+        },
+        delay,
+    );
+};
+
+const update = (updateTime, onUpdate, onInactive) => {
     if (!isRunning) {
         return;
     }
 
-    if (updateTime >= endTime) {
-        stopTimer();
-        onFinished();
+    if (endTime && updateTime >= endTime) {
+        stop();
+        onInactive();
+        return;
+    }
+
+    if (startTime && startTime > updateTime) {
+        stop();
+        onInactive();
+        startLater(onUpdate, onInactive);
         return;
     }
 
@@ -23,21 +53,29 @@ const updateCountdownTimer = (updateTime, endTime, onUpdate, onFinished) => {
         : updateTime + INTERVAL;
 
     setTimeout(
-        () => updateCountdownTimer(newUpdateTime, endTime, onUpdate, onFinished),
+        () => update(newUpdateTime, onUpdate, onInactive),
         INTERVAL - timeDifference,
     );
 };
 
-export const startTimer = (endTime, onUpdate, onFinished) => {
+export const start = (time, isCountup, onUpdate, onInactive) => {
+    startTime = isCountup ? time.getTime() : null;
+    endTime = isCountup ? null : time.getTime();
+
     if (isRunning) {
         return;
     }
 
+    if (pendingTimerId) {
+        clearTimeout(pendingTimerId);
+        pendingTimerId = null;
+    }
+
     isRunning = true;
 
-    updateCountdownTimer(Date.now(), endTime, onUpdate, onFinished);
+    update(Date.now(), onUpdate, onInactive);
 };
 
-const stopTimer = () => {
+const stop = () => {
     isRunning = false;
 };
