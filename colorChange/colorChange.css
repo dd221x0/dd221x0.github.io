@@ -39,9 +39,18 @@ button:hover {
     transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
 }
 
+button.switch, button.switch:hover {
+    background-color: var(--placeholder-color);
+    transition: color 1s 0.02s ease, border-color 1s 0.02s ease, background-color 1s 0.02s ease;
+}
+
 .switch.active, .switch.active:hover {
     color: var(--main-color);
     border-color: var(--main-color);
+}
+
+button.switch.active, button.switch.active:hover {
+    background-color: var(--main-color);
 }
 
 ::placeholder {
