@@ -3,14 +3,17 @@ import {
     defaultColorPair,
 } from './common.js';
 
-const defaultIconLinkHref = `${location.origin}/icon.png`;
+const x1 = 0.9770066967932373;
+const y1 = 0.01108087050416906;
+const x2 = 0.7181876516907166;
+const y2 = 0.9770066967932373;
+const x3 = 0.01108087050416906;
+const y3 = 0.26989991560668986;
 
-const ICON_SIZE = 64;
-
-const getCanvas = () => {
+const getCanvas = (size) => {
     const canvas = document.createElement('canvas');
-    canvas.width = ICON_SIZE;
-    canvas.height = ICON_SIZE;
+    canvas.width = size;
+    canvas.height = size;
     return canvas;
 };
 
@@ -18,34 +21,34 @@ const drawTriangle = (canvas) => {
     const canvasContext = canvas.getContext('2d');
 
     canvasContext.drawImage(new Image(), 0, 0);
-    canvasContext.clearRect(0, 0, ICON_SIZE, ICON_SIZE);
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 
-    const x1 = 62.528428594767185;
-    const y1 = 0.7091757122668199;
-    const x2 = 45.964009708205865;
-    const y2 = 62.528428594767185;
-    const x3 = 0.7091757122668199;
-    const y3 = 17.27359459882815;
+    const x1scaled = x1 * canvas.width;
+    const y1scaled = y1 * canvas.height;
+    const x2scaled = x2 * canvas.width;
+    const y2scaled = y2 * canvas.height;
+    const x3scaled = x3 * canvas.width;
+    const y3scaled = y3 * canvas.height;
 
     canvasContext.fillStyle = getCurrentColorPair().color;
     canvasContext.beginPath();
-    canvasContext.moveTo(x1, y1);
-    canvasContext.lineTo(x2, y2);
-    canvasContext.lineTo(x3, y3);
+    canvasContext.moveTo(x1scaled, y1scaled);
+    canvasContext.lineTo(x2scaled, y2scaled);
+    canvasContext.lineTo(x3scaled, y3scaled);
     canvasContext.fill();
 };
 
-const isDefaultIcon = (iconLink) => getCurrentColorPair().color === defaultColorPair.color
-    && iconLink?.href === defaultIconLinkHref;
+const isDefaultIcon = (iconLink, size) => getCurrentColorPair().color === defaultColorPair.color
+    && iconLink?.href === `${location.origin}/icon-${size}.png`;
 
-const setIcon = () => {
-    const iconLink = document.querySelector('link[rel="icon"]');
+const updateIcon = (size) => {
+    let iconLink = document.querySelector(`link[rel="icon"][sizes="${size}x${size}"]`);
 
-    if (isDefaultIcon(iconLink)) {
+    if (isDefaultIcon(iconLink, size)) {
         return;
     }
 
-    const canvas = getCanvas();
+    const canvas = getCanvas(size);
     drawTriangle(canvas);
 
     if (iconLink) {
@@ -59,6 +62,33 @@ const setIcon = () => {
     iconLink.sizes = `${canvas.width}x${canvas.height}`;
     iconLink.href = canvas.toDataURL('image/png');
     document.getElementsByTagName('head')[0].appendChild(iconLink);
+}
+
+const updateTouchIcon = (size) => {
+    let iconLink = document.querySelector('link[rel="apple-touch-icon"]');
+
+    if (isDefaultIcon(iconLink, size)) {
+        return;
+    }
+
+    const canvas = getCanvas(size);
+    drawTriangle(canvas);
+
+    if (iconLink) {
+        iconLink.href = canvas.toDataURL('image/png');
+        return;
+    }
+
+    iconLink = document.createElement('link');
+    iconLink.rel = 'apple-touch-icon';
+    iconLink.href = canvas.toDataURL('image/png');
+    document.getElementsByTagName('head')[0].appendChild(iconLink);
+}
+
+const setIcon = () => {
+    updateIcon(96);
+    updateIcon(256);
+    updateTouchIcon(256);
 };
 
 export {
