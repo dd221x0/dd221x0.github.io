@@ -1,4 +1,9 @@
-import { getCurrentColorPair } from './common.js';
+import { 
+    getCurrentColorPair,
+    defaultColorPair,
+} from './common.js';
+
+const defaultIconLinkHref = `${location.origin}/icon.png`;
 
 const ICON_SIZE = 64;
 
@@ -30,21 +35,29 @@ const drawTriangle = (canvas) => {
     canvasContext.fill();
 };
 
+const isDefaultIcon = (iconLink) => getCurrentColorPair().color === defaultColorPair.color
+    && iconLink?.href === defaultIconLinkHref;
+
 const setIcon = () => {
+    const iconLink = document.querySelector('link[rel="icon"]');
+
+    if (isDefaultIcon(iconLink)) {
+        return;
+    }
+
     const canvas = getCanvas();
     drawTriangle(canvas);
 
-    let iconLink = document.querySelector('link[rel="shortcut icon"]');
-
     if (iconLink) {
-        iconLink.href = canvas.toDataURL('image/x-icon');
+        iconLink.href = canvas.toDataURL('image/png');
         return;
     }
 
     iconLink = document.createElement('link');
-    iconLink.type = 'image/x-icon';
-    iconLink.rel = 'shortcut icon';
-    iconLink.href = canvas.toDataURL('image/x-icon');
+    iconLink.rel = 'icon';
+    iconLink.type = 'image/png';
+    iconLink.sizes = `${canvas.width}x${canvas.height}`;
+    iconLink.href = canvas.toDataURL('image/png');
     document.getElementsByTagName('head')[0].appendChild(iconLink);
 };
 
