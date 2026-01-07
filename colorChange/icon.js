@@ -3,6 +3,8 @@ import {
     defaultColorPair,
 } from './common.js';
 
+const touchIconSize = 256;
+
 const x1 = 0.9770066967932373;
 const y1 = 0.01108087050416906;
 const x2 = 0.7181876516907166;
@@ -10,10 +12,20 @@ const y2 = 0.9770066967932373;
 const x3 = 0.01108087050416906;
 const y3 = 0.26989991560668986;
 
-const getCanvas = (size) => {
+const getSvgIconData = () => {
+    const color = getCurrentColorPair().color;
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1">
+        <path d="M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} Z" fill="${color}" />
+    </svg>`;
+
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+};
+
+const getCanvas = () => {
     const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = touchIconSize;
+    canvas.height = touchIconSize;
     return canvas;
 };
 
@@ -38,40 +50,38 @@ const drawTriangle = (canvas) => {
     canvasContext.fill();
 };
 
-const isDefaultIcon = (iconLink, size) => getCurrentColorPair().color === defaultColorPair.color
-    && iconLink?.href === `${location.origin}/icon-${size}.png`;
+const isDefaultIcon = (iconLink) => getCurrentColorPair().color === defaultColorPair.color
+    && iconLink?.href.startsWith(`${location.origin}/icon.`);
 
-const updateIcon = (size) => {
-    let iconLink = document.querySelector(`link[rel="icon"][sizes="${size}x${size}"]`);
+const updateIcon = () => {
+    let iconLink = document.querySelector(`link[rel="icon"]`);
 
-    if (isDefaultIcon(iconLink, size)) {
+    if (isDefaultIcon(iconLink)) {
         return;
     }
 
-    const canvas = getCanvas(size);
-    drawTriangle(canvas);
+    const svgData = getSvgIconData();
 
     if (iconLink) {
-        iconLink.href = canvas.toDataURL('image/png');
+        iconLink.href = svgData;
         return;
     }
 
     iconLink = document.createElement('link');
     iconLink.rel = 'icon';
-    iconLink.type = 'image/png';
-    iconLink.sizes = `${canvas.width}x${canvas.height}`;
-    iconLink.href = canvas.toDataURL('image/png');
+    iconLink.href = svgData;
+    iconLink.type = 'image/svg+xml';
     document.getElementsByTagName('head')[0].appendChild(iconLink);
 }
 
-const updateTouchIcon = (size) => {
+const updateTouchIcon = () => {
     let iconLink = document.querySelector('link[rel="apple-touch-icon"]');
 
-    if (isDefaultIcon(iconLink, size)) {
+    if (isDefaultIcon(iconLink)) {
         return;
     }
 
-    const canvas = getCanvas(size);
+    const canvas = getCanvas();
     drawTriangle(canvas);
 
     if (iconLink) {
@@ -86,9 +96,8 @@ const updateTouchIcon = (size) => {
 }
 
 const setIcon = () => {
-    updateIcon(96);
-    updateIcon(256);
-    updateTouchIcon(256);
+    updateIcon();
+    updateTouchIcon();
 };
 
 export {
