@@ -1,0 +1,42 @@
+@import '../layoutStyles.css';
+
+.row { /*workaround*/
+    max-width: 461px;
+    width: 461px;
+}
+
+#form {
+    position: absolute;
+    width: 460px;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    margin-top: -75px;
+    margin-left: -230px;
+    padding: 0;
+}
+
+#length {
+    max-width: 64px;
+    width: 64px;
+}
+
+#generate {
+    max-width: 380px;
+    width: 380px;
+}
+
+#result {
+    max-width: 452px;
+    width: 452px;
+    max-height: 36px;
+    height: 36px;
+}
+
+#copy {
+    position: relative;
+    max-width: 128px;
+    width: 128px;
+    left: 50%;
+    margin-left: -64px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNQGK06S1X"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-MNQGK06S1X');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>password</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div id="home" class="unselectable">
+        <a href="/" class="navigator">
+            <div id="triangle" class="home"></div>
+        </a>
+    </div>
+    <div id="form">
+        <div class="row unselectable">
+            <input id="length" placeholder="length" type="text" name="length">
+            <button id="generate">generate</button>
+        </div>
+        <div class="row">
+            <textarea readonly="readonly" id="result"></textarea>
+        </div>
+        <div class="row unselectable">
+            <button id="copy">copy</button>
+        </div>
+    </div>
+    <script type="module" src="scripts.js"></script>
+</body>
+
+</html>

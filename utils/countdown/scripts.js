@@ -2,6 +2,7 @@ import '../layout.js';
 import {
     isDigit,
     saveOldValue,
+    restoreOldValue,
     getValueInsideRange,
     roundToTwoDigits,
     updateUrl,
@@ -67,7 +68,7 @@ const handleDigitInput = (event) => {
         return;
     }
 
-    event.target.value = event.target.oldValue;
+    restoreOldValue(event);
 };
 
 const setInputValue = (input, value) => {
