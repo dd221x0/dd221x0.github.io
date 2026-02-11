@@ -1,24 +1,24 @@
 @import '../layoutStyles.css';
 
 .row { /*workaround*/
-    max-width: 461px;
-    width: 461px;
+    max-width: 381px;
+    width: 381px;
 }
 
 #form {
     position: absolute;
-    width: 460px;
-    height: 150px;
+    width: 380px;
+    height: 200px;
     top: 50%;
     left: 50%;
-    margin-top: -75px;
-    margin-left: -230px;
+    margin-top: -100px;
+    margin-left: -190px;
     padding: 0;
 }
 
 #length {
-    max-width: 64px;
-    width: 64px;
+    max-width: 368px;
+    width: 368px;
 }
 
 #generate {
@@ -31,6 +31,8 @@
     width: 452px;
     max-height: 36px;
     height: 36px;
+    left: 50%;
+    margin-left: -40px;
 }
 
 #copy {
