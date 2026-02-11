@@ -13,7 +13,7 @@ const copyButton = document.getElementById('copy');
 const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const digits = '0123456789';
-const specialCharacters = '!@#$%^&*()-_=+[]{}|;:,.<>?/~`';
+const specialCharacters = '"`!@#$%^&*()_+-={}[]:;\',.<>?';
 
 const defaultLength = 16;
 
