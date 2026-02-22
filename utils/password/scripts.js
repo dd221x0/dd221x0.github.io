@@ -2,9 +2,11 @@ import '../layout.js';
 import {
     saveOldValue,
     restoreOldValue,
+    hasValueChanged,
     isDigit,
 } from '../common.js';
 
+const specialCharactersInput = document.getElementById('specialCharacters');
 const lengthInput = document.getElementById('length');
 const generateButton = document.getElementById('generate');
 const resultTextArea = document.getElementById('result');
@@ -13,20 +15,28 @@ const copyButton = document.getElementById('copy');
 const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const digits = '0123456789';
-const specialCharacters = '"`!@#$%^&*()_+-={}[]:;\',.<>?';
 
+const defaultSpecialCharacters = '"`!@#$%^&*()_+-={}[]:;\',.<>?';
 const defaultLength = 16;
 
-const symbolSets = [
-    lowerCaseLetters,
-    upperCaseLetters,
-    digits,
-    specialCharacters
-];
+const getSymbolsSets = () => {
+    const symbolSets = [
+        lowerCaseLetters,
+        upperCaseLetters,
+        digits,
+    ];
 
-const allSymbols = symbolSets.join('');
+    if (specialCharactersInput.value?.length) {
+        symbolSets.push(specialCharactersInput.value);
+    }
+
+    return symbolSets;
+}
 
 const generatePassword = (passwordLength) => {
+    const symbolSets = getSymbolsSets();
+    const allSymbols = symbolSets.join('');
+
     const passwordSymbols = [];
 
     for (let symbolSet of symbolSets) {
@@ -48,6 +58,15 @@ const generatePassword = (passwordLength) => {
     }
 
     return password;
+};
+
+const handleSpecialCharactersFocusOut = (event) => {
+    if (!hasValueChanged(event)) {
+        return;
+    }
+
+    saveOldValue(event);
+    setNewPassword();
 };
 
 const handleLengthInput = (event) => {
@@ -92,6 +111,9 @@ const copyResult = async () => {
 };
 
 const setupPage = () => {
+    specialCharactersInput.value = defaultSpecialCharacters;
+    specialCharactersInput.oldValue = defaultSpecialCharacters;
+    specialCharactersInput.addEventListener('focusout', handleSpecialCharactersFocusOut);
     lengthInput.onfocus = saveOldValue;
     lengthInput.oninput = handleLengthInput;
     lengthInput.addEventListener('focusout', handleLengthFocusOut);
