@@ -14,10 +14,14 @@ const triggerElements = [...document.getElementsByClassName('trigger')];
 const hoverTargetElements = [...document.getElementsByClassName('hoverTarget')];
 const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
 
+const setDefaultColors = () => {
+    document.documentElement.style.setProperty('--placeholder-color', placeholderColor);
+    document.documentElement.style.setProperty('--background-color', backgroundColor);
+};
+
 const updateColor = (colorPair) => {
     document.documentElement.style.setProperty('--main-color', colorPair.color);
     document.documentElement.style.setProperty('--negative-color', colorPair.negative);
-    document.documentElement.style.setProperty('--placeholder-color', placeholderColor);
 };
 
 const changeColor = (colorPair) => {
@@ -68,6 +72,7 @@ const hideColor = () => {
 const initializeColorChange = () => {
     setIcon();
     updateColor(getCurrentColorPair());
+    setDefaultColors();
     configureHoverColorChange();
     startManual(triggerElements, changeColor);
 };

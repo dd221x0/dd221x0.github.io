@@ -11,6 +11,10 @@ import {
     initializeNavigationEffects,
     uninitializeNavigationEffects,
 } from './navigationEffects/navigationEffects.js';
+import {
+    initializeUtils,
+    uninitializeUtils,
+} from './utils.js';
 
 let isInitialized = false;
 
@@ -19,6 +23,7 @@ const initialize = () => {
     initializeTetrahedron();
     registerNavigationHandler(() => uninitialize(true));
     initializeNavigationEffects();
+    initializeUtils();
 
     isInitialized = true;
 }
@@ -27,6 +32,7 @@ const uninitialize = (isNavigation = false) => {
     uninitializeColorChange();
     uninitializeTetrahedron(isNavigation);
     uninitializeNavigationEffects();
+    uninitializeUtils();
 
     isInitialized = false;
 };

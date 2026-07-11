@@ -39,5 +39,51 @@ a:hover {
 }
 
 #utils h3 {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--main-color);
     text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 3px;
+    margin-top: 0px;
+    font-size: 20px;
+
+    transition:
+        color 1s 0.02s ease, 
+        text-decoration-color 1s 0.02s ease;
+}
+
+#utils:not(.expanded) h3:hover {
+    color: var(--placeholder-color);
+
+    transition:
+        color 0.2s 0.02s ease, 
+        text-decoration-color 1s 0.02s ease;
+}
+
+#utils.expanded h3 {
+    color: var(--placeholder-color);
+    text-decoration-color: var(--main-color);
+}
+
+#utils div {
+    display: none;
+    opacity: 0;
+    transform: translateX(160px);
+
+    transition:
+        opacity 1s 0.02s ease,
+        transform 1s 0.02s ease,
+        display 1s 0.02s ease allow-discrete;
+}
+
+#utils.expanded div {
+    display: block;
+    opacity: 1;
+    transform: translateX(0px);
+
+    @starting-style {
+        opacity: 0;
+        transform: translateX(160px);
+    }
 }
