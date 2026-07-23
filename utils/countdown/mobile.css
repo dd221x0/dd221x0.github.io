@@ -6,4 +6,9 @@
         margin-top: -4vw;
         font-size: 8vw;
     }
+
+    .clear-view #time {
+        margin-top: -5vw;
+        font-size: 10vw;
+    }
 }

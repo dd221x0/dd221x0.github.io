@@ -173,7 +173,7 @@ const setModeSwitch = () => {
 
     modeSwitch.appendChild(arrowIconElement);
     modeSwitch.appendChild(clockIconElement);
-}
+};
 
 const initializeSwitchMode = () => {
     const urlMode = url.searchParams.get('mode');
@@ -196,10 +196,19 @@ const initializeSwitchMode = () => {
     };
 };
 
+const initializeClearView = () => {
+    const isClearView = url.searchParams.get('clearView') === 'true';
+
+    if (isClearView) {
+        document.body.classList.add('clear-view');
+    }
+};
+
 const setupPage = () => {
     initializeInputs();
     initializeMaxUnit();
     initializeSwitchMode();
+    initializeClearView();
     start(targetTime, isCountup(mode), setCountdownValue, setInactive);
 };
 

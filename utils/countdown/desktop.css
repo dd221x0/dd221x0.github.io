@@ -3,4 +3,9 @@
         margin-top: -2.5vw;
         font-size: 5vw;
     }
+
+    .clear-view #time {
+        margin-top: -4vw;
+        font-size: 8vw;
+    }
 }

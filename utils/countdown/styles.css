@@ -45,3 +45,11 @@ button.switch {
     margin-left: -142.5px;
     text-align: center;
 }
+
+.clear-view #setTargetTime {
+    display: none;
+}
+
+.clear-view .home {
+    display: none;
+}
