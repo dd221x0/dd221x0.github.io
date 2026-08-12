@@ -5,7 +5,7 @@
 @import './mobile.css';
 @import './colorChange/colorChange.css';
 
-a, h3 {
+a, #wrench {
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 1s 0.02s ease;
@@ -38,35 +38,48 @@ a:hover {
     text-align: right;
 }
 
-#utils h3 {
+#utils #wrench {
     display: inline-block;
     cursor: pointer;
     color: var(--main-color);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-decoration-thickness: 3px;
     margin-top: 0px;
     font-size: 20px;
 
     transition:
-        color 1s 0.02s ease, 
-        text-decoration-color 1s 0.02s ease;
+        color 1s 0.02s ease;
 }
 
-#utils:not(.expanded) h3:hover {
+#utils #wrench i {
+    transform: rotate(0deg) translateZ(0);
+    transform-box: view-box;
+    transform-origin: 73.55% 26.45%;
+
+    transition:
+        transform 1s 0.02s ease;
+}
+
+#utils:not(.expanded) #wrench:hover {
     color: var(--placeholder-color);
 
     transition:
-        color 0.2s 0.02s ease, 
-        text-decoration-color 1s 0.02s ease;
+        color 0.2s 0.02s ease;
 }
 
-#utils.expanded h3 {
+#utils.expanded #wrench {
     color: var(--placeholder-color);
-    text-decoration-color: var(--main-color);
+
+    transition:
+        color 1s 0.02s ease;
 }
 
-#utils div {
+#utils.expanded #wrench i {
+    transform: rotate(45deg) translateZ(0);
+
+    transition:
+        transform 1s 0.02s ease;
+}
+
+#utils .util {
     display: none;
     opacity: 0;
     transform: translateX(160px);
@@ -77,7 +90,7 @@ a:hover {
         display 1s 0.02s ease allow-discrete;
 }
 
-#utils.expanded div {
+#utils.expanded .util {
     display: block;
     opacity: 1;
     transform: translateX(0px);

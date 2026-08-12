@@ -4,7 +4,7 @@
     --placeholder-color: #000000;
 }
 
-a, input, button, textarea, h3, .target {
+a, input, button, textarea, .mainColor {
     color: var(--main-color);
 }
 
