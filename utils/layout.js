@@ -10,6 +10,12 @@ import {
 
 let isInitialized = false;
 
+let customUnloadHandler = null;
+
+export const registerCustomUnloadHandler = (handler) => {
+    customUnloadHandler = handler;
+};
+
 const initializeLayout = () => {
     initializeColorChange();
     registerNavigationHandler(uninitializeLayout);
@@ -21,6 +27,10 @@ const initializeLayout = () => {
 const uninitializeLayout = () => {
     uninitializeColorChange();
     uninitializeNavigationEffects();
+
+    if (customUnloadHandler) {
+        customUnloadHandler();
+    }
 
     isInitialized = false;
 };

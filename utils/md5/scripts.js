@@ -134,7 +134,7 @@ const applyValuesFromURL = () => {
 };
 
 const updateStringParameter = (url) => {
-    if (!stringInput.value || passwordSwitch.isActive) {
+    if (!stringInput.value || passwordSwitch.classList.contains('active')) {
         url.searchParams.delete('string');
         return
     }

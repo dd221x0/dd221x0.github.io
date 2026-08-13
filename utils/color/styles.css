@@ -1,0 +1,52 @@
+@import '../layoutStyles.css';
+
+.row {
+    max-width: 151px;
+    width: 151px;
+}
+
+#form {
+    position: absolute;
+    width: 150px;
+    height: 210px;
+    top: 50%;
+    left: 50%;
+    margin-top: -105px;
+    margin-left: -75px;
+    padding: 0;
+}
+
+#hex {
+    padding-bottom: 5px;
+}
+
+#colors input {
+    max-width: 35px;
+    width: 35px;
+}
+
+#preview {
+    max-width: 142px;
+    width: 142px;
+    max-height: 64px;
+    height: 64px;
+    margin-bottom: 8px;
+
+    border-width: 4px;
+    border-style: solid;
+    border-color: var(--background-color);
+    background-color: var(--background-color);
+
+    transition:
+        background-color 1s 0.02s ease,
+        border-color 1s 0.02s ease;
+}
+
+#apply {
+    position: relative;
+    max-width: 150px;
+    width: 150px;
+    left: 50%;
+    margin-left: -75px;
+    margin-top: 8px;
+}

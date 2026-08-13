@@ -1,4 +1,5 @@
 export const isDigit = (value) => /^\d*$/.test(value);
+export const isHex = (value) => /^[0-9A-Fa-f]*$/.test(value);
 
 export const getValueInsideRange = (value, min, max) => {
     return Math.min(

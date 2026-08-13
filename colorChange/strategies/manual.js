@@ -1,8 +1,8 @@
-import { defaultColorPair } from "../common.js";
+import { defaultColorStringPair } from "../common.js";
 import { getRandomColorPair } from "../randomColorGenerator.js";
+import { changeColor } from "../colorChange.js";
 
-let triggerElements = [];
-let changeColor = () => {};
+const triggerElements = [...document.getElementsByClassName('trigger')];
 
 const clickColorChangeListener = (event) => {
     changeColor(getRandomColorPair());
@@ -11,20 +11,17 @@ const clickColorChangeListener = (event) => {
 };
 
 const clickColorResetListener = (event) => {
-    changeColor(defaultColorPair);
+    changeColor(defaultColorStringPair);
     event.stopPropagation();
     event.preventDefault();
 };
 
-const startManual = (elements, changeColorHandler) => {
-    elements.forEach((triggerElement) => {
+const startManual = () => {
+    triggerElements.forEach((triggerElement) => {
         triggerElement.addEventListener('click', clickColorChangeListener);
         triggerElement.addEventListener('contextmenu', clickColorResetListener);
         triggerElement.style.cursor = 'pointer';
     });
-
-    triggerElements = elements;
-    changeColor = changeColorHandler;
 };
 
 const stopManual = () => {

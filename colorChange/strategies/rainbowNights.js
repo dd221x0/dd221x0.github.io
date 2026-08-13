@@ -1,4 +1,6 @@
-import { convertColorToString, inverseColor } from "../common.js";
+import {
+    assembleColorStringPair,
+} from "../common.js";
 
 const startColor = {
     r: 255,
@@ -40,12 +42,7 @@ const startRainbow = (changeColorHandler) => {
     setInterval(() => {
         currentColor = moveRainbow(currentColor);
 
-        const newColorPair = {
-            color: convertColorToString(currentColor),
-            negative: convertColorToString(inverseColor(currentColor)),
-        };
-
-        changeColorHandler(newColorPair);
+        changeColorHandler(assembleColorStringPair(currentColor));
     }, 200);
 };
 

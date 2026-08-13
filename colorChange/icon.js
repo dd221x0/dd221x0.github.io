@@ -1,6 +1,6 @@
 import { 
-    getCurrentColorPair,
-    defaultColorPair,
+    getCurrentColorStringPair,
+    defaultColorStringPair,
 } from './common.js';
 
 const touchIconSize = 256;
@@ -13,7 +13,7 @@ const x3 = 0.01108087050416906;
 const y3 = 0.26989991560668986;
 
 const getSvgIconData = () => {
-    const color = getCurrentColorPair().color;
+    const color = getCurrentColorStringPair().color;
 
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1">
         <path d="M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} Z" fill="${color}" />
@@ -42,7 +42,7 @@ const drawTriangle = (canvas) => {
     const x3scaled = x3 * canvas.width;
     const y3scaled = y3 * canvas.height;
 
-    canvasContext.fillStyle = getCurrentColorPair().color;
+    canvasContext.fillStyle = getCurrentColorStringPair().color;
     canvasContext.beginPath();
     canvasContext.moveTo(x1scaled, y1scaled);
     canvasContext.lineTo(x2scaled, y2scaled);
@@ -50,7 +50,7 @@ const drawTriangle = (canvas) => {
     canvasContext.fill();
 };
 
-const isDefaultIcon = (iconLink) => getCurrentColorPair().color === defaultColorPair.color
+const isDefaultIcon = (iconLink) => getCurrentColorStringPair().color === defaultColorStringPair.color
     && iconLink?.href.startsWith(`${location.origin}/icon.`);
 
 const updateIcon = () => {

@@ -1,13 +1,13 @@
-const defaultColorPair = {color: '#BBBBBB', negative: '#444444'};
-const placeholderColor = '#888888';
-const backgroundColor = '#000000';
+const defaultColorStringPair = {color: '#BBBBBB', negative: '#444444'};
+const placeholderColorString = '#888888';
+const backgroundColorString = '#000000';
 
-const getCurrentColorPair = () => {
-    return JSON.parse(localStorage.getItem('color')) || defaultColorPair;
+const getCurrentColorStringPair = () => {
+    return JSON.parse(localStorage.getItem('colorStringPair')) || defaultColorStringPair;
 };
 
-const saveColor = (color) => {
-    localStorage.setItem('color', JSON.stringify(color));
+const saveColorStringPair = (colorStringPair) => {
+    localStorage.setItem('colorStringPair', JSON.stringify(colorStringPair));
 };
 
 const convertColorToString = (color) => {
@@ -19,6 +19,14 @@ const convertColorToString = (color) => {
     return `#${colorString}`;
 };
 
+const parseColorString = (colorString) => {
+    const r = Number.parseInt(colorString.slice(1, 3), 16);
+    const g = Number.parseInt(colorString.slice(3, 5), 16);
+    const b = Number.parseInt(colorString.slice(5, 7), 16);
+
+    return {r, g, b};
+};
+
 const inverseColorComponent = (colorComponent) => 0xFF - colorComponent;
 
 const inverseColor = (color) => ({
@@ -27,12 +35,21 @@ const inverseColor = (color) => ({
     b: inverseColorComponent(color.b),
 });
 
+const assembleColorStringPair = (color) => {
+    const negative = inverseColor(color);
+
+    return {
+        color: convertColorToString(color),
+        negative: convertColorToString(negative),
+    };
+};
+
 export {
-    defaultColorPair,
-    placeholderColor,
-    backgroundColor,
-    getCurrentColorPair,
-    saveColor,
-    convertColorToString,
-    inverseColor,
-}
+    defaultColorStringPair,
+    placeholderColorString,
+    backgroundColorString,
+    getCurrentColorStringPair,
+    saveColorStringPair,
+    parseColorString,
+    assembleColorStringPair,
+};

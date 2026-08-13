@@ -1,8 +1,8 @@
 import {
-    backgroundColor,
-    getCurrentColorPair,
-    placeholderColor,
-    saveColor,
+    backgroundColorString,
+    getCurrentColorStringPair,
+    saveColorStringPair,
+    placeholderColorString,
 } from './common.js';
 import { setIcon } from './icon.js';
 import { 
@@ -10,23 +10,22 @@ import {
     stopManual,
 } from './strategies/manual.js';
 
-const triggerElements = [...document.getElementsByClassName('trigger')];
 const hoverTargetElements = [...document.getElementsByClassName('hoverTarget')];
 const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
 
 const setDefaultColors = () => {
-    document.documentElement.style.setProperty('--placeholder-color', placeholderColor);
-    document.documentElement.style.setProperty('--background-color', backgroundColor);
+    document.documentElement.style.setProperty('--placeholder-color', placeholderColorString);
+    document.documentElement.style.setProperty('--background-color', backgroundColorString);
 };
 
-const updateColor = (colorPair) => {
-    document.documentElement.style.setProperty('--main-color', colorPair.color);
-    document.documentElement.style.setProperty('--negative-color', colorPair.negative);
+const updateColor = (colorStringPair) => {
+    document.documentElement.style.setProperty('--main-color', colorStringPair.color);
+    document.documentElement.style.setProperty('--negative-color', colorStringPair.negative);
 };
 
-const changeColor = (colorPair) => {
-    updateColor(colorPair);
-    saveColor(colorPair);
+const changeColor = (colorStringPair) => {
+    updateColor(colorStringPair);
+    saveColorStringPair(colorStringPair);
     setIcon();
 };
 
@@ -64,17 +63,17 @@ const removeHoverColorChange = () => {
 };
 
 const hideColor = () => {
-    document.documentElement.style.setProperty('--main-color', backgroundColor);
-    document.documentElement.style.setProperty('--negative-color', backgroundColor);
-    document.documentElement.style.setProperty('--placeholder-color', backgroundColor);
+    document.documentElement.style.setProperty('--main-color', backgroundColorString);
+    document.documentElement.style.setProperty('--negative-color', backgroundColorString);
+    document.documentElement.style.setProperty('--placeholder-color', backgroundColorString);
 };
 
 const initializeColorChange = () => {
     setIcon();
-    updateColor(getCurrentColorPair());
+    updateColor(getCurrentColorStringPair());
     setDefaultColors();
     configureHoverColorChange();
-    startManual(triggerElements, changeColor);
+    startManual();
 };
 
 const uninitializeColorChange = () => {
@@ -86,4 +85,5 @@ const uninitializeColorChange = () => {
 export {
     initializeColorChange,
     uninitializeColorChange,
+    changeColor,
 };
