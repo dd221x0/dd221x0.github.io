@@ -1,27 +1,26 @@
 import "../layout.js";
-import { generateGuid } from "./guid.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
 const generateButton = document.getElementById('generate');
 const resultTextArea = document.getElementById('result');
 const copyButton = document.getElementById('copy');
 
-const setGuidValue = (value) => {
+const setUuidValue = (value) => {
     resultTextArea.value = upperCaseSwitch.classList.contains('active')
         ? value.toUpperCase()
         : value.toLowerCase();
 };
 
-const setNewGuid = () => {
-	const guid = generateGuid();
-    setGuidValue(guid);
+const setNewUuid = () => {
+	const uuid = crypto.randomUUID();
+    setUuidValue(uuid);
 };
 
 const switchCase = () => {
-    const guid = resultTextArea.value;
+    const uuid = resultTextArea.value;
 
     upperCaseSwitch.classList.toggle('active');
-    setGuidValue(guid);
+    setUuidValue(uuid);
 };
 
 const copyResult = async () => {
@@ -30,11 +29,11 @@ const copyResult = async () => {
 };
 
 const setupPage = () => {
-    generateButton.onclick = setNewGuid;
+    generateButton.onclick = setNewUuid;
     upperCaseSwitch.onclick = switchCase;
     copyButton.onclick = copyResult;
 
-    setNewGuid();
+    setNewUuid();
 };
 
 window.onload = () => {

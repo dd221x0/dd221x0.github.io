@@ -39,20 +39,27 @@ const generatePassword = (passwordLength) => {
 
     const passwordSymbols = [];
 
+    const randomGenerateIndexes = Array.from(
+        crypto.getRandomValues(new Uint32Array(passwordLength))
+    );
+
     for (let symbolSet of symbolSets) {
-        const randomIndex = Math.floor(Math.random() * symbolSet.length);
+        const randomIndex = randomGenerateIndexes.shift() % symbolSet.length;
         passwordSymbols.push(symbolSet[randomIndex]);
     }
 
     for (let i = passwordLength - passwordSymbols.length; i > 0; i--) {
-        const randomIndex = Math.floor(Math.random() * allSymbols.length);
+        const randomIndex = randomGenerateIndexes.shift() % allSymbols.length;
         passwordSymbols.push(allSymbols[randomIndex]);
     }
 
     let password = '';
+    const randomShuffleIndexes = Array.from(
+        crypto.getRandomValues(new Uint32Array(passwordLength))
+    );
 
     for (let i = 0; i < passwordLength; i++) {
-        const randomIndex = Math.floor(Math.random() * passwordSymbols.length);
+        const randomIndex = randomShuffleIndexes.shift() % passwordSymbols.length;
         password += passwordSymbols[randomIndex];
         passwordSymbols.splice(randomIndex, 1);
     }
