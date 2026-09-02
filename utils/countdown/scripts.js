@@ -16,6 +16,9 @@ import { start } from './timerState.js';
 
 const url = new URL(window.location);
 
+const defaultTitle = 'countdown';
+const title = document.getElementById('title');
+
 const timeElement = document.getElementById('time');
 const modeSwitch = document.getElementById('modeSwitch');
 
@@ -204,11 +207,41 @@ const initializeClearView = () => {
     }
 };
 
+const updateTitleParameter = (url, newTitle) => {
+    if (!newTitle) {
+        url.searchParams.delete('title');
+        return;
+    }
+
+    url.searchParams.set('title', newTitle);
+};
+
+const setTitle = (newTitle) => {
+    document.title = newTitle || defaultTitle;;
+
+    updateTitleParameter(url, newTitle);
+    updateUrl(url);
+};
+
+const initializeTitle = () => {
+    const urlTitle = url.searchParams.get('title');
+
+    if (urlTitle) {
+        title.value = urlTitle;
+        document.title = urlTitle;
+    }
+
+    title.addEventListener('input', (event) => {
+        setTitle(event.target.value);
+    });
+};
+
 const setupPage = () => {
     initializeInputs();
     initializeMaxUnit();
     initializeSwitchMode();
     initializeClearView();
+    initializeTitle();
     start(targetTime, isCountup(mode), setCountdownValue, setInactive);
 };
 

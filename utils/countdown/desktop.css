@@ -1,4 +1,8 @@
 @media screen and (min-width: 600px) {
+    #title {
+        font-size: 3vw;
+    }
+
     #time {
         margin-top: -2.5vw;
         font-size: 5vw;

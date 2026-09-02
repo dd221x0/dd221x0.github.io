@@ -2,6 +2,11 @@
     ((orientation: portrait) and (max-width: 600px))
     or ((orientation: landscape) and (max-height: 600px))
 ) {
+    #title {
+        margin-top: -6vw;
+        font-size: 6vw;
+    }
+
     #time {
         margin-top: -4vw;
         font-size: 8vw;

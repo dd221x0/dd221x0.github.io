@@ -26,6 +26,16 @@ button.switch {
     vertical-align: top;
 }
 
+#title {
+    position: absolute;
+    width: 100vw;
+    max-width: 100vw;
+    top: 38.2%;
+    text-align: center;
+    border: none;
+    padding: 0;
+}
+
 #time {
     position: absolute;
     width: 100vw;
@@ -44,6 +54,10 @@ button.switch {
     left: 50%;
     margin-left: -142.5px;
     text-align: center;
+}
+
+.clear-view #title {
+    display: none;
 }
 
 .clear-view #setTargetTime {
