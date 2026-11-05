@@ -93,7 +93,6 @@
     opacity: 0.92;
 
     transform-origin: var(--half-box-size) var(--triangle-center-distance);
-    transform: translateZ(var(--disassemble-range));
 
     transition:
         background-color 1s 0.02s ease,
@@ -116,8 +115,7 @@
     opacity: 0.92;
 
     transform-origin: var(--half-box-size) var(--triangle-center-distance);
-    transform: translateZ(var(--disassemble-range))
-        rotateZ(var(--PI));
+    transform: rotateZ(var(--PI));
 
     transition:
         background-color 1s 0.02s ease,
@@ -142,9 +140,22 @@
         rotateY(var(--PI));
 }
 
+#tetrahedron.disassembled #bottom,
+#tetrahedron.octahedron #bottom {
+    transform: rotateX(var(--half-PI))
+        rotateY(var(--PI))
+        translateZ(var(--disassemble-range));
+}
+
 #front {
     transform-origin: var(--half-box-size) var(--box-size);
     transform: rotateX(var(--edges-angle));
+}
+
+#tetrahedron.disassembled #front,
+#tetrahedron.octahedron #front {
+    transform: rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));
 }
 
 #right {
@@ -154,9 +165,29 @@
         rotateX(var(--edges-angle));
 }
 
+#tetrahedron.disassembled #right,
+#tetrahedron.octahedron #right {
+    transform: rotateY(var(--right-corner-angle))
+        translateX(var(--box-size))
+        rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));
+}
+
 #left {
     transform-origin: 0px var(--box-size);
     transform: rotateY(var(--left-corner-angle))
         translateX(var(--negative-box-size))
         rotateX(var(--edges-angle));
+}
+
+#tetrahedron.disassembled #left,
+#tetrahedron.octahedron #left {
+    transform: rotateY(var(--left-corner-angle))
+        translateX(var(--negative-box-size))
+        rotateX(var(--edges-angle))
+        translateZ(var(--disassemble-range));
+}
+
+#tetrahedron.octahedron .side {
+    transition: transform 0.2s 0.02s ease;
 }

@@ -37,8 +37,6 @@
 }
 
 #result {
-    display: block;
-    font-weight: bolder;
     text-align: center;
     max-width: 452px;
     width: 452px;

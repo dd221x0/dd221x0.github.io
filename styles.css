@@ -21,7 +21,6 @@ a:hover {
     margin-left: -157.865px;
     bottom: 1%;
     font-size: 20px;
-    font-weight: normal;
 }
 
 #email {
@@ -36,10 +35,12 @@ a:hover {
     width: 160px;
     max-width: 160px;
     text-align: right;
+    pointer-events: none;
 }
 
 #utils #wrench {
     display: inline-block;
+    pointer-events: auto;
     cursor: pointer;
     color: var(--main-color);
     margin-top: 0px;
@@ -80,23 +81,19 @@ a:hover {
 }
 
 #utils .util {
-    display: none;
+    visibility: hidden;
+    pointer-events: auto;
     opacity: 0;
     transform: translateX(160px);
 
     transition:
         opacity 1s 0.02s ease,
         transform 1s 0.02s ease,
-        display 1s 0.02s ease allow-discrete;
+        visibility 1s 0.02s ease;
 }
 
 #utils.expanded .util {
-    display: block;
+    visibility: visible;
     opacity: 1;
     transform: translateX(0px);
-
-    @starting-style {
-        opacity: 0;
-        transform: translateX(160px);
-    }
 }

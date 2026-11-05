@@ -21,8 +21,23 @@ body {
     color: #000000;
     margin: 0;
     font-family: CenturyGothic;
-    font-weight: bolder;
     opacity: 0.8;
+}
+
+body,
+body * {
+    --line-height: calc(round(1.005859375em, 1px) + round(0.22021484375em, 1px));
+    font-synthesis-weight: none;
+    -webkit-text-stroke-width: calc(0.035em - 0.25px);
+    line-height: var(--line-height);
+}
+
+input {
+    height: var(--line-height);
+}
+
+body i {
+    -webkit-text-stroke-width: 0;
 }
 
 .unselectable {

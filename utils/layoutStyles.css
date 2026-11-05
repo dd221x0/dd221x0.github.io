@@ -6,7 +6,6 @@
 
 ::placeholder {
     opacity: 1;
-    transition: color 1s 0.02s ease;
 }
 
 ::-webkit-scrollbar-thumb:not(input, button) {
@@ -22,11 +21,10 @@
 }
 
 input, button, textarea, span {
-    font-weight: bolder;
     font-size: 20px;
     font-family: CenturyGothic;
     margin-bottom: 8px;
-    transition: color 1s 0.02s ease, border-color 1s 0.02s ease;
+    transition: color 1s 0.02s ease, border-color 1s 0.02s ease, --placeholder-color 1s 0.02s ease;
 }
 
 input, button, textarea {
@@ -46,6 +44,7 @@ textarea, span {
 }
 
 textarea {
+    display: block;
     border: none;
     resize: none;
 }

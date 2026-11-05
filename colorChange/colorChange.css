@@ -1,7 +1,25 @@
-:root {
-    --main-color: #000000;
-    --negative-color: #000000;
-    --placeholder-color: #000000;
+@property --main-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #000000;
+}
+
+@property --negative-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #000000;
+}
+
+@property --background-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #000000;
+}
+
+@property --placeholder-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #000000;
 }
 
 a, input, button, textarea, .mainColor {
