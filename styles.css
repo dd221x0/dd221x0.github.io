@@ -6,7 +6,7 @@
 @import './colorChange/colorChange.css';
 
 a, #wrench {
-    font-family: CenturyGothic;
+    font-family: DDGeo;
     text-decoration: none;
     transition: color 1s 0.02s ease;
 }

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DD Geo specimen</title>
+    <style>
+        @font-face {
+            font-family: Reference;
+            src: url(../CenturyGothic.ttf);
+        }
+
+        body {
+            margin: 24px;
+            background: #000000;
+            color: #BBBBBB;
+            font-family: DDGeo;
+        }
+
+        label {
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #glyphs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            margin: 24px 0;
+        }
+
+        .glyph {
+            border: 1px solid #333333;
+            text-align: center;
+            font-size: 80px;
+            overflow: hidden;
+        }
+
+        .glyph .reference {
+            font-size: 80px;
+        }
+
+        .reference {
+            display: none;
+            font-family: Reference;
+            color: #666666;
+        }
+
+        .compare .reference {
+            display: block;
+        }
+
+        .line {
+            white-space: nowrap;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <label><input id="compare" type="checkbox"> show Century Gothic underneath</label>
+    <div id="glyphs"></div>
+    <div id="lines"></div>
+    <script>
+        const sets = [
+            'abcdefghijklmnopqrstuvwxyz',
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            '0123456789',
+            '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~',
+            '–—−•·…°×÷±«»‹›¡¿‘’‚“”„',
+        ];
+        const lines = [
+            'md5 uuid gitbranchname countdown password color',
+            'copy generate apply string special characters',
+            'parts count part length year month day hour minute second',
+            'UPPER CASE PASSWORD 0x dd221x0 Il1| 0O',
+            '0123456789 d41d8cd98f00b204e9800998ecf8427e',
+            '"`!@#$%^&*()_+-={}[]:;\',.<>?',
+            'The quick brown fox jumps over the lazy dog',
+        ];
+        const sizes = [16, 20, 40, 96];
+
+        const add = (parent, className, text, size) => {
+            const element = document.createElement('div');
+            element.className = className;
+            element.textContent = text;
+            if (size) {
+                element.style.fontSize = `${size}px`;
+            }
+            parent.appendChild(element);
+            return element;
+        };
+
+        const glyphs = document.getElementById('glyphs');
+        for (const character of sets.join('')) {
+            const cell = add(glyphs, 'glyph', character);
+            add(cell, 'reference', character);
+        }
+
+        const container = document.getElementById('lines');
+        for (const size of sizes) {
+            for (const line of lines) {
+                add(container, 'line', line, size);
+                add(container, 'line reference', line, size);
+            }
+        }
+
+        document.getElementById('compare').addEventListener('change', (event) => {
+            document.body.classList.toggle('compare', event.target.checked);
+        });
+
+        const font = new FontFace('DDGeo', `url(../DDGeo.woff2?${Date.now()})`);
+        font.load().then((loaded) => document.fonts.add(loaded));
+    </script>
+</body>
+
+</html>
