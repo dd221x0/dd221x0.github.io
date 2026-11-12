@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body style="margin:0">
+<iframe id="f" style="border:0"></iframe><pre id="out">pending</pre>
+<script>
+const q = new URLSearchParams(location.search);
+const key = q.get('key');
+if (key) { const im = new Image(); im.src = '/wait?key=' + key; document.body.appendChild(im); }
+const f = document.getElementById('f');
+f.style.width = (q.get('w') || 1280) + 'px';
+f.style.height = (q.get('h') || 800) + 'px';
+f.onload = async () => {
+  const d = f.contentDocument;
+  await d.fonts.ready;
+  await new Promise(r => setTimeout(r, 2500));
+  await d.fonts.ready;
+  if (q.get('expand')) { const u = d.getElementById('utils'); if (u) u.classList.add('expanded'); await new Promise(r => setTimeout(r, 1500)); }
+  const rows = [];
+  const over = [];
+  for (const el of d.querySelectorAll('body *')) {
+    if (el.closest('#tetrahedron') || el.tagName === 'SCRIPT' || el.closest('svg')) continue;
+    const r = el.getBoundingClientRect();
+    rows.push([el.tagName, el.id, typeof el.className === 'string' ? el.className : '', +r.x.toFixed(2), +r.y.toFixed(2), +r.width.toFixed(2), +r.height.toFixed(2)].join('|'));
+    if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'BUTTON') && (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1))
+      over.push(el.tagName + '#' + el.id + ' scroll ' + el.scrollWidth + 'x' + el.scrollHeight + ' client ' + el.clientWidth + 'x' + el.clientHeight + ' value=' + (el.value || el.placeholder || el.textContent).slice(0, 40));
+  }
+  const fam = [...d.fonts].map(x => x.family + ':' + x.status);
+  const res = JSON.stringify({ fam, rows, over });
+  document.getElementById('out').textContent = res;
+  if (key) fetch('/report?key=' + key, { method: 'POST', body: res });
+};
+f.src = q.get('page');
+</script></body></html>

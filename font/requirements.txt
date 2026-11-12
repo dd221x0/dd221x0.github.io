@@ -1,3 +1,5 @@
 fonttools
 brotli
 skia-pathops
+pillow
+numpy

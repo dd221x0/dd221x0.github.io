@@ -21,3 +21,20 @@ Source of `DDGeo.woff2`, the site's typeface. Every glyph is a small Python cons
 ## Files
 
 `params.py` sizes, `geom.py` drawing toolkit, `forms.py` shared constructions, `lower.py` `upper.py` `digits.py` `punct.py` `extra.py` glyphs, `fontbuild.py` assembly.
+
+`../glacial-indifference/` is a reference for the overall feel (SIL Open Font License, licence text included). Ideas may be taken from it where they fit the framework; outlines are never copied from it or from Century Gothic.
+
+## Tools
+
+    .venv/bin/python font/build.py /tmp/ddgeo --ttf
+    .venv/bin/python font/tools/qa.py /tmp/ddgeo/DDGeo.ttf
+    .venv/bin/python font/tools/render.py /tmp/ddgeo/DDGeo.ttf /tmp/sample.png 150 --opsz 20 "abc 123"
+    .venv/bin/python font/tools/check.py ink
+    .venv/bin/python font/tools/check.py layout
+    .venv/bin/python font/tools/check.py layout --cross
+
+- `qa.py`: tiny or reversed contours, duplicate points, missing ASCII, vertical metrics.
+- `render.py`: a quick PNG of text in any font file; `--opsz` picks the optical size.
+- `preview.py`: `sheet(shapes, out)` draws constructions side by side before they become glyphs.
+- `check.py ink`: screenshots the same text in the new font and in Century Gothic with the old fake-bold CSS, in Chrome and Firefox, and prints new/old ink per size. Within about 0.97–1.03 means the weight matches.
+- `check.py layout`: loads every page of `master` and of the working tree and prints which element boxes moved; `--cross` compares the working tree in Chrome and Firefox. Both flag input fields whose text overflows.
