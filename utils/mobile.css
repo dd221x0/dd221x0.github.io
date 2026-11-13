@@ -2,19 +2,10 @@
     (orientation: portrait) and (max-width: 600px)
 ) {
     #home {
-        left: 1%;
         bottom: 3%;
     }
 
     #form {
         scale: 0.75;
-    }
-}
-
-@media screen and (
-    (orientation: landscape) and (max-height: 600px)
-) {
-    #home {
-        left: 1%;
     }
 }
