@@ -2,28 +2,13 @@
 @import './desktop.css';
 @import './mobile.css';
 
-.row { /*workaround*/
-    max-width: 286px;
-    width: 286px;
-}
-
 .row input {
-    width: 80px;
     text-align: center;
 }
 
 button.switch {
-    width: 92px;
     height: 4px;
     padding: 0;
-}
-
-.row.top .switch {
-    vertical-align: bottom;
-}
-
-.row.bottom .switch {
-    vertical-align: top;
 }
 
 #title {
@@ -46,13 +31,13 @@ button.switch {
 }
 
 #setTargetTime {
+    --form-width: calc(3 * (80px + var(--field-inset)) + 2 * var(--gap));
+
     position: absolute;
-    width: 285px;
-    height: auto;
+    width: var(--form-width);
     top: 61.8%;
     left: 50%;
-    margin-left: -142.5px;
-    text-align: center;
+    margin-left: calc(var(--form-width) / -2);
 }
 
 .clear-view #title {

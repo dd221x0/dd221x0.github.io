@@ -1,8 +1,15 @@
 @import '../commonStyles.css';
-@import './desktop.css';
 @import './tablet.css';
 @import './mobile.css';
 @import '../colorChange/colorChange.css';
+
+:root {
+    --gap: 8px;
+    --padding: 4px;
+    --border-width: 2px;
+    --field-inset: calc(2 * (var(--padding) + var(--border-width)));
+    --result-height: 36px;
+}
 
 ::placeholder {
     opacity: 1;
@@ -20,26 +27,30 @@
     width: 10px;
 }
 
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100%;
+}
+
 input, button, textarea, span {
     font-size: 20px;
     font-family: CenturyGothic;
-    margin-bottom: 8px;
+    margin-bottom: var(--gap);
     transition: color 1s 0.02s ease, border-color 1s 0.02s ease, --placeholder-color 1s 0.02s ease;
 }
 
 input, button, textarea {
     background-color: #000000;
-    padding: 4px;
+    padding: var(--padding);
     outline: none;
 }
 
 input, button {
-    border: 2px solid;
+    border: var(--border-width) solid;
 }
 
 textarea, span {
-    max-width: 100%;
-    width: 100%;
     text-align: center;
 }
 
@@ -65,8 +76,39 @@ button:hover {
     cursor: pointer;
 }
 
+#form {
+    width: var(--form-width);
+}
+
+#form .switch {
+    padding-bottom: 5px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap);
+}
+
+.row > * {
+    flex: 1;
+    min-width: 0;
+}
+
+#result {
+    flex: none;
+    width: calc(var(--result-width, var(--form-width)) - 2 * var(--padding));
+    height: var(--result-height);
+}
+
+#copy {
+    flex: none;
+    width: 128px;
+}
+
 #home {
     position: fixed;
+    left: 1%;
     width: 60px;
     height: 60px;
     background: transparent;

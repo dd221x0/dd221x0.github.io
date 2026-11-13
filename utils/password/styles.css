@@ -1,44 +1,6 @@
 @import '../layoutStyles.css';
 
-.row { /*workaround*/
-    max-width: 381px;
-    width: 381px;
-}
-
 #form {
-    position: absolute;
-    width: 380px;
-    height: 230px;
-    top: 50%;
-    left: 50%;
-    margin-top: -115px;
-    margin-left: -190px;
-    padding: 0;
-}
-
-input {
-    max-width: 368px;
-    width: 368px;
-}
-
-#generate {
-    max-width: 380px;
-    width: 380px;
-}
-
-#result {
-    max-width: 452px;
-    width: 452px;
-    max-height: 36px;
-    height: 36px;
-    left: 50%;
-    margin-left: -40px;
-}
-
-#copy {
-    position: relative;
-    max-width: 128px;
-    width: 128px;
-    left: 50%;
-    margin-left: -64px;
+    --form-width: 380px;
+    --result-width: 460px;
 }
