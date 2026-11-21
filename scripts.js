@@ -3,6 +3,10 @@ import {
     uninitializeColorChange,
 } from './colorChange/colorChange.js';
 import {
+    startManual,
+    stopManual,
+} from './colorChange/triggers/manual.js';
+import {
     initializeTetrahedron,
     uninitializeTetrahedron,
 } from './tetrahedron.js';
@@ -20,6 +24,7 @@ let isInitialized = false;
 
 const initialize = () => {
     initializeColorChange();
+    startManual();
     initializeTetrahedron();
     registerNavigationHandler(() => uninitialize(true));
     initializeNavigationEffects();
@@ -29,6 +34,7 @@ const initialize = () => {
 }
 
 const uninitialize = (isNavigation = false) => {
+    stopManual();
     uninitializeColorChange();
     uninitializeTetrahedron(isNavigation);
     uninitializeNavigationEffects();

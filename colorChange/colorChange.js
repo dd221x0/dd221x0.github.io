@@ -1,14 +1,11 @@
 import {
     backgroundColorString,
+    placeholderColorString,
+    assembleColorStringPair,
     getCurrentColorStringPair,
     saveColorStringPair,
-    placeholderColorString,
 } from './common.js';
 import { setIcon } from './icon.js';
-import { 
-    startManual,
-    stopManual,
-} from './strategies/manual.js';
 
 const hoverTargetElements = [...document.getElementsByClassName('hoverTarget')];
 const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
@@ -23,7 +20,9 @@ const updateColor = (colorStringPair) => {
     document.documentElement.style.setProperty('--negative-color', colorStringPair.negative);
 };
 
-const changeColor = (colorStringPair) => {
+const changeColor = (rgb) => {
+    const colorStringPair = assembleColorStringPair(rgb);
+
     updateColor(colorStringPair);
     saveColorStringPair(colorStringPair);
     setIcon();
@@ -69,17 +68,17 @@ const hideColor = () => {
 };
 
 const initializeColorChange = () => {
+    const colorStringPair = getCurrentColorStringPair();
+
     setIcon();
-    updateColor(getCurrentColorStringPair());
+    updateColor(colorStringPair);
     setDefaultColors();
     configureHoverColorChange();
-    startManual();
 };
 
 const uninitializeColorChange = () => {
     hideColor();
     removeHoverColorChange();
-    stopManual();
 };
 
 export {

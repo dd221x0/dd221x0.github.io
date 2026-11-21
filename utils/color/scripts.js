@@ -8,7 +8,9 @@ import {
 } from '../common.js';
 import {
     getCurrentColorStringPair,
-    parseColorString,
+    rgbComponentToHex,
+    rgbToColorString,
+    colorStringToRgb,
     assembleColorStringPair,
     backgroundColorString,
 } from '../../colorChange/common.js';
@@ -23,16 +25,20 @@ const applyButton = document.getElementById('apply');
 
 const rgbInputs = [redInput, greenInput, blueInput];
 
-const initializeInputs = (color) => {
-    redInput.value = color.r.toString(16).padStart(2, '0').toUpperCase();
-    greenInput.value = color.g.toString(16).padStart(2, '0').toUpperCase();
-    blueInput.value = color.b.toString(16).padStart(2, '0').toUpperCase();
+const initializeInputs = (rgb) => {
+    redInput.value = rgbComponentToHex(rgb.r);
+    greenInput.value = rgbComponentToHex(rgb.g);
+    blueInput.value = rgbComponentToHex(rgb.b);
 };
 
-const updateInputColors = (color) => {
-    redInput.style.borderColor = `#${color.r.toString(16).padStart(2, '0')}0000`;
-    greenInput.style.borderColor = `#00${color.g.toString(16).padStart(2, '0')}00`;
-    blueInput.style.borderColor = `#0000${color.b.toString(16).padStart(2, '0')}`;
+const updateInputColors = (rgb) => {
+    const redRgb = {r: rgb.r, g: 0, b: 0};
+    const greenRgb = {r: 0, g: rgb.g, b: 0};
+    const blueRgb = {r: 0, g: 0, b: rgb.b};
+
+    redInput.style.borderColor = rgbToColorString(redRgb);
+    greenInput.style.borderColor = rgbToColorString(greenRgb);
+    blueInput.style.borderColor = rgbToColorString(blueRgb);
 
     redInput.style.color = `#FF8888`;
     greenInput.style.color = `#88FF88`;
@@ -44,12 +50,12 @@ const updatePreview = (colorStringPair) => {
     preview.style.borderColor = colorStringPair.negative;
 };
 
-const getColorFromUrl = () => {
+const getRgbFromUrl = () => {
     const url = new URL(window.location);
     const colorString = url.searchParams.get('color');
     
     if (/^([0-9A-Fa-f]{6})$/.test(colorString)) {
-        return parseColorString(`#${colorString}`);
+        return colorStringToRgb(`#${colorString}`);
     }
 
     url.searchParams.delete('color');
@@ -57,27 +63,27 @@ const getColorFromUrl = () => {
 };
 
 const initializeColors = () => {
-    const urlColor = getColorFromUrl();
+    const urlRgb = getRgbFromUrl();
 
-    const colorStringPair = urlColor ? assembleColorStringPair(urlColor) : getCurrentColorStringPair()
-    const color = urlColor ?? parseColorString(colorStringPair.color);
+    const colorStringPair = urlRgb ? assembleColorStringPair(urlRgb) : getCurrentColorStringPair()
+    const rgb = urlRgb ?? colorStringToRgb(colorStringPair.color);
 
-    initializeInputs(color);
-    updateInputColors(color);
+    initializeInputs(rgb);
+    updateInputColors(rgb);
     updatePreview(colorStringPair);
 };
 
-const assembleColorFromInputs = () => ({
+const assembleRgbFromInputs = () => ({
     r: Number.parseInt(redInput.value, isHexMode() ? 16 : 10),
     g: Number.parseInt(greenInput.value, isHexMode() ? 16 : 10),
     b: Number.parseInt(blueInput.value, isHexMode() ? 16 : 10),
 });
 
 const updateColors = () => {
-    const color = assembleColorFromInputs();
-    const colorStringPair = assembleColorStringPair(color);
+    const rgb = assembleRgbFromInputs();
+    const colorStringPair = assembleColorStringPair(rgb);
 
-    updateInputColors(color);
+    updateInputColors(rgb);
     updatePreview(colorStringPair);
 };
 
@@ -93,7 +99,8 @@ const uninitializeColors = () => {
 
 const convertInputsToHex = () => {
     rgbInputs.forEach((input) => {
-        input.value = Number.parseInt(input.value, 10).toString(16).padStart(2, '0').toUpperCase();
+        const component = Number.parseInt(input.value, 10);
+        input.value = rgbComponentToHex(component);
     });
 };
 
@@ -163,16 +170,17 @@ const handleHexInput = (event) => {
         return;
     }
 
-    element.value = Number.parseInt(value, 16).toString(16).toUpperCase().padStart(2, '0');
+    const component = Number.parseInt(value, 16);
+    element.value = rgbComponentToHex(component);
     saveOldValue(event);
 };
 
 const updateURLParameters = () => {
-    const color = assembleColorFromInputs();
-    const colorStringPair = assembleColorStringPair(color);
+    const rgb = assembleRgbFromInputs();
+    const colorString = rgbToColorString(rgb);
 
     const url = new URL(window.location);
-    url.searchParams.set('color', colorStringPair.color.slice(1));
+    url.searchParams.set('color', colorString.slice(1));
     updateUrl(url);
 };
 
@@ -185,10 +193,9 @@ const onColorComponentFocusOut = (event) => {
 };
 
 const applyColor = () => {
-    const color = assembleColorFromInputs();
-    const colorStringPair = assembleColorStringPair(color);
+    const rgb = assembleRgbFromInputs();
 
-    changeColor(colorStringPair);
+    changeColor(rgb);
 };
 
 const setupPage = () => {

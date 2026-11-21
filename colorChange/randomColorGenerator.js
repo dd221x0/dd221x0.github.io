@@ -1,19 +1,11 @@
-import {
-    assembleColorStringPair,
-} from './common.js';
+const generateRgbComponent = () => Math.trunc(Math.random() * 0x100);
 
-const generateColorComponent = () => Math.random() * 0xFF << 0;
-
-const getRandomColorPair = () => {
-    const color = {
-        r: generateColorComponent(),
-        g: generateColorComponent(),
-        b: generateColorComponent(),
-    };
-
-    return assembleColorStringPair(color);
-};
+const getRandomRgb = () => ({
+    r: generateRgbComponent(),
+    g: generateRgbComponent(),
+    b: generateRgbComponent(),
+});
 
 export {
-    getRandomColorPair,
+    getRandomRgb,
 };

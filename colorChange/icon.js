@@ -13,10 +13,10 @@ const x3 = 0.01108087050416906;
 const y3 = 0.26989991560668986;
 
 const getSvgIconData = () => {
-    const color = getCurrentColorStringPair().color;
+    const colorString = getCurrentColorStringPair().color;
 
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1">
-        <path d="M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} Z" fill="${color}" />
+        <path d="M ${x1} ${y1} L ${x2} ${y2} L ${x3} ${y3} Z" fill="${colorString}" />
     </svg>`;
 
     return `data:image/svg+xml;base64,${btoa(svg)}`;
