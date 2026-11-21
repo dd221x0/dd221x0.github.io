@@ -28,8 +28,21 @@ const inverseRgb = (rgb) => ({
     b: inverseRgbComponent(rgb.b),
 });
 
+const inverseColorString = (colorString) => {
+    const rgb = colorStringToRgb(colorString);
+    const negativeRgb = inverseRgb(rgb);
+
+    return rgbToColorString(negativeRgb);
+};
+
 const getCurrentColorString = () => {
     return localStorage.getItem('color') || defaultColorString;
+};
+
+const getCurrentRgb = () => {
+    const colorString = getCurrentColorString();
+
+    return colorStringToRgb(colorString);
 };
 
 const saveColorString = (colorString) => {
@@ -43,7 +56,8 @@ export {
     rgbComponentToHex,
     rgbToColorString,
     colorStringToRgb,
-    inverseRgb,
+    inverseColorString,
     getCurrentColorString,
+    getCurrentRgb,
     saveColorString,
 };

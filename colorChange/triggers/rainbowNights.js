@@ -1,3 +1,4 @@
+import { rgbToColorString } from "../common.js";
 import { changeColor } from "../colorChange.js";
 
 const startRgb = {
@@ -39,8 +40,9 @@ const startRainbow = () => {
 
     intervalId = setInterval(() => {
         currentRgb = moveRainbow(currentRgb);
+        const colorString = rgbToColorString(currentRgb);
 
-        changeColor(currentRgb);
+        changeColor(colorString);
     }, 200);
 };
 

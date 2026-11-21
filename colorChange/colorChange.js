@@ -1,9 +1,7 @@
 import {
     backgroundColorString,
     placeholderColorString,
-    rgbToColorString,
-    colorStringToRgb,
-    inverseRgb,
+    inverseColorString,
     getCurrentColorString,
     saveColorString,
 } from './common.js';
@@ -17,20 +15,17 @@ const setDefaultColors = () => {
     document.documentElement.style.setProperty('--background-color', backgroundColorString);
 };
 
-const updateColor = (rgb) => {
-    const negativeRgb = inverseRgb(rgb);
-    const colorString = rgbToColorString(rgb);
-    const negativeColorString = rgbToColorString(negativeRgb);
+const updateColor = () => {
+    const colorString = getCurrentColorString();
+    const negativeColorString = inverseColorString(colorString);
 
     document.documentElement.style.setProperty('--main-color', colorString);
     document.documentElement.style.setProperty('--negative-color', negativeColorString);
 };
 
-const changeColor = (rgb) => {
-    const colorString = rgbToColorString(rgb);
-
-    updateColor(rgb);
+const changeColor = (colorString) => {
     saveColorString(colorString);
+    updateColor();
     setIcon();
 };
 
@@ -74,11 +69,8 @@ const hideColor = () => {
 };
 
 const initializeColorChange = () => {
-    const colorString = getCurrentColorString();
-    const rgb = colorStringToRgb(colorString);
-
     setIcon();
-    updateColor(rgb);
+    updateColor();
     setDefaultColors();
     configureHoverColorChange();
 };

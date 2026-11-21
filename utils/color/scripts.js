@@ -7,11 +7,11 @@ import {
     updateUrl,
 } from '../common.js';
 import {
-    getCurrentColorString,
+    getCurrentRgb,
     rgbComponentToHex,
     rgbToColorString,
     colorStringToRgb,
-    inverseRgb,
+    inverseColorString,
     backgroundColorString,
 } from '../../colorChange/common.js';
 import { changeColor } from '../../colorChange/colorChange.js';
@@ -46,9 +46,8 @@ const updateInputColors = (rgb) => {
 };
 
 const updatePreview = (rgb) => {
-    const negativeRgb = inverseRgb(rgb);
     const colorString = rgbToColorString(rgb);
-    const negativeColorString = rgbToColorString(negativeRgb);
+    const negativeColorString = inverseColorString(colorString);
 
     preview.style.backgroundColor = colorString;
     preview.style.borderColor = negativeColorString;
@@ -68,8 +67,8 @@ const getRgbFromUrl = () => {
 
 const initializeColors = () => {
     const urlRgb = getRgbFromUrl();
-    const currentColorString = getCurrentColorString();
-    const rgb = urlRgb ?? colorStringToRgb(currentColorString);
+    const currentRgb = getCurrentRgb();
+    const rgb = urlRgb ?? currentRgb;
 
     initializeInputs(rgb);
     updateInputColors(rgb);
@@ -196,8 +195,9 @@ const onColorComponentFocusOut = (event) => {
 
 const applyColor = () => {
     const rgb = assembleRgbFromInputs();
+    const colorString = rgbToColorString(rgb);
 
-    changeColor(rgb);
+    changeColor(colorString);
 };
 
 const setupPage = () => {
