@@ -7,11 +7,11 @@ import {
     updateUrl,
 } from '../common.js';
 import {
-    getCurrentColorStringPair,
+    getCurrentColorString,
     rgbComponentToHex,
     rgbToColorString,
     colorStringToRgb,
-    assembleColorStringPair,
+    inverseRgb,
     backgroundColorString,
 } from '../../colorChange/common.js';
 import { changeColor } from '../../colorChange/colorChange.js';
@@ -45,9 +45,13 @@ const updateInputColors = (rgb) => {
     blueInput.style.color = `#8888FF`;
 };
 
-const updatePreview = (colorStringPair) => {
-    preview.style.backgroundColor = colorStringPair.color;
-    preview.style.borderColor = colorStringPair.negative;
+const updatePreview = (rgb) => {
+    const negativeRgb = inverseRgb(rgb);
+    const colorString = rgbToColorString(rgb);
+    const negativeColorString = rgbToColorString(negativeRgb);
+
+    preview.style.backgroundColor = colorString;
+    preview.style.borderColor = negativeColorString;
 };
 
 const getRgbFromUrl = () => {
@@ -64,13 +68,12 @@ const getRgbFromUrl = () => {
 
 const initializeColors = () => {
     const urlRgb = getRgbFromUrl();
-
-    const colorStringPair = urlRgb ? assembleColorStringPair(urlRgb) : getCurrentColorStringPair()
-    const rgb = urlRgb ?? colorStringToRgb(colorStringPair.color);
+    const currentColorString = getCurrentColorString();
+    const rgb = urlRgb ?? colorStringToRgb(currentColorString);
 
     initializeInputs(rgb);
     updateInputColors(rgb);
-    updatePreview(colorStringPair);
+    updatePreview(rgb);
 };
 
 const assembleRgbFromInputs = () => ({
@@ -81,10 +84,9 @@ const assembleRgbFromInputs = () => ({
 
 const updateColors = () => {
     const rgb = assembleRgbFromInputs();
-    const colorStringPair = assembleColorStringPair(rgb);
 
     updateInputColors(rgb);
-    updatePreview(colorStringPair);
+    updatePreview(rgb);
 };
 
 const uninitializeColors = () => {

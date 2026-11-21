@@ -1,4 +1,4 @@
-const defaultRgb = {r: 0xBB, g: 0xBB, b: 0xBB};
+const defaultColorString = '#BBBBBB';
 const placeholderColorString = '#888888';
 const backgroundColorString = '#000000';
 
@@ -28,34 +28,22 @@ const inverseRgb = (rgb) => ({
     b: inverseRgbComponent(rgb.b),
 });
 
-const assembleColorStringPair = (rgb) => {
-    const negativeRgb = inverseRgb(rgb);
-
-    return {
-        color: rgbToColorString(rgb),
-        negative: rgbToColorString(negativeRgb),
-    };
+const getCurrentColorString = () => {
+    return localStorage.getItem('color') || defaultColorString;
 };
 
-const defaultColorStringPair = assembleColorStringPair(defaultRgb);
-
-const getCurrentColorStringPair = () => {
-    return JSON.parse(localStorage.getItem('colorStringPair')) || defaultColorStringPair;
-};
-
-const saveColorStringPair = (colorStringPair) => {
-    localStorage.setItem('colorStringPair', JSON.stringify(colorStringPair));
+const saveColorString = (colorString) => {
+    localStorage.setItem('color', colorString);
 };
 
 export {
-    defaultRgb,
-    defaultColorStringPair,
+    defaultColorString,
     placeholderColorString,
     backgroundColorString,
     rgbComponentToHex,
     rgbToColorString,
     colorStringToRgb,
-    assembleColorStringPair,
-    getCurrentColorStringPair,
-    saveColorStringPair,
+    inverseRgb,
+    getCurrentColorString,
+    saveColorString,
 };

@@ -1,16 +1,23 @@
-import { defaultRgb } from "../common.js";
+import {
+    defaultColorString,
+    colorStringToRgb,
+} from "../common.js";
 import { getRandomRgb } from "../randomColorGenerator.js";
 import { changeColor } from "../colorChange.js";
 
 const triggerElements = [...document.getElementsByClassName('trigger')];
 
 const clickColorChangeListener = (event) => {
-    changeColor(getRandomRgb());
+    const randomRgb = getRandomRgb();
+
+    changeColor(randomRgb);
     event.stopPropagation();
     event.preventDefault();
 };
 
 const clickColorResetListener = (event) => {
+    const defaultRgb = colorStringToRgb(defaultColorString);
+
     changeColor(defaultRgb);
     event.stopPropagation();
     event.preventDefault();
