@@ -157,13 +157,13 @@ const handleHexInput = (event) => {
         return;
     }
 
-    if (value.length > 2) {
+    if (Number.parseInt(value, 16) > 255) {
         element.value = 'FF';
         saveOldValue(event);
         return;
     }
 
-    element.value = value.toUpperCase().padStart(2, '0');
+    element.value = Number.parseInt(value, 16).toString(16).toUpperCase().padStart(2, '0');
     saveOldValue(event);
 };
 
