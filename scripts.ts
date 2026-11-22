@@ -1,26 +1,33 @@
 import {
     initializeColorChange,
     uninitializeColorChange,
-} from './colorChange/colorChange.js';
+} from './colorChange/colorChange.ts';
 import {
     startManual,
     stopManual,
-} from './colorChange/triggers/manual.js';
+} from './colorChange/triggers/manual.ts';
 import {
     initializeTetrahedron,
     uninitializeTetrahedron,
-} from './tetrahedron.js';
+} from './tetrahedron.ts';
 import {
     registerNavigationHandler,
     initializeNavigationEffects,
     uninitializeNavigationEffects,
-} from './navigationEffects/navigationEffects.js';
+} from './navigationEffects/navigationEffects.ts';
 import {
     initializeUtils,
     uninitializeUtils,
-} from './utils.js';
+} from './utils.ts';
+import { initializeEmail } from './email.ts';
 
 let isInitialized = false;
+
+let ignoreOnBeforeUnload = false;
+
+const ignoreNextOnBeforeUnload = () => {
+    ignoreOnBeforeUnload = true;
+};
 
 const initialize = () => {
     initializeColorChange();
@@ -29,9 +36,10 @@ const initialize = () => {
     registerNavigationHandler(() => uninitialize(true));
     initializeNavigationEffects();
     initializeUtils();
+    initializeEmail(ignoreNextOnBeforeUnload);
 
     isInitialized = true;
-}
+};
 
 const uninitialize = (isNavigation = false) => {
     stopManual();
@@ -50,8 +58,8 @@ window.onpageshow = () => {
 };
 
 window.onbeforeunload = () => {
-    if (window.ignoreOnBeforeUnload) {
-        window.ignoreOnBeforeUnload = false;
+    if (ignoreOnBeforeUnload) {
+        ignoreOnBeforeUnload = false;
         return;
     }
 

@@ -1,11 +1,11 @@
-import '../layout.js';
-import { updateUrl } from '../common.js';
+import '../layout.ts';
+import { updateUrl } from '../common.ts';
 
-const stringInput = document.getElementById('string');
-const resultTextArea = document.getElementById('result');
-const copyButton = document.getElementById('copy');
+const stringInput = document.querySelector<HTMLInputElement>('#string')!;
+const resultTextArea = document.querySelector<HTMLTextAreaElement>('#result')!;
+const copyButton = document.querySelector<HTMLElement>('#copy')!;
 
-const stringToGitBranchName = (string) => string
+const stringToGitBranchName = (string: string) => string
     .replace(/[\^\[\]\(\)\>\<\"\{\}\'\|\,\?\*\!\#\$\%]/g, '')
     .replace(/\&/g, 'and')
     .replace(/\/\.+/g, '/')
@@ -26,7 +26,7 @@ const copyResult = async () => {
     await navigator.clipboard.writeText(resultTextArea.value);
 };
 
-const updateStringParameter = (url) => {
+const updateStringParameter = (url: URL) => {
     if (!stringInput.value) {
         url.searchParams.delete('string');
         return;
@@ -36,7 +36,7 @@ const updateStringParameter = (url) => {
 };
 
 const updateURLParameters = () => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     
     updateStringParameter(url);
 
@@ -44,7 +44,7 @@ const updateURLParameters = () => {
 };
 
 const readURLParameters = () => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     const string = url.searchParams.get('string');
 
     if (string) {

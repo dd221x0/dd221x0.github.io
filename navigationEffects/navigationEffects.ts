@@ -1,14 +1,14 @@
-const navigationElements = [...document.getElementsByClassName('navigator')];
+const navigationElements = document.querySelectorAll<HTMLElement>('.navigator');
 
 let navigationHandler = () => {};
 
-let currentEvent = null;
+let currentEvent: MouseEvent | null = null;
 
-const registerNavigationHandler = (handler) => {
+const registerNavigationHandler = (handler: () => void) => {
     navigationHandler = handler;
 };
 
-const handleClick = (event) => {
+const handleClick = (event: MouseEvent) => {
     if (event === currentEvent) {
         return;
     }
@@ -18,7 +18,7 @@ const handleClick = (event) => {
 
     navigationHandler();
 
-    const target = event.currentTarget;
+    const target = event.currentTarget!;
 
     const newEvent = new MouseEvent('click', {...event});
     currentEvent = newEvent;

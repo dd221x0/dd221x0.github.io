@@ -1,1 +1,4 @@
 .DS_Store
+node_modules/
+*.js
+!utils/md5/md5.min.js

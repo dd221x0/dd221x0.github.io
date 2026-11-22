@@ -1,18 +1,18 @@
 import {
     initializeColorChange,
     uninitializeColorChange,
-} from '../colorChange/colorChange.js';
+} from '../colorChange/colorChange.ts';
 import {
     registerNavigationHandler,
     initializeNavigationEffects,
     uninitializeNavigationEffects,
-} from '../navigationEffects/navigationEffects.js';
+} from '../navigationEffects/navigationEffects.ts';
 
 let isInitialized = false;
 
-let customUnloadHandler = null;
+let customUnloadHandler: (() => void) | null = null;
 
-export const registerCustomUnloadHandler = (handler) => {
+export const registerCustomUnloadHandler = (handler: () => void) => {
     customUnloadHandler = handler;
 };
 

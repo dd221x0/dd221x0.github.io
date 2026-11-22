@@ -1,37 +1,38 @@
-import { registerCustomUnloadHandler } from '../layout.js';
+import { registerCustomUnloadHandler } from '../layout.ts';
 import {
     saveOldValue,
     restoreOldValue,
     isHex,
     isDigit,
     updateUrl,
-} from '../common.js';
+} from '../common.ts';
 import {
+    type Rgb,
     getCurrentRgb,
     rgbComponentToHex,
     rgbToColorString,
     colorStringToRgb,
     inverseColorString,
     backgroundColorString,
-} from '../../colorChange/common.js';
-import { changeColor } from '../../colorChange/colorChange.js';
+} from '../../colorChange/common.ts';
+import { changeColor } from '../../colorChange/colorChange.ts';
 
-const hexSwitch = document.getElementById('hex');
-const redInput = document.getElementById('red');
-const greenInput = document.getElementById('green');
-const blueInput = document.getElementById('blue');
-const preview = document.getElementById('preview');
-const applyButton = document.getElementById('apply');
+const hexSwitch = document.querySelector<HTMLElement>('#hex')!;
+const redInput = document.querySelector<HTMLInputElement>('#red')!;
+const greenInput = document.querySelector<HTMLInputElement>('#green')!;
+const blueInput = document.querySelector<HTMLInputElement>('#blue')!;
+const preview = document.querySelector<HTMLElement>('#preview')!;
+const applyButton = document.querySelector<HTMLElement>('#apply')!;
 
 const rgbInputs = [redInput, greenInput, blueInput];
 
-const initializeInputs = (rgb) => {
+const initializeInputs = (rgb: Rgb) => {
     redInput.value = rgbComponentToHex(rgb.r);
     greenInput.value = rgbComponentToHex(rgb.g);
     blueInput.value = rgbComponentToHex(rgb.b);
 };
 
-const updateInputColors = (rgb) => {
+const updateInputColors = (rgb: Rgb) => {
     const redRgb = {r: rgb.r, g: 0, b: 0};
     const greenRgb = {r: 0, g: rgb.g, b: 0};
     const blueRgb = {r: 0, g: 0, b: rgb.b};
@@ -45,7 +46,7 @@ const updateInputColors = (rgb) => {
     blueInput.style.color = `#8888FF`;
 };
 
-const updatePreview = (rgb) => {
+const updatePreview = (rgb: Rgb) => {
     const colorString = rgbToColorString(rgb);
     const negativeColorString = inverseColorString(colorString);
 
@@ -54,10 +55,10 @@ const updatePreview = (rgb) => {
 };
 
 const getRgbFromUrl = () => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     const colorString = url.searchParams.get('color');
     
-    if (/^([0-9A-Fa-f]{6})$/.test(colorString)) {
+    if (colorString && /^([0-9A-Fa-f]{6})$/.test(colorString)) {
         return colorStringToRgb(`#${colorString}`);
     }
 
@@ -75,7 +76,7 @@ const initializeColors = () => {
     updatePreview(rgb);
 };
 
-const assembleRgbFromInputs = () => ({
+const assembleRgbFromInputs = (): Rgb => ({
     r: Number.parseInt(redInput.value, isHexMode() ? 16 : 10),
     g: Number.parseInt(greenInput.value, isHexMode() ? 16 : 10),
     b: Number.parseInt(blueInput.value, isHexMode() ? 16 : 10),
@@ -124,70 +125,68 @@ const switchHexMode = () => {
 
 const isHexMode = () => hexSwitch.classList.contains('active');
 
-const onColorComponentInput = (event) => {
+const onColorComponentInput = (input: HTMLInputElement) => {
     const isNumber = isHexMode() ? isHex : isDigit;
 
-    if (isNumber(event.target.value)) {
-        saveOldValue(event);
+    if (isNumber(input.value)) {
+        saveOldValue(input);
         return;
     }
 
-    restoreOldValue(event);
+    restoreOldValue(input);
 };
 
-const handleDecimalInput = (event) => {
-    const element = event.target;
-    const value = element.value;
+const handleDecimalInput = (input: HTMLInputElement) => {
+    const value = input.value;
 
     if (!value) {
-        element.value = '0';
-        saveOldValue(event);
+        input.value = '0';
+        saveOldValue(input);
         return;
     }
 
     if (Number.parseInt(value, 10) > 255) {
-        element.value = '255';
-        saveOldValue(event);
+        input.value = '255';
+        saveOldValue(input);
         return;
     }
 
-    element.value = Number.parseInt(value, 10).toString();
-    saveOldValue(event);
+    input.value = Number.parseInt(value, 10).toString();
+    saveOldValue(input);
 };
 
-const handleHexInput = (event) => {
-    const element = event.target;
-    const value = element.value;
+const handleHexInput = (input: HTMLInputElement) => {
+    const value = input.value;
 
     if (!value) {
-        element.value = '00';
-        saveOldValue(event);
+        input.value = '00';
+        saveOldValue(input);
         return;
     }
 
     if (Number.parseInt(value, 16) > 255) {
-        element.value = 'FF';
-        saveOldValue(event);
+        input.value = 'FF';
+        saveOldValue(input);
         return;
     }
 
     const component = Number.parseInt(value, 16);
-    element.value = rgbComponentToHex(component);
-    saveOldValue(event);
+    input.value = rgbComponentToHex(component);
+    saveOldValue(input);
 };
 
 const updateURLParameters = () => {
     const rgb = assembleRgbFromInputs();
     const colorString = rgbToColorString(rgb);
 
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     url.searchParams.set('color', colorString.slice(1));
     updateUrl(url);
 };
 
-const onColorComponentFocusOut = (event) => {
+const onColorComponentFocusOut = (input: HTMLInputElement) => {
     const handleInput = isHexMode() ? handleHexInput : handleDecimalInput;
-    handleInput(event);
+    handleInput(input);
     updateColors();
 
     updateURLParameters();
@@ -203,9 +202,9 @@ const applyColor = () => {
 const setupPage = () => {
     hexSwitch.onclick = switchHexMode;
     rgbInputs.forEach((input) => {
-        input.oninput = onColorComponentInput;
-        input.onfocus = saveOldValue;
-        input.addEventListener('focusout', onColorComponentFocusOut);
+        input.oninput = () => onColorComponentInput(input);
+        input.onfocus = () => saveOldValue(input);
+        input.addEventListener('focusout', () => onColorComponentFocusOut(input));
     });
     applyButton.onclick = applyColor;
 

@@ -1,5 +1,5 @@
-const utils = document.getElementById('utils');
-const wrench = document.getElementById('wrench');
+const utils = document.querySelector('#utils')!;
+const wrench = document.querySelector('#wrench')!;
 
 const toggleUtils = () => {
     utils.classList.toggle('expanded');

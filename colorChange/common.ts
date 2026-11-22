@@ -1,10 +1,16 @@
+type Rgb = {
+    r: number;
+    g: number;
+    b: number;
+};
+
 const defaultColorString = '#BBBBBB';
 const placeholderColorString = '#888888';
 const backgroundColorString = '#000000';
 
-const rgbComponentToHex = (component) => component.toString(16).padStart(2, '0').toUpperCase();
+const rgbComponentToHex = (component: number) => component.toString(16).padStart(2, '0').toUpperCase();
 
-const rgbToColorString = (rgb) => {
+const rgbToColorString = (rgb: Rgb) => {
     const colorString = [rgb.r, rgb.g, rgb.b]
         .map(rgbComponentToHex)
         .join('');
@@ -12,7 +18,7 @@ const rgbToColorString = (rgb) => {
     return `#${colorString}`;
 };
 
-const colorStringToRgb = (colorString) => {
+const colorStringToRgb = (colorString: string): Rgb => {
     const r = Number.parseInt(colorString.slice(1, 3), 16);
     const g = Number.parseInt(colorString.slice(3, 5), 16);
     const b = Number.parseInt(colorString.slice(5, 7), 16);
@@ -20,15 +26,15 @@ const colorStringToRgb = (colorString) => {
     return {r, g, b};
 };
 
-const inverseRgbComponent = (component) => 0xFF - component;
+const inverseRgbComponent = (component: number) => 0xFF - component;
 
-const inverseRgb = (rgb) => ({
+const inverseRgb = (rgb: Rgb): Rgb => ({
     r: inverseRgbComponent(rgb.r),
     g: inverseRgbComponent(rgb.g),
     b: inverseRgbComponent(rgb.b),
 });
 
-const inverseColorString = (colorString) => {
+const inverseColorString = (colorString: string) => {
     const rgb = colorStringToRgb(colorString);
     const negativeRgb = inverseRgb(rgb);
 
@@ -45,11 +51,12 @@ const getCurrentRgb = () => {
     return colorStringToRgb(colorString);
 };
 
-const saveColorString = (colorString) => {
+const saveColorString = (colorString: string) => {
     localStorage.setItem('color', colorString);
 };
 
 export {
+    type Rgb,
     defaultColorString,
     placeholderColorString,
     backgroundColorString,

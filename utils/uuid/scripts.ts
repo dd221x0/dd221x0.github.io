@@ -1,11 +1,11 @@
-import "../layout.js";
+import "../layout.ts";
 
-const upperCaseSwitch = document.getElementById('upperCase');
-const generateButton = document.getElementById('generate');
-const resultTextArea = document.getElementById('result');
-const copyButton = document.getElementById('copy');
+const upperCaseSwitch = document.querySelector<HTMLElement>('#upperCase')!;
+const generateButton = document.querySelector<HTMLElement>('#generate')!;
+const resultTextArea = document.querySelector<HTMLTextAreaElement>('#result')!;
+const copyButton = document.querySelector<HTMLElement>('#copy')!;
 
-const setUuidValue = (value) => {
+const setUuidValue = (value: string) => {
     resultTextArea.value = upperCaseSwitch.classList.contains('active')
         ? value.toUpperCase()
         : value.toLowerCase();

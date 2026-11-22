@@ -1,15 +1,15 @@
 const INTERVAL = 1000;
-const MAX_TIMEOUT_DELAY = 2 ** 32 - 1;
+const MAX_TIMEOUT_DELAY = 2 ** 31 - 1;
 
 let isRunning = false;
 
-let startTime = null;
-let endTime = null;
+let startTime: number | null = null;
+let endTime: number | null = null;
 
-let pendingTimerId = null;
+let pendingTimerId: number | null = null;
 
-const startLater = (onUpdate, onInactive) => {
-    const delay = startTime - Date.now();
+const startLater = (onUpdate: () => void, onInactive: () => void) => {
+    const delay = startTime! - Date.now();
 
     if (delay > MAX_TIMEOUT_DELAY) {
         return;
@@ -19,13 +19,13 @@ const startLater = (onUpdate, onInactive) => {
         () => {
             pendingTimerId = null;
             isRunning = true;
-            update(startTime, onUpdate, onInactive);
+            update(startTime!, onUpdate, onInactive);
         },
         delay,
     );
 };
 
-const update = (updateTime, onUpdate, onInactive) => {
+const update = (updateTime: number, onUpdate: () => void, onInactive: () => void) => {
     if (!isRunning) {
         return;
     }
@@ -58,7 +58,7 @@ const update = (updateTime, onUpdate, onInactive) => {
     );
 };
 
-export const start = (time, isCountup, onUpdate, onInactive) => {
+export const start = (time: Date, isCountup: boolean, onUpdate: () => void, onInactive: () => void) => {
     startTime = isCountup ? time.getTime() : null;
     endTime = isCountup ? null : time.getTime();
 

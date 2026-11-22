@@ -1,10 +1,10 @@
-import { defaultColorString } from "../common.js";
-import { getRandomColorString } from "../randomColorGenerator.js";
-import { changeColor } from "../colorChange.js";
+import { defaultColorString } from "../common.ts";
+import { getRandomColorString } from "../randomColorGenerator.ts";
+import { changeColor } from "../colorChange.ts";
 
-const triggerElements = [...document.getElementsByClassName('trigger')];
+const triggerElements = document.querySelectorAll<HTMLElement>('.trigger');
 
-const clickColorChangeListener = (event) => {
+const clickColorChangeListener = (event: MouseEvent) => {
     const randomColorString = getRandomColorString();
 
     changeColor(randomColorString);
@@ -12,7 +12,7 @@ const clickColorChangeListener = (event) => {
     event.preventDefault();
 };
 
-const clickColorResetListener = (event) => {
+const clickColorResetListener = (event: MouseEvent) => {
     changeColor(defaultColorString);
     event.stopPropagation();
     event.preventDefault();

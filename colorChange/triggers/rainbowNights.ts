@@ -1,18 +1,16 @@
-import { rgbToColorString } from "../common.js";
-import { changeColor } from "../colorChange.js";
+import { type Rgb, rgbToColorString } from "../common.ts";
+import { changeColor } from "../colorChange.ts";
 
-const startRgb = {
+let currentRgb: Rgb = {
     r: 255,
     g: 0,
     b: 0,
 };
 
-let currentRgb = null;
+let intervalId: number | undefined;
 
-let intervalId = null;
-
-const moveRainbow = (rgb) => {
-    const newRgb = {
+const moveRainbow = (rgb: Rgb) => {
+    const newRgb: Rgb = {
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
@@ -36,8 +34,6 @@ const moveRainbow = (rgb) => {
 };
 
 const startRainbow = () => {
-    currentRgb = startRgb;
-
     intervalId = setInterval(() => {
         currentRgb = moveRainbow(currentRgb);
         const colorString = rgbToColorString(currentRgb);
@@ -48,7 +44,7 @@ const startRainbow = () => {
 
 const stopRainbow = () => {
     clearInterval(intervalId);
-    intervalId = null;
+    intervalId = undefined;
 };
 
 export {

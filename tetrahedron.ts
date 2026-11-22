@@ -1,5 +1,5 @@
-const tetrahedron = document.querySelector('#tetrahedron');
-const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
+const tetrahedron = document.querySelector('#tetrahedron')!;
+const hoverTriggerElements = document.querySelectorAll<HTMLElement>('.hoverTrigger');
 
 const disassemble = () => {
     tetrahedron.classList.add('disassembled');
@@ -17,12 +17,12 @@ const transformFromOctahedron = () => {
     tetrahedron.classList.remove('octahedron');
 };
 
-const handleTriggerMouseOver = (event) => {
+const handleTriggerMouseOver = (event: MouseEvent) => {
     disassemble();
     return event;
 };
 
-const handleTriggerMouseOut = (event) => {
+const handleTriggerMouseOut = (event: MouseEvent) => {
     assemble();
     return event;
 };

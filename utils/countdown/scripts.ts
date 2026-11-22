@@ -1,4 +1,4 @@
-import '../layout.js';
+import '../layout.ts';
 import {
     isDigit,
     saveOldValue,
@@ -6,21 +6,27 @@ import {
     getValueInsideRange,
     roundToTwoDigits,
     updateUrl,
-} from '../common.js';
+} from '../common.ts';
 import {
+    type InputConfig,
     createInputConfigs,
     getRemainingTime,
     getPassedTime,
-} from './timeCalculations.js';
-import { start } from './timerState.js';
+} from './timeCalculations.ts';
+import { start } from './timerState.ts';
 
-const url = new URL(window.location);
+type Input = InputConfig & {
+    element?: HTMLInputElement;
+    switch?: HTMLElement | null;
+};
+
+const url = new URL(window.location.href);
 
 const defaultTitle = 'countdown';
-const title = document.getElementById('title');
+const title = document.querySelector<HTMLInputElement>('#title')!;
 
-const timeElement = document.getElementById('time');
-const modeSwitch = document.getElementById('modeSwitch');
+const timeElement = document.querySelector<HTMLElement>('#time')!;
+const modeSwitch = document.querySelector<HTMLElement>('#modeSwitch')!;
 
 const targetTime = new Date(0, 0, 1, 0, 0, 0);
 
@@ -28,9 +34,9 @@ let maxUnit = 'year';
 
 let mode = 'countdown';
 
-const isCountup = (newMode) => newMode === 'countup';
+const isCountup = (newMode: string) => newMode === 'countup';
 
-const inputs = createInputConfigs();
+const inputs: Input[] = createInputConfigs();
 
 const setCountdownValue = () => {
     timeElement.innerText = isCountup(mode)
@@ -56,26 +62,26 @@ const correctLastDayOfMonth = () => {
         return;
     }
 
-    const dayInput = inputs.find(input => input.key === 'day');
+    const dayInput = inputs.find(input => input.key === 'day')!;
 
-    dayInput.element.value = lastDayOfMonth;
-    dayInput.element.oldValue = lastDayOfMonth;
+    dayInput.element!.value = lastDayOfMonth.toString();
+    dayInput.element!.oldValue = lastDayOfMonth.toString();
 
     targetTime.setDate(lastDayOfMonth);
-    url.searchParams.set('day', lastDayOfMonth);
+    url.searchParams.set('day', lastDayOfMonth.toString());
 };
 
-const handleDigitInput = (event) => {
-    if (isDigit(event.target.value)) {
-        saveOldValue(event);
+const handleDigitInput = (input: HTMLInputElement) => {
+    if (isDigit(input.value)) {
+        saveOldValue(input);
         return;
     }
 
-    restoreOldValue(event);
+    restoreOldValue(input);
 };
 
-const setInputValue = (input, value) => {
-    if (!value && value !== 0) {
+const setInputValue = (input: Input, value: string | null) => {
+    if (!value) {
         input.onChange(input.minValue, targetTime);
         url.searchParams.delete(input.key);
 
@@ -89,22 +95,22 @@ const setInputValue = (input, value) => {
     );
 
     const valueString = input.key === 'year' 
-        ? newValue
+        ? newValue.toString()
         : roundToTwoDigits(newValue);
 
-    input.element.value = valueString;
-    input.element.oldValue = valueString;
+    input.element!.value = valueString;
+    input.element!.oldValue = valueString;
     input.onChange(+newValue, targetTime);
 
-    url.searchParams.set(input.key, newValue);
+    url.searchParams.set(input.key, newValue.toString());
 
     if (input.needsDateCorrection) {
         correctLastDayOfMonth();
     }
 };
 
-const createFocusOutHandler = (input) => (event) => {
-    setInputValue(input, event.target.value);
+const createFocusOutHandler = (input: Input) => () => {
+    setInputValue(input, input.element!.value);
     updateUrl(url);
     start(targetTime, isCountup(mode), setCountdownValue, setInactive);
 };
@@ -123,7 +129,7 @@ const updateSwitches = () => {
     });
 };
 
-const setMaxUnit = (key) => {
+const setMaxUnit = (key: string) => {
     maxUnit = key;
     url.searchParams.set('maxUnit', maxUnit);
     updateUrl(url);
@@ -131,18 +137,18 @@ const setMaxUnit = (key) => {
     updateSwitches();
 };
 
-const setupSwitch = (input) => {
-    input.switch = document.getElementById(`${input.key}Switch`);
+const setupSwitch = (input: Input) => {
+    input.switch = document.querySelector<HTMLElement>(`#${input.key}Switch`);
 
     if (input.switch) {
         input.switch.onclick = () => setMaxUnit(input.key);
     }
 };
 
-const initializeInput = (input) => {
-    input.element = document.getElementById(input.key);
-    input.element.onfocus = saveOldValue;
-    input.element.oninput = handleDigitInput;
+const initializeInput = (input: Input) => {
+    input.element = document.querySelector<HTMLInputElement>(`#${input.key}`)!;
+    input.element.onfocus = () => saveOldValue(input.element!);
+    input.element.oninput = () => handleDigitInput(input.element!);
     input.element.addEventListener('focusout', createFocusOutHandler(input));
 
     setupSwitch(input);
@@ -207,7 +213,7 @@ const initializeClearView = () => {
     }
 };
 
-const updateTitleParameter = (url, newTitle) => {
+const updateTitleParameter = (url: URL, newTitle: string) => {
     if (!newTitle) {
         url.searchParams.delete('title');
         return;
@@ -216,7 +222,7 @@ const updateTitleParameter = (url, newTitle) => {
     url.searchParams.set('title', newTitle);
 };
 
-const setTitle = (newTitle) => {
+const setTitle = (newTitle: string) => {
     document.title = newTitle || defaultTitle;;
 
     updateTitleParameter(url, newTitle);
@@ -231,8 +237,8 @@ const initializeTitle = () => {
         document.title = urlTitle;
     }
 
-    title.addEventListener('input', (event) => {
-        setTitle(event.target.value);
+    title.addEventListener('input', () => {
+        setTitle(title.value);
     });
 };
 

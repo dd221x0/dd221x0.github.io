@@ -4,11 +4,11 @@ import {
     inverseColorString,
     getCurrentColorString,
     saveColorString,
-} from './common.js';
-import { setIcon } from './icon.js';
+} from './common.ts';
+import { setIcon } from './icon.ts';
 
-const hoverTargetElements = [...document.getElementsByClassName('hoverTarget')];
-const hoverTriggerElements = [...document.getElementsByClassName('hoverTrigger')];
+const hoverTargetElements = document.querySelectorAll('.hoverTarget');
+const hoverTriggerElements = document.querySelectorAll('.hoverTrigger');
 
 const setDefaultColors = () => {
     document.documentElement.style.setProperty('--placeholder-color', placeholderColorString);
@@ -23,7 +23,7 @@ const updateColor = () => {
     document.documentElement.style.setProperty('--negative-color', negativeColorString);
 };
 
-const changeColor = (colorString) => {
+const changeColor = (colorString: string) => {
     saveColorString(colorString);
     updateColor();
     setIcon();

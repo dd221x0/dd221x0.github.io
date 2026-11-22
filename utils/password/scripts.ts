@@ -1,16 +1,16 @@
-import '../layout.js';
+import '../layout.ts';
 import {
     saveOldValue,
     restoreOldValue,
     hasValueChanged,
     isDigit,
-} from '../common.js';
+} from '../common.ts';
 
-const specialCharactersInput = document.getElementById('specialCharacters');
-const lengthInput = document.getElementById('length');
-const generateButton = document.getElementById('generate');
-const resultTextArea = document.getElementById('result');
-const copyButton = document.getElementById('copy');
+const specialCharactersInput = document.querySelector<HTMLInputElement>('#specialCharacters')!;
+const lengthInput = document.querySelector<HTMLInputElement>('#length')!;
+const generateButton = document.querySelector<HTMLElement>('#generate')!;
+const resultTextArea = document.querySelector<HTMLTextAreaElement>('#result')!;
+const copyButton = document.querySelector<HTMLElement>('#copy')!;
 
 const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,7 +33,7 @@ const getSymbolsSets = () => {
     return symbolSets;
 }
 
-const generatePassword = (passwordLength) => {
+const generatePassword = (passwordLength: number) => {
     const symbolSets = getSymbolsSets();
     const allSymbols = symbolSets.join('');
 
@@ -44,12 +44,12 @@ const generatePassword = (passwordLength) => {
     );
 
     for (let symbolSet of symbolSets) {
-        const randomIndex = randomGenerateIndexes.shift() % symbolSet.length;
+        const randomIndex = randomGenerateIndexes.shift()! % symbolSet.length;
         passwordSymbols.push(symbolSet[randomIndex]);
     }
 
     for (let i = passwordLength - passwordSymbols.length; i > 0; i--) {
-        const randomIndex = randomGenerateIndexes.shift() % allSymbols.length;
+        const randomIndex = randomGenerateIndexes.shift()! % allSymbols.length;
         passwordSymbols.push(allSymbols[randomIndex]);
     }
 
@@ -59,7 +59,7 @@ const generatePassword = (passwordLength) => {
     );
 
     for (let i = 0; i < passwordLength; i++) {
-        const randomIndex = randomShuffleIndexes.shift() % passwordSymbols.length;
+        const randomIndex = randomShuffleIndexes.shift()! % passwordSymbols.length;
         password += passwordSymbols[randomIndex];
         passwordSymbols.splice(randomIndex, 1);
     }
@@ -67,48 +67,47 @@ const generatePassword = (passwordLength) => {
     return password;
 };
 
-const handleSpecialCharactersFocusOut = (event) => {
-    if (!hasValueChanged(event)) {
+const handleSpecialCharactersFocusOut = () => {
+    if (!hasValueChanged(specialCharactersInput)) {
         return;
     }
 
-    saveOldValue(event);
+    saveOldValue(specialCharactersInput);
     setNewPassword();
 };
 
-const handleLengthInput = (event) => {
-    if (isDigit(event.target.value)) {
-        saveOldValue(event);
+const handleLengthInput = () => {
+    if (isDigit(lengthInput.value)) {
+        saveOldValue(lengthInput);
         return;
     }
 
-    restoreOldValue(event);
+    restoreOldValue(lengthInput);
 };
 
-const handleLengthFocusOut = (event) => {
-    const element = event.target;
-    const newValue = element.value;
+const handleLengthFocusOut = () => {
+    const newValue = lengthInput.value;
 
     if (+newValue < 8 && newValue !== '') {
-        element.value = 8;
+        lengthInput.value = '8';
     }
 
     if (+newValue > 32) {
-        element.value = 32;
+        lengthInput.value = '32';
     }
 
-    const isSameLength = resultTextArea.value.length === +element.value;
-    const isDefaultLength = element.value === '' && resultTextArea.value.length === defaultLength;
+    const isSameLength = resultTextArea.value.length === +lengthInput.value;
+    const isDefaultLength = lengthInput.value === '' && resultTextArea.value.length === defaultLength;
 
     if (isSameLength || isDefaultLength) {
         return;
     }
 
-    setNewPassword(+element.value);
+    setNewPassword();
 };
 
 const setNewPassword = () => {
-    const password = generatePassword(lengthInput.value || defaultLength);
+    const password = generatePassword(+lengthInput.value || defaultLength);
     resultTextArea.value = password;
 };
 
@@ -121,13 +120,13 @@ const setupPage = () => {
     specialCharactersInput.value = defaultSpecialCharacters;
     specialCharactersInput.oldValue = defaultSpecialCharacters;
     specialCharactersInput.addEventListener('focusout', handleSpecialCharactersFocusOut);
-    lengthInput.onfocus = saveOldValue;
+    lengthInput.onfocus = () => saveOldValue(lengthInput);
     lengthInput.oninput = handleLengthInput;
     lengthInput.addEventListener('focusout', handleLengthFocusOut);
     generateButton.onclick = setNewPassword;
     copyButton.onclick = copyResult;
 
-    setNewPassword(lengthInput.value);
+    setNewPassword();
 };
 
 window.onload = () => {

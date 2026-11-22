@@ -1,1 +1,1 @@
-My personal website and at the same time a sandbox for playing with Pure JS.
+My personal website. It initially was a sandbox for playing with pure JavaScript, but has became more structured and migrated to TypeScript.

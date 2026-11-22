@@ -1,0 +1,13 @@
+{
+    "name": "dd221x0.io",
+    "private": true,
+    "type": "module",
+    "packageManager": "pnpm@12.21.0",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "devDependencies": {
+        "typescript": "^7.0.2"
+    }
+}

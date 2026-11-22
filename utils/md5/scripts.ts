@@ -1,17 +1,18 @@
-import '../layout.js';
+import '../layout.ts';
 import {
     isDigit,
+    restoreOldValue,
     saveOldValue,
     updateUrl,
-} from '../common.js';
+} from '../common.ts';
 import { md5 } from './md5.min.js';
 
-const passwordSwitch = document.getElementById('password');
-const stringInput = document.getElementById('string');
-const partsCountInput = document.getElementById('partsCount');
-const partInput = document.getElementById('part');
-const resultTextArea = document.getElementById('result');
-const copyButton = document.getElementById('copy');
+const passwordSwitch = document.querySelector<HTMLElement>('#password')!;
+const stringInput = document.querySelector<HTMLInputElement>('#string')!;
+const partsCountInput = document.querySelector<HTMLInputElement>('#partsCount')!;
+const partInput = document.querySelector<HTMLInputElement>('#part')!;
+const resultTextArea = document.querySelector<HTMLTextAreaElement>('#result')!;
+const copyButton = document.querySelector<HTMLElement>('#copy')!;
 
 const switchPasswordMode = () => {
     passwordSwitch.classList.toggle('active');
@@ -20,32 +21,27 @@ const switchPasswordMode = () => {
     updateURLParameters();
 };
 
-const getHashPart = (string, partsCount, part) => {
+const getHashPart = (string: string, partsCountValue: string, partValue: string) => {
     if (!string) {
         return '';
     }
 
-    if (!partsCount) {
-        partsCount = 1;
-    }
-
-    if (!part) {
-        part = 1;
-    }
+    const partsCount = partsCountValue ? +partsCountValue : 1;
+    const part = partValue ? +partValue : 1;
 
     const passwordHash = md5(string);
     const partLength = Math.floor(passwordHash.length / partsCount);
     return passwordHash.substring((part - 1) * partLength, part * partLength);
 };
 
-const updateCountRelatedInputs = (newPartsCount) => {
+const updateCountRelatedInputs = (newPartsCount: string) => {
     if (newPartsCount === '') {
         partInput.value = '';
         return;
     }
 
     if (+newPartsCount > 32) {
-        partsCountInput.value = 32;
+        partsCountInput.value = '32';
         return;
     }
 
@@ -55,45 +51,43 @@ const updateCountRelatedInputs = (newPartsCount) => {
     }
 };
 
-const handlePartsCountInput = (event) => {
-    const element = event.target;
-    const newPartsCount = element.value;
+const handlePartsCountInput = () => {
+    const newPartsCount = partsCountInput.value;
 
-    if (!isDigit(newPartsCount)){ 
-        element.value = element.oldValue;
+    if (!isDigit(newPartsCount)){
+        restoreOldValue(partsCountInput);
         return;
     }
 
     updateCountRelatedInputs(newPartsCount);
 
-    saveOldValue(event);
+    saveOldValue(partsCountInput);
     setResult();
 };
 
-const updatePartRelatedInputs = (partNumber) => {
+const updatePartRelatedInputs = (partNumber: string) => {
     if (partsCountInput.value === '') {
         partInput.value = '';
         return;
     }
 
     if (+partNumber > +partsCountInput.value) {
-        partInput.value = +partsCountInput.value;
-        return;
+        const partsCount = +partsCountInput.value;
+        partInput.value = partsCount.toString();
     }
 };
 
-const handlePartInput = (event) => {
-    const element = event.target;
-    const partNumber = element.value;
+const handlePartInput = () => {
+    const partNumber = partInput.value;
 
     if (!isDigit(partNumber)) {
-        element.value = element.oldValue;
+        restoreOldValue(partInput);
         return;
     }
 
     updatePartRelatedInputs(partNumber);
 
-    saveOldValue(event);
+    saveOldValue(partInput);
     setResult();
 };
 
@@ -108,7 +102,7 @@ const copyResult = async () => {
 };
 
 const readURLParameters = () => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     const string = url.searchParams.get('string');
     const partsCount = url.searchParams.get('partsCount');
     const part = url.searchParams.get('part');
@@ -133,7 +127,7 @@ const applyValuesFromURL = () => {
     setResult();
 };
 
-const updateStringParameter = (url) => {
+const updateStringParameter = (url: URL) => {
     if (!stringInput.value || passwordSwitch.classList.contains('active')) {
         url.searchParams.delete('string');
         return
@@ -142,7 +136,7 @@ const updateStringParameter = (url) => {
     url.searchParams.set('string', stringInput.value);
 };
 
-const updatePartsCountParameter = (url) => {
+const updatePartsCountParameter = (url: URL) => {
     if (!partsCountInput.value) {
         url.searchParams.delete('partsCount');
         return;
@@ -151,7 +145,7 @@ const updatePartsCountParameter = (url) => {
     url.searchParams.set('partsCount', partsCountInput.value);
 };
 
-const updatePartParameter = (url) => {
+const updatePartParameter = (url: URL) => {
     if (!partInput.value) {
         url.searchParams.delete('part');
         return;
@@ -161,7 +155,7 @@ const updatePartParameter = (url) => {
 };
 
 const updateURLParameters = () => {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
 
     updateStringParameter(url);
     updatePartsCountParameter(url);
@@ -173,9 +167,9 @@ const updateURLParameters = () => {
 const setupPage = () => {    
     passwordSwitch.onclick = switchPasswordMode;
     stringInput.oninput = setResult;
-    partsCountInput.onfocus = saveOldValue;
+    partsCountInput.onfocus = () => saveOldValue(partsCountInput);
     partsCountInput.oninput = handlePartsCountInput;
-    partInput.onfocus = saveOldValue;
+    partInput.onfocus = () => saveOldValue(partInput);
     partInput.oninput = handlePartInput;
     copyButton.onclick = copyResult;
 
