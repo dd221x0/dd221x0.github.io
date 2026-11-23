@@ -4,6 +4,7 @@ import {
     saveOldValue,
     updateUrl,
 } from '../common.js';
+import { copyResult } from '../copyButton.js';
 import { md5 } from './md5.min.js';
 
 const passwordSwitch = document.getElementById('password');
@@ -100,11 +101,6 @@ const handlePartInput = (event) => {
 const setResult = () => {
     resultTextArea.value = getHashPart(stringInput.value, partsCountInput.value, partInput.value);
     updateURLParameters();
-};
-
-const copyResult = async () => {
-    resultTextArea.setSelectionRange(0, resultTextArea.value.length);
-    await navigator.clipboard.writeText(resultTextArea.value);
 };
 
 const readURLParameters = () => {

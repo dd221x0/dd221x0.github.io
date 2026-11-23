@@ -5,6 +5,7 @@ import {
     hasValueChanged,
     isDigit,
 } from '../common.js';
+import { copyResult } from '../copyButton.js';
 
 const specialCharactersInput = document.getElementById('specialCharacters');
 const lengthInput = document.getElementById('length');
@@ -110,11 +111,6 @@ const handleLengthFocusOut = (event) => {
 const setNewPassword = () => {
     const password = generatePassword(lengthInput.value || defaultLength);
     resultTextArea.value = password;
-};
-
-const copyResult = async () => {
-    resultTextArea.setSelectionRange(0, resultTextArea.value.length);
-    await navigator.clipboard.writeText(resultTextArea.value);
 };
 
 const setupPage = () => {

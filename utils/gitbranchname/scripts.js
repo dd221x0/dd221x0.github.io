@@ -1,5 +1,6 @@
 import '../layout.js';
 import { updateUrl } from '../common.js';
+import { copyResult } from '../copyButton.js';
 
 const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
@@ -19,11 +20,6 @@ const stringToGitBranchName = (string) => string
 const convertToGitBranchName = () => {
     resultTextArea.value = stringToGitBranchName(stringInput.value);
     updateURLParameters();
-};
-
-const copyResult = async () => {
-    resultTextArea.setSelectionRange(0, resultTextArea.value.length);
-    await navigator.clipboard.writeText(resultTextArea.value);
 };
 
 const updateStringParameter = (url) => {

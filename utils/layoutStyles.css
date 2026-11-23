@@ -2,6 +2,7 @@
 @import './tablet.css';
 @import './mobile.css';
 @import '../colorChange/colorChange.css';
+@import './copyButton.css';
 
 :root {
     --gap: 8px;
@@ -109,11 +110,6 @@ button:hover {
     flex: none;
     width: calc(var(--result-width, var(--form-width)) - 2 * var(--padding));
     height: var(--result-height);
-}
-
-#copy {
-    flex: none;
-    width: 128px;
 }
 
 #home {

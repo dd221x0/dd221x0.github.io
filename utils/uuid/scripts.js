@@ -1,4 +1,5 @@
 import "../layout.js";
+import { copyResult } from "../copyButton.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
 const generateButton = document.getElementById('generate');
@@ -21,11 +22,6 @@ const switchCase = () => {
 
     upperCaseSwitch.classList.toggle('active');
     setUuidValue(uuid);
-};
-
-const copyResult = async () => {
-    resultTextArea.setSelectionRange(0, resultTextArea.value.length);
-    await navigator.clipboard.writeText(resultTextArea.value);
 };
 
 const setupPage = () => {
