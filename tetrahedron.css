@@ -48,11 +48,7 @@
     pointer-events: none;
 
     transition:
-        transform 1s 0.02s ease;
-    -webkit-transition:
-        transform 1s 0.02s ease;
-    -moz-transition:
-        transform 1s 0.02s ease;
+        transform 1s ease;
 
     --PI: 3.141592653589793rad;
     --half-PI: 1.5707963267948966rad;
@@ -73,20 +69,10 @@
     pointer-events: auto;
 
     transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
-    -webkit-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
-    -moz-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
+        background-color 1s ease,
+        transform 1s ease,
+        opacity 1s ease,
+        box-shadow 1s ease;
 }
 
 #tetrahedron.disassembled .triangle {
@@ -95,20 +81,10 @@
     transform-origin: var(--half-box-size) var(--triangle-center-distance);
 
     transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
-    -webkit-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
-    -moz-transition:
-        background-color 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        opacity 1s 0.02s ease,
-        box-shadow 1s 0.02s ease;
+        background-color 1s ease,
+        transform 1s ease,
+        opacity 1s ease,
+        box-shadow 1s ease;
 }
 
 #tetrahedron.octahedron .triangle {
@@ -118,20 +94,10 @@
     transform: rotateZ(var(--PI));
 
     transition:
-        background-color 1s 0.02s ease,
-        transform 0.2s 0.02s ease,
-        opacity 0.2s 0.02s ease,
-        box-shadow 0.2s 0.02s ease;
-    -webkit-transition:
-        background-color 1s 0.02s ease,
-        transform 0.2s 0.02s ease,
-        opacity 0.2s 0.02s ease,
-        box-shadow 0.2s 0.02s ease;
-    -moz-transition:
-        background-color 1s 0.02s ease,
-        transform 0.2s 0.02s ease,
-        opacity 0.2s 0.02s ease,
-        box-shadow 0.2s 0.02s ease;
+        background-color 1s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 #bottom {
@@ -189,5 +155,5 @@
 }
 
 #tetrahedron.octahedron .side {
-    transition: transform 0.2s 0.02s ease;
+    transition: transform 0.2s ease;
 }

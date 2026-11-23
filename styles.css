@@ -8,15 +8,15 @@
 a, #wrench {
     font-family: CenturyGothic;
     text-decoration: none;
-    transition: color 1s 0.02s ease;
+    transition: color 1s ease;
 }
 
 a:hover {
-    transition: color 0.2s 0.02s ease;
+    transition: color 0.2s ease;
 }
 
 .colorHidden a:hover {
-    transition: color 1s 0.02s ease;
+    transition: color 1s ease;
 }
 
 #social {
@@ -51,7 +51,7 @@ a:hover {
     font-size: 20px;
 
     transition:
-        color 1s 0.02s ease;
+        color 1s ease;
 }
 
 #utils #wrench i {
@@ -60,28 +60,28 @@ a:hover {
     transform-origin: 73.55% 26.45%;
 
     transition:
-        transform 1s 0.02s ease;
+        transform 1s ease;
 }
 
 #utils:not(.expanded) #wrench:hover {
     color: var(--placeholder-color);
 
     transition:
-        color 0.2s 0.02s ease;
+        color 0.2s ease;
 }
 
 #utils.expanded #wrench {
     color: var(--placeholder-color);
 
     transition:
-        color 1s 0.02s ease;
+        color 1s ease;
 }
 
 #utils.expanded #wrench i {
     transform: rotate(45deg) translateZ(0);
 
     transition:
-        transform 1s 0.02s ease;
+        transform 1s ease;
 }
 
 #utils .util {
@@ -91,9 +91,9 @@ a:hover {
     transform: translateX(160px);
 
     transition:
-        opacity 1s 0.02s ease,
-        transform 1s 0.02s ease,
-        visibility 1s 0.02s ease;
+        opacity 1s ease,
+        transform 1s ease,
+        visibility 1s ease;
 }
 
 #utils.expanded .util {

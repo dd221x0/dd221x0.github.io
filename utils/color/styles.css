@@ -14,6 +14,6 @@
     background-color: var(--background-color);
 
     transition:
-        background-color 1s 0.02s ease,
-        border-color 1s 0.02s ease;
+        background-color 1s ease,
+        border-color 1s ease;
 }
