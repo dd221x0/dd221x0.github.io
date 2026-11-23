@@ -3,14 +3,14 @@ import {
     defaultColorString,
 } from './common.js';
 
-const touchIconSize = 256;
+const pngIconSize = 256;
 
-const x1 = 0.9770066967932373;
-const y1 = 0.01108087050416906;
-const x2 = 0.7181876516907166;
-const y2 = 0.9770066967932373;
-const x3 = 0.01108087050416906;
-const y3 = 0.26989991560668986;
+const x1 = 0.8535533905932737;
+const y1 = 0.14644660940672627;
+const x2 = 0.6294095225512604;
+const y2 = 0.9829629131445341;
+const x3 = 0.017037086855465844;
+const y3 = 0.37059047744873963;
 
 const getSvgIconData = () => {
     const colorString = getCurrentColorString();
@@ -24,8 +24,8 @@ const getSvgIconData = () => {
 
 const getCanvas = () => {
     const canvas = document.createElement('canvas');
-    canvas.width = touchIconSize;
-    canvas.height = touchIconSize;
+    canvas.width = pngIconSize;
+    canvas.height = pngIconSize;
     return canvas;
 };
 
@@ -54,7 +54,7 @@ const isDefaultIcon = (iconLink) => getCurrentColorString() === defaultColorStri
     && iconLink?.href.startsWith(`${location.origin}/icon.`);
 
 const updateIcon = () => {
-    let iconLink = document.querySelector(`link[rel="icon"]`);
+    let iconLink = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
 
     if (isDefaultIcon(iconLink)) {
         return;
@@ -74,8 +74,8 @@ const updateIcon = () => {
     document.getElementsByTagName('head')[0].appendChild(iconLink);
 }
 
-const updateTouchIcon = () => {
-    let iconLink = document.querySelector('link[rel="apple-touch-icon"]');
+const updatePngIcon = (rel) => {
+    let iconLink = document.querySelector(`link[rel="${rel}"][type="image/png"]`);
 
     if (isDefaultIcon(iconLink)) {
         return;
@@ -83,21 +83,25 @@ const updateTouchIcon = () => {
 
     const canvas = getCanvas();
     drawTriangle(canvas);
+    const pngData = canvas.toDataURL('image/png');
 
     if (iconLink) {
-        iconLink.href = canvas.toDataURL('image/png');
+        iconLink.href = pngData;
         return;
     }
 
     iconLink = document.createElement('link');
-    iconLink.rel = 'apple-touch-icon';
-    iconLink.href = canvas.toDataURL('image/png');
+    iconLink.rel = rel;
+    iconLink.href = pngData;
+    iconLink.type = 'image/png';
+    iconLink.sizes = `${canvas.width}x${canvas.height}`;
     document.getElementsByTagName('head')[0].appendChild(iconLink);
 }
 
 const setIcon = () => {
     updateIcon();
-    updateTouchIcon();
+    updatePngIcon('icon');
+    updatePngIcon('apple-touch-icon');
 };
 
 export {
