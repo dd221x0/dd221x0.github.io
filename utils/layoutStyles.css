@@ -134,6 +134,7 @@ button:hover {
 
 #home a {
     cursor: default;
+    pointer-events: none;
 }
 
 #home a:has(.home:hover) {
@@ -149,6 +150,7 @@ button:hover {
 }
 
 #home .home {
+    pointer-events: auto;
     transition: background-color 1s 0.02s ease;
 }
 
