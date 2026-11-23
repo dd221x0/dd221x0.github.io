@@ -63,12 +63,14 @@ const removeHoverColorChange = () => {
 };
 
 const hideColor = () => {
+    document.documentElement.classList.add('colorHidden');
     document.documentElement.style.setProperty('--main-color', backgroundColorString);
     document.documentElement.style.setProperty('--negative-color', backgroundColorString);
     document.documentElement.style.setProperty('--placeholder-color', backgroundColorString);
 };
 
 const initializeColorChange = () => {
+    document.documentElement.classList.remove('colorHidden');
     setIcon();
     updateColor();
     setDefaultColors();

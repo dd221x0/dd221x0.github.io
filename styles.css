@@ -15,6 +15,10 @@ a:hover {
     transition: color 0.2s 0.02s ease;
 }
 
+.colorHidden a:hover {
+    transition: color 1s 0.02s ease;
+}
+
 #social {
     position: fixed;
     left: 50%;

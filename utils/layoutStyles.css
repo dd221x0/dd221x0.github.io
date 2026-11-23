@@ -124,7 +124,7 @@ button:hover {
 
     transform-origin: 50% 71.13248654051871%;
     transform: rotate(45deg);
-    transition: all 1s 0.02s ease;
+    transition: transform 1s 0.02s ease;
 }
 
 #home:has(.home:hover) {
@@ -156,4 +156,8 @@ button:hover {
     cursor: pointer;
 
     transition: background-color 0.2s 0.02s ease;
+}
+
+.colorHidden #home .home:hover {
+    transition: background-color 1s 0.02s ease;
 }
