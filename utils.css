@@ -1,0 +1,50 @@
+#utils {
+    position: fixed;
+    top: 1%;
+    right: 1%;
+    font-size: 16px;
+    width: 160px;
+    text-align: right;
+    pointer-events: none;
+}
+
+#utils #wrench {
+    display: inline-block;
+    pointer-events: auto;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 1s ease;
+}
+
+#utils #wrench i {
+    transform: rotate(0deg) translateZ(0);
+    transform-origin: 73.55% 26.45%;
+    transition: transform 1s ease;
+}
+
+#utils:not(.expanded) #wrench:hover {
+    color: var(--placeholder-color);
+    transition: color 0.2s ease;
+}
+
+#utils.expanded #wrench {
+    color: var(--placeholder-color);
+}
+
+#utils.expanded #wrench i {
+    transform: rotate(45deg) translateZ(0);
+}
+
+#utils .util {
+    visibility: hidden;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateX(160px);
+    transition: opacity 1s ease, transform 1s ease, visibility 1s ease;
+}
+
+#utils.expanded .util {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0px);
+}

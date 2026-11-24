@@ -4,8 +4,10 @@
 @import './tablet.css';
 @import './mobile.css';
 @import './colorChange/colorChange.css';
+@import './email.css';
+@import './utils.css';
 
-a, #wrench {
+a {
     font-family: CenturyGothic;
     text-decoration: none;
     transition: color 1s ease;
@@ -25,79 +27,4 @@ a:hover {
     margin-left: -157.865px;
     bottom: 1%;
     font-size: 20px;
-}
-
-#email {
-    position: fixed;
-}
-
-#utils {
-    position: fixed;
-    top: 1%;
-    right: 1%;
-    font-size: 16px;
-    width: 160px;
-    max-width: 160px;
-    text-align: right;
-    pointer-events: none;
-}
-
-#utils #wrench {
-    display: inline-block;
-    pointer-events: auto;
-    cursor: pointer;
-    color: var(--main-color);
-    margin-top: 0px;
-    font-size: 20px;
-
-    transition:
-        color 1s ease;
-}
-
-#utils #wrench i {
-    transform: rotate(0deg) translateZ(0);
-    transform-box: view-box;
-    transform-origin: 73.55% 26.45%;
-
-    transition:
-        transform 1s ease;
-}
-
-#utils:not(.expanded) #wrench:hover {
-    color: var(--placeholder-color);
-
-    transition:
-        color 0.2s ease;
-}
-
-#utils.expanded #wrench {
-    color: var(--placeholder-color);
-
-    transition:
-        color 1s ease;
-}
-
-#utils.expanded #wrench i {
-    transform: rotate(45deg) translateZ(0);
-
-    transition:
-        transform 1s ease;
-}
-
-#utils .util {
-    visibility: hidden;
-    pointer-events: auto;
-    opacity: 0;
-    transform: translateX(160px);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease,
-        visibility 1s ease;
-}
-
-#utils.expanded .util {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0px);
 }

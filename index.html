@@ -76,9 +76,18 @@
         </a>
     </div>
     <div id="email" class="unselectable">
-        <a href="mailto:x@dd221x0.io" class="hoverTrigger" onclick="ignoreOnBeforeUnload=true">
+        <div id="envelope" class="mainColor">
             <i class="fas fa-envelope fa-xl"></i>
-        </a>
+        </div>
+        <div id="address">
+            <div class="drawer">
+                <a href="mailto:mail@dd221x0.io" class="hoverTrigger" onclick="ignoreOnBeforeUnload=true">mail@dd221x0.io</a>
+                <div id="copy" class="mainColor">
+                    <i class="fa-solid fa-copy copyIcon"></i>
+                    <i class="fa-solid fa-check copiedIcon"></i>
+                </div>
+            </div>
+        </div>
     </div>
     <script type="module" src="scripts.js"></script>
 </body>

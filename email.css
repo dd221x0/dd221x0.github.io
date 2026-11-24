@@ -1,0 +1,78 @@
+#email {
+    position: fixed;
+    pointer-events: none;
+}
+
+#email #envelope {
+    display: inline-block;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: color 1s ease;
+}
+
+#email:not(.expanded) #envelope:hover {
+    color: var(--placeholder-color);
+    transition: color 0.2s ease;
+}
+
+#email.expanded #envelope {
+    color: var(--placeholder-color);
+}
+
+#email #address {
+    display: inline-block;
+    clip-path: inset(0);
+}
+
+#email .drawer {
+    visibility: hidden;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 1s ease, transform 1s ease, visibility 1s ease;
+}
+
+#email.expanded .drawer {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+#email #copy {
+    display: inline-grid;
+    cursor: pointer;
+    clip-path: inset(0);
+    transition: color 1s ease;
+}
+
+#email #copy:hover {
+    color: var(--negative-color);
+    transition: color 0.2s ease;
+}
+
+#email #copy i {
+    grid-area: 1 / 1;
+}
+
+#email #copy .copyIcon {
+    transition: opacity 0.2s 0.1s ease;
+}
+
+#email #copy.copied .copyIcon {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: transform 0.2s 0s ease, opacity 0s 0.2s, visibility 0s 0.2s;
+}
+
+#email #copy .copiedIcon {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s 0s ease, visibility 0s 0.2s;
+}
+
+#email #copy.copied .copiedIcon {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s 0.1s ease;
+}

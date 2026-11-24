@@ -19,6 +19,10 @@ import {
     initializeUtils,
     uninitializeUtils,
 } from './utils.js';
+import {
+    initializeEmail,
+    uninitializeEmail,
+} from './email.js';
 
 let isInitialized = false;
 
@@ -29,6 +33,7 @@ const initialize = () => {
     registerNavigationHandler(() => uninitialize(true));
     initializeNavigationEffects();
     initializeUtils();
+    initializeEmail();
 
     isInitialized = true;
 }
@@ -39,6 +44,7 @@ const uninitialize = (isNavigation = false) => {
     uninitializeTetrahedron(isNavigation);
     uninitializeNavigationEffects();
     uninitializeUtils();
+    uninitializeEmail();
 
     isInitialized = false;
 };
