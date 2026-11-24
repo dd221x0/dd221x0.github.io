@@ -1,6 +1,9 @@
 import '../layout.js';
 import { updateUrl } from '../common.js';
-import { copyResult } from '../copyButton.js';
+import {
+    copyResult,
+    updateCopyButtonVisibility,
+} from '../copyButton.js';
 
 const stringInput = document.getElementById('string');
 const resultTextArea = document.getElementById('result');
@@ -19,6 +22,7 @@ const stringToGitBranchName = (string) => string
 
 const convertToGitBranchName = () => {
     resultTextArea.value = stringToGitBranchName(stringInput.value);
+    updateCopyButtonVisibility();
     updateURLParameters();
 };
 

@@ -1,5 +1,8 @@
 import "../layout.js";
-import { copyResult } from "../copyButton.js";
+import {
+    copyResult,
+    updateCopyButtonVisibility,
+} from "../copyButton.js";
 
 const upperCaseSwitch = document.getElementById('upperCase');
 const generateButton = document.getElementById('generate');
@@ -10,6 +13,7 @@ const setUuidValue = (value) => {
     resultTextArea.value = upperCaseSwitch.classList.contains('active')
         ? value.toUpperCase()
         : value.toLowerCase();
+    updateCopyButtonVisibility();
 };
 
 const setNewUuid = () => {

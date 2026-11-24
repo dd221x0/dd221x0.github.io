@@ -5,7 +5,10 @@ import {
     hasValueChanged,
     isDigit,
 } from '../common.js';
-import { copyResult } from '../copyButton.js';
+import {
+    copyResult,
+    updateCopyButtonVisibility,
+} from '../copyButton.js';
 
 const specialCharactersInput = document.getElementById('specialCharacters');
 const lengthInput = document.getElementById('length');
@@ -111,6 +114,7 @@ const handleLengthFocusOut = (event) => {
 const setNewPassword = () => {
     const password = generatePassword(lengthInput.value || defaultLength);
     resultTextArea.value = password;
+    updateCopyButtonVisibility();
 };
 
 const setupPage = () => {

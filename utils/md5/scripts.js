@@ -4,7 +4,10 @@ import {
     saveOldValue,
     updateUrl,
 } from '../common.js';
-import { copyResult } from '../copyButton.js';
+import {
+    copyResult,
+    updateCopyButtonVisibility,
+} from '../copyButton.js';
 import { md5 } from './md5.min.js';
 
 const passwordSwitch = document.getElementById('password');
@@ -100,6 +103,7 @@ const handlePartInput = (event) => {
 
 const setResult = () => {
     resultTextArea.value = getHashPart(stringInput.value, partsCountInput.value, partInput.value);
+    updateCopyButtonVisibility();
     updateURLParameters();
 };
 

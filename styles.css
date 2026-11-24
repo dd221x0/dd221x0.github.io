@@ -4,6 +4,7 @@
 @import './tablet.css';
 @import './mobile.css';
 @import './colorChange/colorChange.css';
+@import './copyButton/copyButton.css';
 @import './email.css';
 @import './utils.css';
 
