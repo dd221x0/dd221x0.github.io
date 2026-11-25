@@ -62,7 +62,18 @@ const removeHoverColorChange = () => {
     });
 };
 
+let fadeTimeoutId = null;
+
+const arrangeFade = () => {
+    document.documentElement.classList.add('colorHidden');
+
+    fadeTimeoutId = setTimeout(() => {
+        document.documentElement.classList.remove('colorHidden');
+    }, 1000);
+};
+
 const hideColor = () => {
+    clearTimeout(fadeTimeoutId);
     document.documentElement.classList.add('colorHidden');
     document.documentElement.style.setProperty('--main-color', backgroundColorString);
     document.documentElement.style.setProperty('--negative-color', backgroundColorString);
@@ -70,7 +81,7 @@ const hideColor = () => {
 };
 
 const initializeColorChange = () => {
-    document.documentElement.classList.remove('colorHidden');
+    arrangeFade();
     setIcon();
     updateColor();
     setDefaultColors();

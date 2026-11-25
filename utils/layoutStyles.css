@@ -87,7 +87,26 @@ button:hover {
     padding-bottom: 5px;
 }
 
+#form .iconSwitch {
+    position: absolute;
+    left: 100%;
+    display: grid;
+    place-items: center;
+    height: var(--line-height);
+    margin-left: var(--gap);
+    padding: 0;
+}
+
+#form input + .iconSwitch {
+    top: calc(var(--padding) + var(--border-width));
+}
+
+#form textarea + .iconSwitch {
+    top: var(--padding);
+}
+
 .row {
+    position: relative;
     display: flex;
     justify-content: center;
     gap: var(--gap);

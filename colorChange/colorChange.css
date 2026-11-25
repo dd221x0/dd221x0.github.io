@@ -54,12 +54,12 @@ button:hover {
 .switch, .switch:hover {
     color: var(--placeholder-color);
     border-color: var(--placeholder-color);
-    transition: color 1s ease, border-color 1s ease;
+    transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 button.switch, button.switch:hover {
     background-color: var(--placeholder-color);
-    transition: color 1s ease, border-color 1s ease, background-color 1s ease;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .switch.active, .switch.active:hover {
@@ -69,6 +69,14 @@ button.switch, button.switch:hover {
 
 button.switch.active, button.switch.active:hover {
     background-color: var(--main-color);
+}
+
+.colorHidden .switch, .colorHidden .switch:hover {
+    transition: color 1s ease, border-color 1s ease;
+}
+
+.colorHidden button.switch, .colorHidden button.switch:hover {
+    transition: color 1s ease, border-color 1s ease, background-color 1s ease;
 }
 
 ::placeholder {
