@@ -21,6 +21,7 @@ const title = document.getElementById('title');
 
 const timeElement = document.getElementById('time');
 const modeSwitch = document.getElementById('modeSwitch');
+const modeArrow = modeSwitch.querySelector('.fa-arrow-right');
 
 const targetTime = new Date(0, 0, 1, 0, 0, 0);
 
@@ -161,21 +162,13 @@ const initializeMaxUnit = () => {
 };
 
 const setModeSwitch = () => {
-    const clockIconElement = document.createElement('i');
-    clockIconElement.className = 'fa-regular fa-clock';
+    modeSwitch.classList.toggle('countup', isCountup(mode));
+};
 
-    const arrowIconElement = document.createElement('i');
-    arrowIconElement.className = `fa-solid fa-arrow-right`;
+const skipModeSwitchAnimation = () => {
+    const animations = modeArrow.getAnimations();
 
-    modeSwitch.innerHTML = '';
-    if (isCountup(mode)) {
-        modeSwitch.appendChild(clockIconElement);
-        modeSwitch.appendChild(arrowIconElement);
-        return;
-    }
-
-    modeSwitch.appendChild(arrowIconElement);
-    modeSwitch.appendChild(clockIconElement);
+    animations.forEach(animation => animation.finish());
 };
 
 const initializeSwitchMode = () => {
@@ -186,6 +179,7 @@ const initializeSwitchMode = () => {
     }
 
     setModeSwitch();
+    skipModeSwitchAnimation();
 
     modeSwitch.onclick = () => {
         mode = isCountup(mode) ? 'countdown' : 'countup';
